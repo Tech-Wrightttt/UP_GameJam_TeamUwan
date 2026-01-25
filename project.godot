@@ -11,7 +11,13 @@ config_version=5
 [application]
 
 config/name="UP_GameJam"
+run/main_scene="uid://cpwdkmjjnguj8"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="ground"
 
 [rendering]
 

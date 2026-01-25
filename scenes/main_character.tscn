@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt5prudsrqxmc"]
+[gd_scene load_steps=8 format=3 uid="uid://bt5prudsrqxmc"]
+
+[ext_resource type="Script" uid="uid://6ydeq8yimemm" path="res://scenes/main_character.gd" id="1_nrcqd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vthvm"]
 load_path = "res://.godot/imported/GandalfHardcore Warrior.png-4a510af3934b970b4081b77804af1695.ctex"
@@ -62,6 +64,8 @@ radius = 8.0
 height = 40.0
 
 [node name="main_character" type="CharacterBody2D"]
+collision_mask = 3
+script = ExtResource("1_nrcqd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("CompressedTexture2D_vthvm")
