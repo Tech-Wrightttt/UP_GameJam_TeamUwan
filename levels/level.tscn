@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dsff3e0i5avs3" path="res://assets/Foreground/Tileset.png" id="1_80vhd"]
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://levels/level.gd" id="1_cwqvt"]
-[ext_resource type="PackedScene" uid="uid://bt5prudsrqxmc" path="res://scenes/main_character.tscn" id="2_hjsbj"]
+[ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_hjsbj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
