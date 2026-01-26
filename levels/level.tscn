@@ -1,15 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://mem0x7wtkcdu"]
+[gd_scene load_steps=7 format=3 uid="uid://mem0x7wtkcdu"]
 
 [ext_resource type="Texture2D" uid="uid://dsff3e0i5avs3" path="res://assets/Foreground/Tileset.png" id="1_80vhd"]
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://levels/level.gd" id="1_cwqvt"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_hjsbj"]
-[ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="4_safpt"]
-[ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="5_gjl0y"]
-[ext_resource type="Texture2D" uid="uid://cyavqevwdwg41" path="res://assets/Foreground/Mockup.png" id="6_ukwr8"]
-[ext_resource type="Texture2D" uid="uid://cxwkp5m7ty8vs" path="res://assets/Background/BGFront.png" id="7_pb8y7"]
-[ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="8_hy0rb"]
-[ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="9_mxp4k"]
-[ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="10_d7v53"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -201,67 +194,3 @@ layer_0/tile_data = PackedInt32Array(-196628, 327681, 2, -196617, 458753, 2, -19
 [node name="main_character" parent="." instance=ExtResource("2_hjsbj")]
 position = Vector2(-429.99997, 121)
 scale = Vector2(1.655, 1.655)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -1846.0
-offset_top = -707.0
-offset_right = -1007.0
-offset_bottom = -93.0
-texture = ExtResource("4_safpt")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = -1460.0
-offset_top = -36.0
-offset_right = -953.0
-offset_bottom = 218.0
-texture = ExtResource("5_gjl0y")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-offset_left = -2049.0
-offset_top = -85.0
-offset_right = -1441.0
-offset_bottom = 239.0
-texture = ExtResource("1_80vhd")
-expand_mode = 1
-
-[node name="TextureRect4" type="TextureRect" parent="."]
-offset_left = -3398.0
-offset_top = -1113.0
-offset_right = -1957.0
-offset_bottom = -208.0
-texture = ExtResource("6_ukwr8")
-expand_mode = 1
-
-[node name="TextureRect5" type="TextureRect" parent="."]
-offset_left = -3292.0
-offset_top = -445.0
-offset_right = -2209.0
-offset_bottom = 189.0
-texture = ExtResource("7_pb8y7")
-expand_mode = 1
-
-[node name="TextureRect6" type="TextureRect" parent="."]
-offset_left = -3287.0
-offset_top = -183.0
-offset_right = -2204.0
-offset_bottom = 451.0
-texture = ExtResource("8_hy0rb")
-expand_mode = 1
-
-[node name="TextureRect7" type="TextureRect" parent="."]
-offset_left = -4482.0
-offset_top = -105.0
-offset_right = -3399.0
-offset_bottom = 529.0
-texture = ExtResource("9_mxp4k")
-expand_mode = 1
-
-[node name="TextureRect8" type="TextureRect" parent="."]
-offset_left = -3289.0
-offset_top = 323.0
-offset_right = -2206.0
-offset_bottom = 957.0
-texture = ExtResource("10_d7v53")
-expand_mode = 1
