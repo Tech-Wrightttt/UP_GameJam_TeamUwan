@@ -215,6 +215,7 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(0.99999994, 10)
 scale = Vector2(0.90625006, 0.8344156)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
+animation = &"run"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -100)

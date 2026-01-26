@@ -176,8 +176,6 @@ sources/1 = SubResource("TileSetAtlasSource_cwqvt")
 [node name="Level" type="Node2D"]
 script = ExtResource("1_cwqvt")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="TileMap2" type="TileMap" parent="."]
 scale = Vector2(1.935, 1.935)
 tile_set = SubResource("TileSet_5mrsh")
