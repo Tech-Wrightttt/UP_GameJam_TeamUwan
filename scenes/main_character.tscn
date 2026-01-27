@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=36 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scenes/main_character.gd" id="1_ig48j"]
 [ext_resource type="Texture2D" uid="uid://c6ygn55vpo254" path="res://assets/main_character.png" id="1_nrcqd"]
@@ -7,6 +7,30 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tqm6u"]
 radius = 8.0
 height = 40.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3rqm"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(720, 896, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s43vl"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(640, 896, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fdd0"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(560, 896, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eflq"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(480, 896, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3ggf"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(400, 896, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itr2f"]
+atlas = ExtResource("1_nrcqd")
+region = Rect2(320, 896, 80, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqm6u"]
 atlas = ExtResource("1_nrcqd")
@@ -106,6 +130,29 @@ region = Rect2(640, 72, 80, 72)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n3rqm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3rqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s43vl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fdd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eflq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3ggf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itr2f")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 7.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tqm6u")
@@ -215,7 +262,8 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(0.99999994, 10)
 scale = Vector2(0.90625006, 0.8344156)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
-animation = &"run"
+animation = &"attack"
+frame_progress = 0.2987967
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -76)

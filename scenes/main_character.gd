@@ -25,7 +25,8 @@ enum State {
 	IDLE,
 	WALK,
 	JUMP,
-	FALL
+	FALL,
+	ATTACK
 }
 
 var current_state: State = State.IDLE
@@ -35,6 +36,9 @@ var previous_state: State = State.IDLE
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
 var last_direction: int = 1
+
+const ATTACK_DURATION = 1.00
+var attack_timer: float = 0.0
 
 func _ready() -> void:
 	transition_to(State.IDLE)
@@ -56,10 +60,13 @@ func _process(_delta: float) -> void:
 	if current_state != previous_state:
 		print(State.keys()[current_state])
 		previous_state = current_state
-
+		
 func update_timers(delta: float) -> void:
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
+
+	if attack_timer > 0:
+		attack_timer -= delta
 	
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME
@@ -70,6 +77,10 @@ func handle_input() -> void:
 	
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= JUMP_CUT_MULTIPLIER
+		
+	if Input.is_action_just_pressed("attack"):
+		if current_state != State.ATTACK:
+			transition_to(State.ATTACK)
 	
 	if Input.is_action_just_pressed("left"):
 		sprite.flip_h = true
@@ -89,6 +100,8 @@ func update_state(delta: float) -> void:
 			state_jump(delta)
 		State.FALL:
 			state_fall(delta)
+		State.ATTACK:
+			state_attack(delta)
 
 func state_idle(delta: float) -> void:
 	apply_friction(delta)
@@ -148,6 +161,22 @@ func state_fall(delta: float) -> void:
 			transition_to(State.WALK)
 		else:
 			transition_to(State.IDLE)
+			
+func state_attack(delta: float) -> void:
+	# Stop horizontal movement while attacking
+	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+	apply_gravity(delta)
+
+	# Attack finished
+	if attack_timer <= 0:
+		if not is_on_floor():
+			transition_to(State.FALL)
+		else:
+			var direction = Input.get_axis("left", "right")
+			if direction != 0:
+				transition_to(State.WALK)
+			else:
+				transition_to(State.IDLE)
 
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -199,6 +228,9 @@ func enter_state(state: State) -> void:
 			sprite.play("jump")
 		State.FALL:
 			sprite.play("fall")
+		State.ATTACK:
+			sprite.play("attack")
+			attack_timer = ATTACK_DURATION
 
 func exit_state(state: State) -> void:
 	# Clean up when leaving a state (if needed)
