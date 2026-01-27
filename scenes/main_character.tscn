@@ -218,6 +218,7 @@ sprite_frames = SubResource("SpriteFrames_n3rqm")
 animation = &"run"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -76)
 offset = Vector2(0, -100)
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_tqm6u")
