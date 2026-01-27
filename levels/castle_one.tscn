@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://dn6jopggneqco"]
 
-[ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://levels/castle_one.gd" id="1_fpfjo"]
+[ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
 [ext_resource type="Texture2D" uid="uid://dow3lyrormikg" path="res://assets/Foreground/spr_torch.png" id="3_5ylp2"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="5_de36y"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ylynx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpfjo"]
 texture = ExtResource("5_de36y")
 1:0/0 = 0
 1:0/0/material = SubResource("CanvasItemMaterial_hjsbj")
@@ -991,7 +991,7 @@ texture = ExtResource("5_de36y")
 
 [sub_resource type="TileSet" id="TileSet_om42o"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_ylynx")
+sources/1 = SubResource("TileSetAtlasSource_fpfjo")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpfjo"]
 atlas = ExtResource("3_5ylp2")
@@ -1048,7 +1048,7 @@ layer_0/tile_data = PackedInt32Array(1507328, 720897, 4, 1572864, 720897, 4, 163
 scale = Vector2(2.55, 1.935)
 tile_set = SubResource("TileSet_om42o")
 format = 2
-layer_0/tile_data = PackedInt32Array(983096, 327681, 4, 1048632, 327681, 4, 1114168, 327681, 4, 1179704, 327681, 5, 983097, 393217, 4, 1048633, 393217, 4, 1114169, 393217, 4, 1179705, 393217, 5, 917560, 327681, 4, 917561, 393217, 4, 852024, 327681, 4, 852025, 393217, 4, 786488, 327681, 4, 786489, 393217, 4, 720952, 327681, 3, 720953, 393217, 3, 655416, 327681, 2, 655417, 393217, 2, 983099, 131073, 4, 852026, 131073, 4, 720954, 786433, 28, 720955, 786433, 28, 786490, 917505, 32, 786484, 393217, 18, 852020, 393217, 18, 917556, 393217, 18, 983092, 393217, 18, 1048628, 393217, 18, 1114164, 393217, 19, 720948, 393217, 17, 1179707, 524289, 5, 1179708, 524289, 5, 1179706, 458753, 5, 786482, 589825, 17, 852018, 589825, 18, 786483, 655361, 17, 852019, 655361, 18, 1114162, 589825, 19, 1114161, 524289, 19, 1114163, 655361, 19, 1048625, 524289, 18, 983089, 524289, 18, 917553, 524289, 18, 852017, 524289, 18, 786481, 524289, 17, 917555, 655361, 18, 983091, 655361, 18, 1048627, 655361, 18, 917554, 589825, 18, 983090, 589825, 18, 1048626, 589825, 18, 852022, 393217, 41, 917558, 393217, 42, 852023, 458753, 41, 917559, 458753, 42)
+layer_0/tile_data = PackedInt32Array(983096, 327681, 4, 1048632, 327681, 4, 1114168, 327681, 4, 1179704, 327681, 5, 983097, 393217, 4, 1048633, 393217, 4, 1114169, 393217, 4, 1179705, 393217, 5, 917560, 327681, 4, 917561, 393217, 4, 852024, 327681, 4, 852025, 393217, 4, 786488, 327681, 4, 786489, 393217, 4, 720952, 327681, 3, 720953, 393217, 3, 655416, 327681, 2, 655417, 393217, 2, 983099, 131073, 4, 852026, 131073, 4, 720954, 786433, 28, 720955, 786433, 28, 786490, 917505, 32, 786484, 393217, 18, 852020, 393217, 18, 917556, 393217, 18, 983092, 393217, 18, 1048628, 393217, 18, 1114164, 393217, 19, 720948, 393217, 17, 1179707, 524289, 5, 1179708, 524289, 5, 1179706, 458753, 5, 786482, 589825, 17, 852018, 393217, 42, 786483, 655361, 17, 852019, 458753, 42, 1114162, 589825, 19, 1114161, 524289, 19, 1114163, 655361, 19, 1048625, 524289, 18, 983089, 524289, 18, 917553, 524289, 18, 852017, 524289, 18, 786481, 524289, 17)
 
 [node name="main_character" parent="." instance=ExtResource("2_ptp65")]
 position = Vector2(89, 788)
@@ -1058,7 +1058,7 @@ scale = Vector2(1.655, 1.655)
 position = Vector2(488, 720)
 scale = Vector2(3.2142856, 2.574074)
 sprite_frames = SubResource("SpriteFrames_fm0u3")
-frame_progress = 0.5693514
+frame_progress = 0.6665222
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(897, 718)
