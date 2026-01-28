@@ -20,24 +20,28 @@ const JUMP_BUFFER_TIME = 0.15
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# State machine
-enum State {
+# PlayerState machine
+enum PlayerState {
 	IDLE,
 	WALK,
 	JUMP,
-	FALL
+	FALL,
+	ATTACK
 }
 
-var current_state: State = State.IDLE
-var previous_state: State = State.IDLE
+var current_state: PlayerState = PlayerState.IDLE
+var previous_state: PlayerState = PlayerState.IDLE
 
 # Timers and tracking
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
 var last_direction: int = 1
 
+const ATTACK_DURATION = 1.00
+var attack_timer: float = 0.0
+
 func _ready() -> void:
-	transition_to(State.IDLE)
+	transition_to(PlayerState.IDLE)
 
 func _physics_process(delta: float) -> void:
 	# Update timers
@@ -54,12 +58,15 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if current_state != previous_state:
-		print(State.keys()[current_state])
+		print(PlayerState.keys()[current_state])
 		previous_state = current_state
-
+		
 func update_timers(delta: float) -> void:
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
+
+	if attack_timer > 0:
+		attack_timer -= delta
 	
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME
@@ -70,6 +77,10 @@ func handle_input() -> void:
 	
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= JUMP_CUT_MULTIPLIER
+		
+	if Input.is_action_just_pressed("attack"):
+		if current_state != PlayerState.ATTACK:
+			transition_to(PlayerState.ATTACK)
 	
 	if Input.is_action_just_pressed("left"):
 		sprite.flip_h = true
@@ -81,14 +92,16 @@ func handle_input() -> void:
 
 func update_state(delta: float) -> void:
 	match current_state:
-		State.IDLE:
+		PlayerState.IDLE:
 			state_idle(delta)
-		State.WALK:
+		PlayerState.WALK:
 			state_walk(delta)
-		State.JUMP:
+		PlayerState.JUMP:
 			state_jump(delta)
-		State.FALL:
+		PlayerState.FALL:
 			state_fall(delta)
+		PlayerState.ATTACK:
+			state_attack(delta)
 
 func state_idle(delta: float) -> void:
 	apply_friction(delta)
@@ -101,9 +114,9 @@ func state_idle(delta: float) -> void:
 		return
 	
 	if not is_on_floor():
-		transition_to(State.FALL)
+		transition_to(PlayerState.FALL)
 	elif direction != 0:
-		transition_to(State.WALK)
+		transition_to(PlayerState.WALK)
 
 func state_walk(delta: float) -> void:
 	apply_horizontal_movement(delta)
@@ -116,9 +129,9 @@ func state_walk(delta: float) -> void:
 		return
 	
 	if not is_on_floor():
-		transition_to(State.FALL)
+		transition_to(PlayerState.FALL)
 	elif direction == 0:
-		transition_to(State.IDLE)
+		transition_to(PlayerState.IDLE)
 
 func state_jump(delta: float) -> void:
 	apply_horizontal_movement(delta)
@@ -126,13 +139,13 @@ func state_jump(delta: float) -> void:
 	
 	# Transition checks
 	if velocity.y >= 0:
-		transition_to(State.FALL)
+		transition_to(PlayerState.FALL)
 	elif is_on_floor():
 		var direction = Input.get_axis("left", "right")
 		if direction != 0:
-			transition_to(State.WALK)
+			transition_to(PlayerState.WALK)
 		else:
-			transition_to(State.IDLE)
+			transition_to(PlayerState.IDLE)
 
 func state_fall(delta: float) -> void:
 	apply_horizontal_movement(delta)
@@ -145,9 +158,25 @@ func state_fall(delta: float) -> void:
 	if is_on_floor():
 		var direction = Input.get_axis("left", "right")
 		if direction != 0:
-			transition_to(State.WALK)
+			transition_to(PlayerState.WALK)
 		else:
-			transition_to(State.IDLE)
+			transition_to(PlayerState.IDLE)
+			
+func state_attack(delta: float) -> void:
+	# Stop horizontal movement while attacking
+	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+	apply_gravity(delta)
+
+	# Attack finished
+	if attack_timer <= 0:
+		if not is_on_floor():
+			transition_to(PlayerState.FALL)
+		else:
+			var direction = Input.get_axis("left", "right")
+			if direction != 0:
+				transition_to(PlayerState.WALK)
+			else:
+				transition_to(PlayerState.IDLE)
 
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -170,12 +199,12 @@ func try_jump() -> bool:
 		velocity.y = JUMP_VELOCITY
 		jump_buffer_timer = 0
 		coyote_timer = 0
-		transition_to(State.JUMP)
+		transition_to(PlayerState.JUMP)
 		return true
 	return false
 
 
-func transition_to(new_state: State) -> void:
+func transition_to(new_state: PlayerState) -> void:
 	if current_state == new_state:
 		return
 	
@@ -189,17 +218,20 @@ func transition_to(new_state: State) -> void:
 	# Enter new state
 	enter_state(new_state)
 
-func enter_state(state: State) -> void:
+func enter_state(state: PlayerState) -> void:
 	match state:
-		State.IDLE:
+		PlayerState.IDLE:
 			sprite.play("default")
-		State.WALK:
+		PlayerState.WALK:
 			sprite.play("walk")
-		State.JUMP:
+		PlayerState.JUMP:
 			sprite.play("jump")
-		State.FALL:
+		PlayerState.FALL:
 			sprite.play("fall")
+		PlayerState.ATTACK:
+			sprite.play("attack")
+			attack_timer = ATTACK_DURATION
 
-func exit_state(state: State) -> void:
+func exit_state(state: PlayerState) -> void:
 	# Clean up when leaving a state (if needed)
 	pass
