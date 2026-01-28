@@ -2234,7 +2234,7 @@ energy = 0.6
 blend_mode = 2
 max_distance = 10395.0
 
-[node name="bg4" type="TileMap" parent="."]
+[node name="spikes" type="TileMap" parent="."]
 scale = Vector2(2.55, 1.935)
 tile_set = SubResource("TileSet_qwjc7")
 format = 2

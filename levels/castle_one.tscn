@@ -2157,7 +2157,7 @@ scale = Vector2(3.2142856, 2.574074)
 sprite_frames = SubResource("SpriteFrames_fm0u3")
 frame_progress = 0.8972514
 
-[node name="bg4" type="TileMap" parent="."]
+[node name="spikes" type="TileMap" parent="."]
 scale = Vector2(2.55, 1.935)
 tile_set = SubResource("TileSet_qwc3w")
 format = 2
