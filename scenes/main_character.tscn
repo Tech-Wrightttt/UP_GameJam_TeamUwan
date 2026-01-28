@@ -1,8 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=35 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Texture2D" uid="uid://c6ygn55vpo254" path="res://assets/main_character.png" id="1_nrcqd"]
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
-[ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="3_tqm6u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tqm6u"]
 radius = 8.0
@@ -264,9 +263,3 @@ scale = Vector2(0.90625006, 0.8344156)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
 animation = &"attack"
 frame_progress = 0.2987967
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -76)
-offset = Vector2(0, -100)
-zoom = Vector2(1.2, 1.2)
-script = ExtResource("3_tqm6u")
