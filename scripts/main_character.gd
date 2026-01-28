@@ -245,7 +245,7 @@ func state_attack(delta: float) -> void:
 # =========================
 func start_attack(anim: String) -> void:
 	is_attacking = true
-	combo_pending = false 
+	#combo_pending = false 
 	transition_to(PlayerState.ATTACK)
 	sprite.play(anim)
 
