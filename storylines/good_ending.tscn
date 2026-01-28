@@ -1,0 +1,181 @@
+[gd_scene load_steps=9 format=3 uid="uid://douabbm58tail"]
+
+[ext_resource type="Script" uid="uid://cxt88ou2lya30" path="res://scripts/good_ending.gd" id="1_l8p4m"]
+[ext_resource type="Texture2D" uid="uid://byh11k6352ox7" path="res://assets/ui/story images/goodending.png" id="2_ol8dq"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_v7om6"]
+[ext_resource type="Texture2D" uid="uid://brfencms42gqs" path="res://assets/ui/story images/goodending1.png" id="4_ujmsy"]
+[ext_resource type="Texture2D" uid="uid://bdbk38jeyva56" path="res://assets/ui/story images/goodending2.png" id="5_v7om6"]
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les")
+}
+
+[node name="IntroStory" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l8p4m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.094000004
+anchor_right = 0.77800006
+anchor_bottom = 0.563
+offset_left = 0.44000244
+offset_top = -0.5200043
+offset_right = -0.76013184
+offset_bottom = -0.040039063
+texture = ExtResource("2_ol8dq")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = -0.12005615
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("3_v7om6")
+theme_override_font_sizes/normal_font_size = 31
+text = "Like every hero who came before, you defeated  the Demon King. The world is safe once more — the people sing your name.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.185
+anchor_top = 0.65800005
+anchor_right = 0.85700005
+anchor_bottom = 0.873
+offset_left = -0.2000122
+offset_top = 0.35992432
+offset_right = 0.5599365
+offset_bottom = 28.159973
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("3_v7om6")
+theme_override_font_sizes/normal_font_size = 31
+text = "You shone bright. You followed the path given to you… perhaps too closely, never questioning why."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.094000004
+anchor_right = 0.77800006
+anchor_bottom = 0.563
+offset_left = 0.44000244
+offset_top = -0.5200043
+offset_right = -0.76013184
+offset_bottom = -0.040039063
+texture = ExtResource("4_ujmsy")
+expand_mode = 1
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.38300002
+anchor_top = 0.65000004
+anchor_right = 0.80100006
+anchor_bottom = 0.873
+offset_left = -0.3600464
+offset_top = -6.1035156e-05
+offset_right = -0.920166
+offset_bottom = 12.159973
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("3_v7om6")
+theme_override_font_sizes/normal_font_size = 31
+text = "But still, the world thanks you.
+
+You are a TRUE HERO.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer3"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.268
+anchor_top = 0.094000004
+anchor_right = 0.77800006
+anchor_bottom = 0.563
+offset_left = 0.44000244
+offset_top = -0.5200043
+offset_right = 13.239868
+offset_bottom = 4.959961
+texture = ExtResource("5_v7om6")
+expand_mode = 1
