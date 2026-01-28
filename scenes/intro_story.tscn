@@ -1,0 +1,217 @@
+[gd_scene load_steps=11 format=3 uid="uid://b543fn73vjced"]
+
+[ext_resource type="Texture2D" uid="uid://dtfjchy55i4kd" path="res://assets/ui/story1.png" id="1_cyg31"]
+[ext_resource type="Script" uid="uid://1fy518sv47h1" path="res://scripts/intro_story.gd" id="1_r1les"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="2_bumqu"]
+[ext_resource type="Texture2D" uid="uid://s4rnw7gu8idy" path="res://assets/ui/story2.png" id="4_cgnwt"]
+[ext_resource type="Texture2D" uid="uid://j7kqexcpl6qr" path="res://assets/ui/story3.png" id="4_pmj2g"]
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les")
+}
+
+[sub_resource type="Gradient" id="Gradient_pmj2g"]
+offsets = PackedFloat32Array(0.017094018, 1)
+colors = PackedColorArray(0.12156863, 0.16862746, 0.25490198, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jd5cs"]
+gradient = SubResource("Gradient_pmj2g")
+
+[node name="IntroStory" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1les")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.21700001
+anchor_right = 0.68200004
+anchor_bottom = 0.623
+offset_left = 85.359985
+offset_top = -56.360016
+offset_right = -106.44006
+offset_bottom = -47.840027
+texture = ExtResource("1_cyg31")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = -0.12005615
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "Long ago, the kingdom of Zhebu fell under the shadow of the Demon King, a monstrous being who devoured the light of the world.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.21700001
+anchor_right = 0.68200004
+anchor_bottom = 0.623
+offset_left = 85.359985
+offset_top = -56.360016
+offset_right = -106.44006
+offset_bottom = -47.840027
+texture = ExtResource("4_pmj2g")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = -0.12005615
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "You are the Hero, a young knight chosen by the God of Fate to defeat the Demon King and restore peace. 
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.21700001
+anchor_right = 0.68200004
+anchor_bottom = 0.623
+offset_left = 512.36
+offset_top = 351.63998
+offset_right = -97.44006
+offset_bottom = -47.840027
+texture = SubResource("GradientTexture2D_jd5cs")
+expand_mode = 1
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.21700001
+anchor_right = 0.68200004
+anchor_bottom = 0.623
+offset_left = 85.359985
+offset_top = -56.360016
+offset_right = -106.44006
+offset_bottom = -47.840027
+texture = ExtResource("4_cgnwt")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.21700001
+anchor_right = 0.68200004
+anchor_bottom = 0.623
+offset_left = 512.36
+offset_top = 351.63998
+offset_right = -97.44006
+offset_bottom = -47.840027
+texture = SubResource("GradientTexture2D_jd5cs")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.20700002
+anchor_top = 0.63000005
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 46.559967
+offset_top = -0.40008545
+offset_right = -58.600098
+offset_bottom = -9.840027
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "
+Now, you stand before the gates of the demon’s castle. Follow your path, and save the world.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer3"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
