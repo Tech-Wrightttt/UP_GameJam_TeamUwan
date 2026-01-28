@@ -516,7 +516,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(327673, 393217, 3, 327674, 458753, 3, 327675, 524289, 3, 327676, 589825, 3, 262166, 393217, 3, 262167, 458753, 3, 262168, 524289, 3, 262169, 589825, 3, 327666, 393217, 4, 327672, 524289, 4, -524275, 524289, 3, -524274, 589825, 3, 262108, 589825, 4, 262107, 589825, 4, 262106, 589825, 4, 851921, 458753, 2, 851922, 458753, 2, 851923, 589825, 2)
 
 [node name="main_character" parent="." instance=ExtResource("3_nvowi")]
-position = Vector2(638, 79.00001)
+position = Vector2(279, 95)
 scale = Vector2(1.975, 1.975)
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
@@ -530,5 +530,5 @@ editor_draw_limits = true
 script = ExtResource("9_gedp1")
 
 [node name="fake narrator" parent="." instance=ExtResource("9_d1nep")]
-position = Vector2(217, 115)
+position = Vector2(-457, 112)
 scale = Vector2(2, 2)

@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ctbipx83c2shk" path="res://state.gd" id="6_mpwst"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scenes/idle.gd" id="7_i4cr4"]
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scenes/follow.gd" id="9_40g78"]
+[ext_resource type="Script" uid="uid://cgc24ul0anvn2" path="res://scenes/attack.gd" id="10_n1hse"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6kjf"]
 atlas = ExtResource("1_jpui6")
@@ -34,10 +35,6 @@ region = Rect2(512, 0, 128, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dfc4"]
 atlas = ExtResource("1_jpui6")
 region = Rect2(640, 0, 128, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xvv06"]
-atlas = ExtResource("2_mpwst")
-region = Rect2(0, 0, 128, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lk7e6"]
 atlas = ExtResource("2_mpwst")
@@ -162,9 +159,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xvv06")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_lk7e6")
 }, {
 "duration": 1.0,
@@ -181,7 +175,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_up",
-"speed": 8.0
+"speed": 6.66
 }, {
 "frames": [{
 "duration": 1.0,
@@ -271,13 +265,13 @@ height = 34.0
 radius = 5.0
 
 [node name="fake narrator" type="CharacterBody2D"]
-collision_mask = 128
 script = ExtResource("1_u6kjf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"attack"
+animation = &"attack_up"
+frame_progress = 0.8199483
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -316,7 +310,7 @@ script = ExtResource("7_i4cr4")
 script = ExtResource("9_40g78")
 
 [node name="attack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("6_mpwst")
+script = ExtResource("10_n1hse")
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_mpwst")
