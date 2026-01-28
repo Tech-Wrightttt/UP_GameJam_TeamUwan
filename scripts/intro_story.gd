@@ -2,23 +2,19 @@ extends Control
 
 @onready var layer1 = $CanvasLayer
 @onready var layer2 = $CanvasLayer2
-@onready var layer3 = $CanvasLayer3
 
 @onready var anim_player1 = $CanvasLayer/AnimationPlayer
 @onready var anim_player2 = $CanvasLayer2/AnimationPlayer
-@onready var anim_player3 = $CanvasLayer3/AnimationPlayer
 
 func _ready() -> void:
 	# Hide all layers at the start just in case
 	layer1.hide()
 	layer2.hide()
-	layer3.hide()
 	
 	await play_layer_sequence(layer1, anim_player1)
 	await play_layer_sequence(layer2, anim_player2)
-	await play_layer_sequence(layer3, anim_player3)
 	
-	get_tree().change_scene_to_file("res://levels/tutoriallevel.tscn")
+	get_tree().change_scene_to_file("res://levels/title_screen.tscn")
 
 func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer) -> void:
 	layer.show()

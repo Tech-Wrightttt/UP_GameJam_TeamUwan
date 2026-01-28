@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=3 uid="uid://djdtw4qt78uts"]
+
+[ext_resource type="Script" uid="uid://1fy518sv47h1" path="res://scripts/intro_story.gd" id="1_rfvop"]
+[ext_resource type="Texture2D" uid="uid://cab3rg4dl1t7e" path="res://assets/ui/story images/neutralending1.png" id="2_urk4v"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_5xqq2"]
+[ext_resource type="Texture2D" uid="uid://1p3ov3pfdrvp" path="res://assets/ui/story images/neutralending2.png" id="4_rfvop"]
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les")
+}
+
+[node name="neutral" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rfvop")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.323
+anchor_top = 0.165
+anchor_right = 0.69500005
+anchor_bottom = 0.57900006
+offset_left = 0.8399658
+offset_top = -0.2000122
+offset_right = -0.40014648
+offset_bottom = -0.32006836
+texture = ExtResource("2_urk4v")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = -0.12005615
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("3_5xqq2")
+theme_override_font_sizes/normal_font_size = 31
+text = "Not every soul follows its destiny. Some walk the path laid before them, while others carve their own.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.323
+anchor_top = 0.165
+anchor_right = 0.69500005
+anchor_bottom = 0.57900006
+offset_left = 0.8399658
+offset_top = -0.2000122
+offset_right = -0.40014648
+offset_bottom = -0.32006836
+texture = ExtResource("4_rfvop")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = 27.879944
+offset_right = 0.39990234
+offset_bottom = 28.159973
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("3_5xqq2")
+theme_override_font_sizes/normal_font_size = 31
+text = "You, however… chose neither. You turned away before your story could even begin. Perhaps the path of a hero was never meant for you."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
