@@ -50,6 +50,13 @@ var attack_timer := 0.0
 
 var last_direction := 1
 
+var attack_index: int = 0
+var attacks := ["attack1", "attack2", "attack3"]
+var combo_window: float = 0.4  # Grace period AFTER attack ends
+var combo_timer: float = 0.0
+var is_attacking: bool = false
+var combo_pending: bool = false
+
 # =========================
 # READY
 # =========================
@@ -69,6 +76,11 @@ func _process(_delta: float) -> void:
 	if current_state != previous_state:
 		print(PlayerState.keys()[current_state])
 		previous_state = current_state
+		
+	if combo_timer > 0.0 and not is_attacking:
+		combo_timer -= _delta
+		if combo_timer <= 0.0:
+			attack_index = 0  # Reset after window
 
 # =========================
 # TIMERS
@@ -86,16 +98,24 @@ func update_timers(delta: float) -> void:
 # =========================
 # INPUT
 # =========================
-var attack_index: int = 0
-var attacks := ["attack1", "attack2", "attack3"]
+
+
 func handle_input() -> void:
 	# =====================
 	# ATTACKS (highest priority)
 	# =====================
+	
 	if Input.is_action_just_pressed("attack1"):
-		attack_index = (attack_index + 1) % attacks.size()
-		start_attack(attacks[attack_index])
-		return
+		if not is_attacking:
+			attack_index = 1
+			start_attack(attacks[attack_index - 1])
+		else:
+			# Queue next attack
+			attack_index = (attack_index % attacks.size()) + 1
+			combo_pending = true
+
+
+
 
 
 	# =====================
@@ -217,21 +237,15 @@ func state_block(delta: float) -> void:
 # ATTACK STATE
 # =========================
 func state_attack(delta: float) -> void:
-	# Stop sliding
 	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	apply_gravity(delta)
-
-	if not sprite.is_playing(): # exit when animation finished
-		if not is_on_floor():
-			transition_to(PlayerState.FALL)
-		else:
-			var dir = Input.get_axis("left", "right")
-			transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
 
 # =========================
 # ACTIONS
 # =========================
 func start_attack(anim: String) -> void:
+	is_attacking = true
+	combo_pending = false 
 	transition_to(PlayerState.ATTACK)
 	sprite.play(anim)
 
@@ -293,3 +307,22 @@ func enter_state(state: PlayerState) -> void:
 			sprite.play("block")
 		PlayerState.ATTACK:
 			pass
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if not sprite.animation.begins_with("attack"):
+		return
+
+	if combo_pending:
+		combo_pending = false
+		start_attack(attacks[attack_index - 1])
+	else:
+		# Open combo timeout AFTER attack ends
+		combo_timer = combo_window
+		is_attacking = false
+
+		if not is_on_floor():
+			transition_to(PlayerState.FALL)
+		else:
+			var dir = Input.get_axis("left", "right")
+			transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
