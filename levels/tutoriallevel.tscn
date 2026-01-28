@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=18 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_d1nep"]
 [ext_resource type="Texture2D" uid="uid://cxwkp5m7ty8vs" path="res://assets/Background/BGFront.png" id="5_gedp1"]
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_l1egu"]
+[ext_resource type="PackedScene" uid="uid://bregye8nef5wb" path="res://scenes/fake_narrator.tscn" id="9_d1nep"]
+[ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_gedp1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -519,3 +521,17 @@ layer_0/tile_data = PackedInt32Array(327673, 393217, 3, 327674, 458753, 3, 32767
 [node name="main_character" parent="." instance=ExtResource("3_nvowi")]
 position = Vector2(-518, 104.00001)
 scale = Vector2(1.975, 1.975)
+
+[node name="Camera2D" type="Camera2D" parent="main_character"]
+offset = Vector2(0, -100)
+zoom = Vector2(1.2, 1.2)
+limit_left = -1450
+limit_top = -600
+limit_right = 800
+limit_bottom = 525
+editor_draw_limits = true
+script = ExtResource("9_gedp1")
+
+[node name="fake narrator" parent="." instance=ExtResource("9_d1nep")]
+position = Vector2(211, 119)
+scale = Vector2(2, 2)
