@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://djdtw4qt78uts"]
+[gd_scene load_steps=10 format=3 uid="uid://djdtw4qt78uts"]
 
 [ext_resource type="Script" uid="uid://d3uxxkxb8cyk8" path="res://scripts/neutral_ending.gd" id="1_urk4v"]
 [ext_resource type="Texture2D" uid="uid://cab3rg4dl1t7e" path="res://assets/ui/story images/neutralending1.png" id="2_urk4v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_5xqq2"]
 [ext_resource type="Texture2D" uid="uid://1p3ov3pfdrvp" path="res://assets/ui/story images/neutralending2.png" id="4_rfvop"]
+[ext_resource type="AudioStream" uid="uid://c24srr1gxx6i4" path="res://assets/sounds/neutral ending.wav" id="5_rfvop"]
 
 [sub_resource type="Animation" id="Animation_cgnwt"]
 length = 0.001
@@ -22,6 +23,22 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r1les"]
 resource_name = "typewriter"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_rfvop"]
+resource_name = "typwriter2"
 length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -30,7 +47,7 @@ tracks/0/path = NodePath(".:visible_ratio")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.5),
+"times": PackedFloat32Array(0, 6.9666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -39,7 +56,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
 _data = {
 &"RESET": SubResource("Animation_cgnwt"),
-&"typewriter": SubResource("Animation_r1les")
+&"typewriter": SubResource("Animation_r1les"),
+&"typwriter2": SubResource("Animation_rfvop")
 }
 
 [node name="neutral" type="Control"]
@@ -62,7 +80,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = -1
@@ -102,7 +119,6 @@ libraries = {
 }
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
 anchors_preset = -1
@@ -119,13 +135,13 @@ expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
 anchors_preset = -1
-anchor_left = 0.21100001
-anchor_top = 0.63900006
-anchor_right = 0.88000005
+anchor_left = 0.19100001
+anchor_top = 0.64400005
+anchor_right = 0.859
 anchor_bottom = 0.873
-offset_left = 0.87997437
-offset_top = 27.879944
-offset_right = 0.39990234
+offset_left = -0.72003174
+offset_top = -0.52008057
+offset_right = 0.7199707
 offset_bottom = 28.159973
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("3_5xqq2")
@@ -139,3 +155,6 @@ root_node = NodePath("../RichTextLabel")
 libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rfvop")
