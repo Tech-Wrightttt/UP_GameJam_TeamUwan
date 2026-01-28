@@ -1,0 +1,182 @@
+[gd_scene load_steps=9 format=3 uid="uid://b543fn73vjced"]
+
+[ext_resource type="Texture2D" uid="uid://dtfjchy55i4kd" path="res://assets/ui/story images/story1.png" id="1_cyg31"]
+[ext_resource type="Script" uid="uid://1fy518sv47h1" path="res://scripts/intro_story.gd" id="1_r1les"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="2_bumqu"]
+[ext_resource type="Texture2D" uid="uid://j7kqexcpl6qr" path="res://assets/ui/story images/story3.png" id="4_pmj2g"]
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jn4l6"]
+load_path = "res://.godot/imported/story2.png-b245d66d8aa2bdb9c6c745e42fe1d81f.ctex"
+
+[node name="IntroStory" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1les")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.38200003
+anchor_top = 0.127
+anchor_right = 0.66700006
+anchor_bottom = 0.59900004
+offset_left = 0.5599365
+offset_top = 5.8399963
+offset_right = -27.640137
+offset_bottom = -29.920044
+texture = ExtResource("1_cyg31")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.63900006
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.87997437
+offset_top = -0.12005615
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "Not every soul follows its destiny. Some walk the path laid before them, while others carve their own."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.185
+anchor_top = 0.65800005
+anchor_right = 0.85700005
+anchor_bottom = 0.873
+offset_left = -0.2000122
+offset_top = 0.35992432
+offset_right = 0.5599365
+offset_bottom = 28.159973
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "You are the Hero, a young knight chosen by the God of Fate to defeat the Demon King and restore peace. 
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.38200003
+anchor_top = 0.13100001
+anchor_right = 0.652
+anchor_bottom = 0.55600005
+offset_left = 0.5599365
+offset_top = -0.480011
+offset_right = 0.16003418
+offset_bottom = 26.519958
+texture = SubResource("CompressedTexture2D_jn4l6")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.165
+anchor_right = 0.65500003
+anchor_bottom = 0.60200006
+offset_left = -0.52001953
+offset_top = -14.200012
+offset_right = 0.39990234
+offset_bottom = -0.16003418
+texture = ExtResource("4_pmj2g")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.21400002
+anchor_top = 0.63600004
+anchor_right = 0.83000004
+anchor_bottom = 0.873
+offset_left = 0.1199646
+offset_top = 0.11993408
+offset_right = 4.3999023
+offset_bottom = -2.8400269
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_bumqu")
+theme_override_font_sizes/normal_font_size = 31
+text = "
+Now, you stand before the gates of the demon’s castle. Follow your path, and save the world.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer3"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
