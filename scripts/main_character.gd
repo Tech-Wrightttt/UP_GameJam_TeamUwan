@@ -1,16 +1,24 @@
 extends CharacterBody2D
 
 # =========================
-# MOVEMENT
+# MOVEMENT TUNING
 # =========================
 const SPEED = 300.0
 const ACCELERATION = 2000.0
 const FRICTION = 1800.0
 const AIR_RESISTANCE = 400.0
+
+# =========================
+# JUMP TUNING
+# =========================
 const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
+
+# =========================
+# ROLL / BLOCK
+# =========================
 const ROLL_DURATION = 0.4
 const BLOCK_HOLD_SPEED = 40.0
 
@@ -25,8 +33,7 @@ enum PlayerState {
 	JUMP,
 	FALL,
 	ROLL,
-	BLOCK,       # Immediate block (F)
-	BLOCKHOLD,   # Toggle block (G)
+	BLOCK,
 	ATTACK
 }
 
@@ -72,6 +79,7 @@ func update_timers(delta: float) -> void:
 	roll_timer -= delta
 	if attack_timer > 0:
 		attack_timer -= delta
+
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME
 
@@ -79,7 +87,9 @@ func update_timers(delta: float) -> void:
 # INPUT
 # =========================
 func handle_input() -> void:
-	# ===== ATTACKS =====
+	# =====================
+	# ATTACKS (highest priority)
+	# =====================
 	if Input.is_action_just_pressed("attack1"):
 		start_attack("attack1")
 		return
@@ -90,32 +100,35 @@ func handle_input() -> void:
 		start_attack("attack3")
 		return
 
-	# ===== JUMP =====
+	# =====================
+	# JUMP
+	# =====================
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = JUMP_BUFFER_TIME
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= JUMP_CUT_MULTIPLIER
 
-	# ===== ROLL =====
+	# =====================
+	# ROLL
+	# =====================
 	if Input.is_action_just_pressed("roll") and is_on_floor():
 		transition_to(PlayerState.ROLL)
 		return
 
-	# ===== BLOCK (F) ===== immediate
+	# =====================
+	# BLOCK TOGGLE (G)
+	# =====================
 	if Input.is_action_just_pressed("block"):
-		transition_to(PlayerState.BLOCK)
-		return
-
-	# ===== BLOCKHOLD (G) toggle =====
-	if Input.is_action_just_pressed("blockhold"):
-		if current_state == PlayerState.BLOCKHOLD:
+		if current_state == PlayerState.BLOCK:
 			transition_to(PlayerState.IDLE)
 		else:
-			transition_to(PlayerState.BLOCKHOLD)
+			transition_to(PlayerState.BLOCK)
 		return
 
-	# ===== DIRECTION =====
-	if current_state != PlayerState.BLOCKHOLD: # normal movement except blockhold
+	# =====================
+	# FACING
+	# =====================
+	if current_state != PlayerState.BLOCK: # block prevents direction changes
 		if Input.is_action_pressed("left"):
 			sprite.flip_h = true
 			last_direction = -1
@@ -140,8 +153,6 @@ func update_state(delta: float) -> void:
 			state_roll(delta)
 		PlayerState.BLOCK:
 			state_block(delta)
-		PlayerState.BLOCKHOLD:
-			state_blockhold(delta)
 		PlayerState.ATTACK:
 			state_attack(delta)
 
@@ -151,8 +162,10 @@ func update_state(delta: float) -> void:
 func state_idle(delta: float) -> void:
 	apply_friction(delta)
 	apply_gravity(delta)
+
 	if try_jump():
 		return
+
 	var dir = Input.get_axis("left", "right")
 	if not is_on_floor():
 		transition_to(PlayerState.FALL)
@@ -162,8 +175,10 @@ func state_idle(delta: float) -> void:
 func state_run(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
+
 	if try_jump():
 		return
+
 	var dir = Input.get_axis("left", "right")
 	if not is_on_floor():
 		transition_to(PlayerState.FALL)
@@ -173,14 +188,17 @@ func state_run(delta: float) -> void:
 func state_jump(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
+
 	if velocity.y >= 0:
 		transition_to(PlayerState.FALL)
 
 func state_fall(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
+
 	if try_jump():
 		return
+
 	if is_on_floor():
 		var dir = Input.get_axis("left", "right")
 		transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
@@ -188,28 +206,24 @@ func state_fall(delta: float) -> void:
 func state_roll(delta: float) -> void:
 	velocity.x = last_direction * SPEED * 1.4
 	apply_gravity(delta)
+
 	if roll_timer <= 0:
 		transition_to(PlayerState.IDLE)
 
 func state_block(delta: float) -> void:
-	# Immediate block, short pause animation, no toggle
-	velocity.x = 0
+	# Prevent horizontal input
+	velocity.x = move_toward(velocity.x, 0, BLOCK_HOLD_SPEED)
 	apply_gravity(delta)
-	# Auto return to IDLE after animation finishes
-	if not sprite.is_playing():
-		transition_to(PlayerState.IDLE)
 
-func state_blockhold(delta: float) -> void:
-	# Slow movement while holding
-	var dir = Input.get_axis("left", "right")
-	velocity.x = move_toward(velocity.x, dir * BLOCK_HOLD_SPEED, ACCELERATION * delta)
-	apply_gravity(delta)
-	# stays in this state until toggle pressed
-
+# =========================
+# ATTACK STATE
+# =========================
 func state_attack(delta: float) -> void:
+	# Stop sliding
 	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	apply_gravity(delta)
-	if not sprite.is_playing():
+
+	if not sprite.is_playing(): # exit when animation finished
 		if not is_on_floor():
 			transition_to(PlayerState.FALL)
 		else:
@@ -240,11 +254,10 @@ func apply_gravity(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 func apply_horizontal_movement(delta: float) -> void:
-	var dir = Input.get_axis("left", "right")
-	# Blockhold allows slow movement
-	if current_state == PlayerState.BLOCKHOLD:
-		velocity.x = move_toward(velocity.x, dir * BLOCK_HOLD_SPEED, ACCELERATION * delta)
+	# Block prevents horizontal input
+	if current_state == PlayerState.BLOCK:
 		return
+	var dir = Input.get_axis("left", "right")
 	if dir != 0:
 		velocity.x = move_toward(velocity.x, dir * SPEED, ACCELERATION * delta)
 	else:
@@ -252,7 +265,7 @@ func apply_horizontal_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
 func apply_friction(delta: float) -> void:
-	if current_state == PlayerState.BLOCKHOLD:
+	if current_state == PlayerState.BLOCK:
 		return
 	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 
@@ -280,7 +293,5 @@ func enter_state(state: PlayerState) -> void:
 			sprite.play("roll")
 		PlayerState.BLOCK:
 			sprite.play("block")
-		PlayerState.BLOCKHOLD:
-			sprite.play("blockhold")
 		PlayerState.ATTACK:
 			pass
