@@ -1,8 +1,9 @@
-[gd_scene load_steps=87 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=90 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
 [ext_resource type="Texture2D" uid="uid://i3wsmmtosd7o" path="res://assets/mc/Idle/HeroKnight_Idle_0.png" id="2_kvjf6"]
+[ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="2_m40x0"]
 [ext_resource type="Texture2D" uid="uid://c4bci3b14fq8v" path="res://assets/mc/Idle/HeroKnight_Idle_1.png" id="3_hj3w6"]
 [ext_resource type="Texture2D" uid="uid://buyb8h87ob16s" path="res://assets/mc/Attack1/HeroKnight_Attack1_1.png" id="3_yum8o"]
 [ext_resource type="Texture2D" uid="uid://cappm2ih2v6bl" path="res://assets/mc/Idle/HeroKnight_Idle_2.png" id="4_hodpe"]
@@ -81,6 +82,8 @@
 [ext_resource type="Texture2D" uid="uid://buvr1cigp1cwp" path="res://assets/mc/Roll/HeroKnight_Roll_6.png" id="69_rt8yy"]
 [ext_resource type="Texture2D" uid="uid://cg3bbmjf7kiah" path="res://assets/mc/Roll/HeroKnight_Roll_7.png" id="70_dh0ek"]
 [ext_resource type="Texture2D" uid="uid://dukibduhwkfir" path="res://assets/mc/Roll/HeroKnight_Roll_8.png" id="71_s48db"]
+[ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="83_ikepn"]
+[ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="84_7ghjf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tqm6u"]
 radius = 8.0
@@ -418,6 +421,9 @@ height = 32.0
 collision_layer = 129
 script = ExtResource("1_tqm6u")
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_m40x0")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.20312119, 5.535715)
 shape = SubResource("CapsuleShape2D_tqm6u")
@@ -428,24 +434,33 @@ scale = Vector2(0.823125, 0.76266235)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
 animation = &"attack2"
 
-[node name="hurtbox" type="Area2D" parent="."]
+[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("83_ikepn")
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_7ip3e")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="Hitbox_Attack1" type="Area2D" parent="."]
+script = ExtResource("84_7ghjf")
 
-[node name="attack1" type="CollisionShape2D" parent="hitbox"]
+[node name="attack1" type="CollisionShape2D" parent="Hitbox_Attack1"]
 position = Vector2(24, 9)
 shape = SubResource("CapsuleShape2D_yum8o")
 
-[node name="attack2" type="CollisionShape2D" parent="hitbox"]
+[node name="Hitbox_Attack2" type="Area2D" parent="."]
+script = ExtResource("84_7ghjf")
+
+[node name="attack2" type="CollisionShape2D" parent="Hitbox_Attack2"]
 position = Vector2(23, 5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_sj5qt")
 
-[node name="attack3" type="CollisionShape2D" parent="hitbox"]
+[node name="Hitbox_Attack3" type="Area2D" parent="."]
+script = ExtResource("84_7ghjf")
+
+[node name="attack3" type="CollisionShape2D" parent="Hitbox_Attack3"]
 position = Vector2(25, 10)
 shape = SubResource("CapsuleShape2D_yum8o")
 
