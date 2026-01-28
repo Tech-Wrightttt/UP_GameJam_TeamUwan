@@ -1,15 +1,19 @@
-[gd_scene load_steps=46 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=51 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_40g78"]
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
 [ext_resource type="Texture2D" uid="uid://cxpby1qjlb0xx" path="res://assets/fake narrator/player-Sword Slash.png" id="1_jpui6"]
 [ext_resource type="Texture2D" uid="uid://lch1uexq7s8u" path="res://assets/fake narrator/player-AirSwordSlash.png" id="2_mpwst"]
+[ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="2_t1j4c"]
 [ext_resource type="Texture2D" uid="uid://neh8v2outyep" path="res://assets/fake narrator/player-Hurt.png" id="3_fcj57"]
 [ext_resource type="Texture2D" uid="uid://csc7dcfss7w1e" path="res://assets/fake narrator/player-Run.png" id="5_i4cr4"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="6_fcj57"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scripts/idle.gd" id="8_n1hse"]
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scripts/follow.gd" id="9_duvg7"]
 [ext_resource type="Script" uid="uid://cgc24ul0anvn2" path="res://scripts/attack.gd" id="10_t1j4c"]
+[ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="12_4dfc4"]
+[ext_resource type="Script" uid="uid://bq6my177xprct" path="res://scripts/death.gd" id="12_xvv06"]
+[ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="13_xvv06"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6kjf"]
 atlas = ExtResource("1_jpui6")
@@ -256,6 +260,10 @@ height = 42.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8rt2"]
 size = Vector2(250, 42)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lk7e6"]
+radius = 13.0
+height = 42.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xkqr"]
 radius = 17.0
 height = 34.0
@@ -266,11 +274,14 @@ radius = 5.0
 [node name="fake narrator" type="CharacterBody2D"]
 script = ExtResource("1_40g78")
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_t1j4c")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"attack_up"
-frame_progress = 0.8199483
+animation = &"hurt"
+frame_progress = 0.8548235
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -282,21 +293,6 @@ position = Vector2(95, -1)
 shape = SubResource("RectangleShape2D_d8rt2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="hitbox" type="Node2D" parent="."]
-
-[node name="attack_up" type="Area2D" parent="hitbox"]
-
-[node name="attack_up" type="CollisionShape2D" parent="hitbox/attack_up"]
-position = Vector2(22, -8)
-shape = SubResource("CapsuleShape2D_2xkqr")
-
-[node name="attack" type="Area2D" parent="hitbox"]
-
-[node name="attack" type="CollisionShape2D" parent="hitbox/attack"]
-position = Vector2(31, 9.536743e-07)
-rotation = 1.1588986
-shape = SubResource("CapsuleShape2D_vvx0s")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("6_fcj57")
@@ -312,6 +308,7 @@ script = ExtResource("9_duvg7")
 script = ExtResource("10_t1j4c")
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("12_xvv06")
 
 [node name="debug" type="Label" parent="."]
 offset_left = -12.0
@@ -319,5 +316,27 @@ offset_top = -42.0
 offset_right = 55.0
 offset_bottom = 23.0
 text = "DEBUG"
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("12_4dfc4")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_lk7e6")
+
+[node name="Hitbox_Attack1" type="Area2D" parent="."]
+script = ExtResource("13_xvv06")
+
+[node name="attack_up" type="CollisionShape2D" parent="Hitbox_Attack1"]
+position = Vector2(22, -8)
+shape = SubResource("CapsuleShape2D_2xkqr")
+
+[node name="Hitbox_Attack2" type="Area2D" parent="."]
+script = ExtResource("13_xvv06")
+
+[node name="attack" type="CollisionShape2D" parent="Hitbox_Attack2"]
+position = Vector2(31, 9.536743e-07)
+rotation = 1.1588986
+shape = SubResource("CapsuleShape2D_vvx0s")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
