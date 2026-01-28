@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b543fn73vjced"]
+[gd_scene load_steps=9 format=3 uid="uid://b543fn73vjced"]
 
 [ext_resource type="Texture2D" uid="uid://dtfjchy55i4kd" path="res://assets/ui/story images/story1.png" id="1_cyg31"]
 [ext_resource type="Script" uid="uid://1fy518sv47h1" path="res://scripts/intro_story.gd" id="1_r1les"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="2_bumqu"]
-[ext_resource type="Texture2D" uid="uid://s4rnw7gu8idy" path="res://assets/ui/story images/story2.png" id="4_cgnwt"]
 [ext_resource type="Texture2D" uid="uid://j7kqexcpl6qr" path="res://assets/ui/story images/story3.png" id="4_pmj2g"]
 
 [sub_resource type="Animation" id="Animation_cgnwt"]
@@ -43,12 +42,8 @@ _data = {
 &"typewriter": SubResource("Animation_r1les")
 }
 
-[sub_resource type="Gradient" id="Gradient_pmj2g"]
-offsets = PackedFloat32Array(0.017094018, 1)
-colors = PackedColorArray(0.12156863, 0.16862746, 0.25490198, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jd5cs"]
-gradient = SubResource("Gradient_pmj2g")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jn4l6"]
+load_path = "res://.godot/imported/story2.png-b245d66d8aa2bdb9c6c745e42fe1d81f.ctex"
 
 [node name="IntroStory" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -73,14 +68,14 @@ color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.342
-anchor_top = 0.21700001
-anchor_right = 0.68200004
-anchor_bottom = 0.623
-offset_left = 85.359985
-offset_top = -56.360016
-offset_right = -106.44006
-offset_bottom = -47.840027
+anchor_left = 0.38200003
+anchor_top = 0.127
+anchor_right = 0.66700006
+anchor_bottom = 0.59900004
+offset_left = 0.5599365
+offset_top = 5.8399963
+offset_right = -27.640137
+offset_bottom = -29.920044
 texture = ExtResource("1_cyg31")
 expand_mode = 1
 
@@ -108,31 +103,17 @@ libraries = {
 }
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
-anchors_preset = -1
-anchor_left = 0.342
-anchor_top = 0.21700001
-anchor_right = 0.68200004
-anchor_bottom = 0.623
-offset_left = 85.359985
-offset_top = -56.360016
-offset_right = -106.44006
-offset_bottom = -47.840027
-texture = ExtResource("4_pmj2g")
-expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
 anchors_preset = -1
-anchor_left = 0.21100001
-anchor_top = 0.63900006
-anchor_right = 0.88000005
+anchor_left = 0.185
+anchor_top = 0.65800005
+anchor_right = 0.85700005
 anchor_bottom = 0.873
-offset_left = 0.87997437
-offset_top = -0.12005615
-offset_right = 0.39990234
-offset_bottom = 0.15997314
+offset_left = -0.2000122
+offset_top = 0.35992432
+offset_right = 0.5599365
+offset_bottom = 28.159973
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("2_bumqu")
 theme_override_font_sizes/normal_font_size = 31
@@ -141,64 +122,50 @@ text = "You are the Hero, a young knight chosen by the God of Fate to defeat the
 visible_characters = 0
 visible_ratio = 0.0
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.38200003
+anchor_top = 0.13100001
+anchor_right = 0.652
+anchor_bottom = 0.55600005
+offset_left = 0.5599365
+offset_top = -0.480011
+offset_right = 0.16003418
+offset_bottom = 26.519958
+texture = SubResource("CompressedTexture2D_jn4l6")
+expand_mode = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
 root_node = NodePath("../RichTextLabel")
 libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer2"]
-anchors_preset = -1
-anchor_left = 0.342
-anchor_top = 0.21700001
-anchor_right = 0.68200004
-anchor_bottom = 0.623
-offset_left = 512.36
-offset_top = 351.63998
-offset_right = -97.44006
-offset_bottom = -47.840027
-texture = SubResource("GradientTexture2D_jd5cs")
-expand_mode = 1
-
 [node name="CanvasLayer3" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
 anchors_preset = -1
-anchor_left = 0.342
-anchor_top = 0.21700001
-anchor_right = 0.68200004
-anchor_bottom = 0.623
-offset_left = 85.359985
-offset_top = -56.360016
-offset_right = -106.44006
-offset_bottom = -47.840027
-texture = ExtResource("4_cgnwt")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer3"]
-anchors_preset = -1
-anchor_left = 0.342
-anchor_top = 0.21700001
-anchor_right = 0.68200004
-anchor_bottom = 0.623
-offset_left = 512.36
-offset_top = 351.63998
-offset_right = -97.44006
-offset_bottom = -47.840027
-texture = SubResource("GradientTexture2D_jd5cs")
+anchor_left = 0.381
+anchor_top = 0.165
+anchor_right = 0.65500003
+anchor_bottom = 0.60200006
+offset_left = -0.52001953
+offset_top = -14.200012
+offset_right = 0.39990234
+offset_bottom = -0.16003418
+texture = ExtResource("4_pmj2g")
 expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
 anchors_preset = -1
-anchor_left = 0.20700002
-anchor_top = 0.63000005
-anchor_right = 0.88000005
+anchor_left = 0.21400002
+anchor_top = 0.63600004
+anchor_right = 0.83000004
 anchor_bottom = 0.873
-offset_left = 46.559967
-offset_top = -0.40008545
-offset_right = -58.600098
-offset_bottom = -9.840027
+offset_left = 0.1199646
+offset_top = 0.11993408
+offset_right = 4.3999023
+offset_bottom = -2.8400269
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("2_bumqu")
 theme_override_font_sizes/normal_font_size = 31

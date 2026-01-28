@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://djdtw4qt78uts"]
 
-[ext_resource type="Script" uid="uid://1fy518sv47h1" path="res://scripts/intro_story.gd" id="1_rfvop"]
+[ext_resource type="Script" uid="uid://d3uxxkxb8cyk8" path="res://scripts/neutral_ending.gd" id="1_urk4v"]
 [ext_resource type="Texture2D" uid="uid://cab3rg4dl1t7e" path="res://assets/ui/story images/neutralending1.png" id="2_urk4v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_5xqq2"]
 [ext_resource type="Texture2D" uid="uid://1p3ov3pfdrvp" path="res://assets/ui/story images/neutralending2.png" id="4_rfvop"]
@@ -50,7 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rfvop")
+script = ExtResource("1_urk4v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
