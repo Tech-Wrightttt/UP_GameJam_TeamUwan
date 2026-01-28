@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_6coua"]
 [ext_resource type="Script" uid="uid://cbal02ml3e170" path="res://scripts/castle_bossroom.gd" id="1_podjh"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_j5t3b"]
-[ext_resource type="Script" path="res://scripts/main_character.gd" id="3_podjh"]
 [ext_resource type="Texture2D" uid="uid://dow3lyrormikg" path="res://assets/Foreground/spr_torch.png" id="4_j5t3b"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
@@ -1030,16 +1029,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_podjh"]
+[sub_resource type="Gradient" id="Gradient_j5t3b"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.95726496, 1)
 colors = PackedColorArray(1, 1, 1, 1, 18.892157, 18.892157, 18.892157, 0.043137256, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yee4r"]
-gradient = SubResource("Gradient_podjh")
+gradient = SubResource("Gradient_j5t3b")
 fill = 1
 fill_from = Vector2(0.4909091, 0.5181818)
 fill_to = Vector2(0.73333335, 0.96060604)
+
+[sub_resource type="Gradient" id="Gradient_podjh"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.95726496, 1)
+colors = PackedColorArray(1, 1, 1, 1, 18.892157, 18.892157, 18.892157, 0.043137256, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_podjh"]
 gradient = SubResource("Gradient_podjh")
@@ -1104,6 +1108,7 @@ sprite_frames = SubResource("SpriteFrames_podjh")
 texture_filter = 1
 position = Vector2(82, 893)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.5211406, 0.5211406, 0.5211405, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1113,6 +1118,7 @@ height = 506.0
 texture_filter = 1
 position = Vector2(286, 893.99994)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1122,6 +1128,7 @@ height = 506.0
 texture_filter = 1
 position = Vector2(573, 893.99994)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1131,6 +1138,7 @@ height = 506.0
 texture_filter = 1
 position = Vector2(1349, 895.99994)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1140,6 +1148,7 @@ height = 506.0
 texture_filter = 1
 position = Vector2(1629, 894)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1149,6 +1158,7 @@ height = 506.0
 texture_filter = 1
 position = Vector2(1833.0001, 896.99994)
 scale = Vector2(2.3437507, 4.4062505)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1156,8 +1166,9 @@ height = 506.0
 
 [node name="PointLight2D7" type="PointLight2D" parent="."]
 texture_filter = 1
-position = Vector2(964.99994, 394)
-scale = Vector2(13.718752, 14.070312)
+position = Vector2(1008.5, 400)
+scale = Vector2(19.078127, 18.46875)
+color = Color(0.52156866, 0.52156866, 0.52156866, 1)
 range_item_cull_mask = 15
 shadow_filter_smooth = 64.0
 texture = SubResource("GradientTexture2D_yee4r")
@@ -1198,7 +1209,6 @@ shape = SubResource("RectangleShape2D_podjh")
 [node name="main_character" parent="." instance=ExtResource("2_j5t3b")]
 position = Vector2(130, 1004)
 scale = Vector2(1.655, 1.655)
-script = ExtResource("3_podjh")
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
 texture_filter = 1
