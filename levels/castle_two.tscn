@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="2_22w3c"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_e7sb2"]
-[ext_resource type="Script" path="res://scripts/main_character.gd" id="3_22w3c"]
+[ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_22w3c"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2165,7 +2165,6 @@ height = 506.0
 [node name="main_character" parent="." instance=ExtResource("2_e7sb2")]
 position = Vector2(-565, 883)
 scale = Vector2(1.655, 1.655)
-script = ExtResource("3_22w3c")
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
 texture_filter = 1
@@ -2179,6 +2178,16 @@ texture = SubResource("GradientTexture2D_m23qa")
 offset = Vector2(-3.31, -0.585)
 texture_scale = 0.55
 height = 506.0
+
+[node name="Camera2D" type="Camera2D" parent="main_character"]
+offset = Vector2(0, -100)
+zoom = Vector2(1.2, 1.2)
+limit_left = -1380
+limit_top = -210
+limit_right = 1180
+limit_bottom = 1175
+editor_draw_limits = true
+script = ExtResource("4_22w3c")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.66657424, 0.66656655, 0.66656834, 1)
