@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=87 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
@@ -155,7 +155,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_dn22e")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack1",
 "speed": 16.0
 }, {
@@ -184,7 +184,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_kvjf6")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack2",
 "speed": 13.0
 }, {
@@ -216,7 +216,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_kvjf6")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack3",
 "speed": 13.0
 }, {
@@ -449,6 +449,16 @@ animations = [{
 "speed": 9.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ip3e"]
+radius = 8.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yum8o"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sj5qt"]
+
 [node name="main_character" type="CharacterBody2D" groups=["player"]]
 collision_layer = 129
 script = ExtResource("1_tqm6u")
@@ -461,6 +471,26 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(2.3841858e-07, 5.9999995)
 scale = Vector2(0.823125, 0.76266235)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
-animation = &"attack1"
-frame = 21
-frame_progress = 1.0
+animation = &"attack3"
+frame_progress = 0.046037324
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_7ip3e")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="attack1" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(24, 9)
+shape = SubResource("CapsuleShape2D_yum8o")
+
+[node name="attack2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(23, 5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_sj5qt")
+
+[node name="attack3" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(25, 10)
+shape = SubResource("CapsuleShape2D_yum8o")
