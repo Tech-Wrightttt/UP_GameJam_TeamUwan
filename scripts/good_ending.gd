@@ -8,6 +8,7 @@ extends Control
 @onready var anim_player2 = $CanvasLayer2/AnimationPlayer
 @onready var anim_player3 = $CanvasLayer3/AnimationPlayer
 
+@onready var audio_player = $audio
 
 func _ready() -> void:
 	# Hide all layers at the start just in case
@@ -15,25 +16,24 @@ func _ready() -> void:
 	layer2.hide()
 	layer3.hide()
 	
-	await play_layer_sequence(layer1, anim_player1)
-	await play_layer_sequence(layer2, anim_player2)
-	await play_layer_sequence(layer3, anim_player3)
+	if audio_player:
+		audio_player.play()
+		
+	await play_layer_sequence(layer1, anim_player1, 10.5)  
+	await play_layer_sequence(layer2, anim_player2, 10) 
+	await play_layer_sequence(layer3, anim_player3, 8) 
 	
 	get_tree().change_scene_to_file("res://levels/title_screen.tscn")
 
-func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer) -> void:
+func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer, animation_length: float) -> void:
 	layer.show()
 	
-	## Start from black, then fade to show the text
-	#anim.play("fade_in") 
-	# Play typewriter immediately or shortly after
+	
 	anim.queue("typewriter") 
+	# Wait for animation to finish OR use timer
+	await get_tree().create_timer(animation_length).timeout
 	
-	# Wait for the player to read (7 seconds)
-	await get_tree().create_timer(7.0).timeout
-	
-	## Fade back to black
-	#anim.play("fade_out")
-	#await anim.animation_finished
+	# Optional: Wait a bit before hiding
+	await get_tree().create_timer(1.0).timeout
 	
 	layer.hide()
