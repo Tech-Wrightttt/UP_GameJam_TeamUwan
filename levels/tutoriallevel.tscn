@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_l1egu"]
 [ext_resource type="PackedScene" uid="uid://bregye8nef5wb" path="res://scenes/fake_narrator.tscn" id="9_d1nep"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_gedp1"]
-[ext_resource type="PackedScene" uid="uid://dhkkgeod03cum" path="res://scenes/npc.tscn" id="11_utvb4"]
+[ext_resource type="PackedScene" uid="uid://cwtf02lj5bqjc" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -516,10 +516,6 @@ tile_set = SubResource("TileSet_5mrsh")
 format = 2
 layer_0/tile_data = PackedInt32Array(327673, 393217, 3, 327674, 458753, 3, 327675, 524289, 3, 327676, 589825, 3, 262166, 393217, 3, 262167, 458753, 3, 262168, 524289, 3, 262169, 589825, 3, 327666, 393217, 4, 327672, 524289, 4, -524275, 524289, 3, -524274, 589825, 3, 262108, 589825, 4, 262107, 589825, 4, 262106, 589825, 4, 851921, 458753, 2, 851922, 458753, 2, 851923, 589825, 2)
 
-[node name="npc" parent="." instance=ExtResource("11_utvb4")]
-position = Vector2(-20, 111)
-scale = Vector2(1.77, 1.77)
-
 [node name="main_character" parent="." instance=ExtResource("3_nvowi")]
 position = Vector2(279, 95)
 scale = Vector2(1.975, 1.975)
@@ -537,3 +533,7 @@ script = ExtResource("9_gedp1")
 [node name="fake narrator" parent="." instance=ExtResource("9_d1nep")]
 position = Vector2(-457, 112)
 scale = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_utvb4")]
