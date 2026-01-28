@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=21 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
 [ext_resource type="Texture2D" uid="uid://dow3lyrormikg" path="res://assets/Foreground/spr_torch.png" id="3_5ylp2"]
+[ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_ylynx"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="5_de36y"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="6_ylynx"]
 
@@ -2121,6 +2122,16 @@ texture = SubResource("GradientTexture2D_ylynx")
 offset = Vector2(-3.31, -0.585)
 texture_scale = 0.55
 height = 506.0
+
+[node name="Camera2D" type="Camera2D" parent="main_character"]
+offset = Vector2(0, -100)
+zoom = Vector2(1.2, 1.2)
+limit_left = -730
+limit_top = 0
+limit_right = 2485
+limit_bottom = 1175
+editor_draw_limits = true
+script = ExtResource("4_ylynx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(488, 720)
