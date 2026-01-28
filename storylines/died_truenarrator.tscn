@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://8fm284uo1ym5"]
+[gd_scene load_steps=8 format=3 uid="uid://8fm284uo1ym5"]
 
-[ext_resource type="Script" uid="uid://cieg47cuw3ya0" path="res://scripts/died_normally.gd" id="1_6lr4r"]
+[ext_resource type="Script" uid="uid://dcehuxi5oqm7b" path="res://scripts/died_truenarrator.gd" id="1_owojr"]
 [ext_resource type="Texture2D" uid="uid://cb76cdmjfmup4" path="res://assets/ui/story images/diedtruenarrator.png" id="2_6lr4r"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_s1ybu"]
+[ext_resource type="AudioStream" uid="uid://bi6dtmygf2g88" path="res://assets/sounds/die true narrator pt.1.wav" id="4_owojr"]
 
 [sub_resource type="Animation" id="Animation_cgnwt"]
 length = 0.001
@@ -21,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r1les"]
 resource_name = "typewriter"
-length = 7.0
+length = 15.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,7 +30,7 @@ tracks/0/path = NodePath(".:visible_ratio")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.5),
+"times": PackedFloat32Array(0, 11.066667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -49,7 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_6lr4r")
+script = ExtResource("1_owojr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -88,7 +89,7 @@ offset_bottom = 0.11999512
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("3_s1ybu")
 theme_override_font_sizes/normal_font_size = 31
-text = "“You tried… you actually tried! \"But you can’t change what I’ve written! Every breath, every swing, every heartbeat — MINE!!!!”
+text = "“You tried… you actually TRIEEEDDDDD! \"But you can’t change what I’ve written! Every breath, every swing, every heartbeat — MINE!!!!”
 "
 visible_characters = 0
 visible_ratio = 0.0
@@ -98,3 +99,6 @@ root_node = NodePath("../RichTextLabel")
 libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_owojr")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy162cvfwduht"]
+[gd_scene load_steps=8 format=3 uid="uid://dy162cvfwduht"]
 
-[ext_resource type="Script" uid="uid://cieg47cuw3ya0" path="res://scripts/died_normally.gd" id="1_fciho"]
+[ext_resource type="Script" uid="uid://tannso01volt" path="res://scripts/died_fakenarrator.gd" id="1_gj0pl"]
 [ext_resource type="Texture2D" uid="uid://cqwhjmcygadvw" path="res://assets/ui/story images/diedfakenarrator.png" id="2_fciho"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_k3y7c"]
+[ext_resource type="AudioStream" uid="uid://d1o6as68hlhbs" path="res://assets/sounds/die fake narrator.wav" id="4_gj0pl"]
 
 [sub_resource type="Animation" id="Animation_cgnwt"]
 length = 0.001
@@ -29,7 +30,7 @@ tracks/0/path = NodePath(".:visible_ratio")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.5),
+"times": PackedFloat32Array(0, 5.233333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -49,7 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fciho")
+script = ExtResource("1_gj0pl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -76,18 +77,18 @@ expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.22000001
+anchor_left = 0.158
 anchor_top = 0.60200006
-anchor_right = 0.83500004
+anchor_right = 0.859
 anchor_bottom = 0.836
-offset_left = 0.5999756
+offset_left = -0.36001587
 offset_top = -0.16003418
-offset_right = -0.20007324
+offset_right = -0.2800293
 offset_bottom = 0.11999512
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("3_k3y7c")
 theme_override_font_sizes/normal_font_size = 31
-text = "“Did you really think you could kill the voice that made you?”"
+text = "“Did you really think you could KILL THE VOICE THAT MADE YOU??”"
 visible_characters = 0
 visible_ratio = 0.0
 
@@ -96,3 +97,6 @@ root_node = NodePath("../RichTextLabel")
 libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gj0pl")

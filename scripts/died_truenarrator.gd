@@ -23,7 +23,7 @@ func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer) -> void:
 	anim.queue("typewriter") 
 	
 	# Wait for the player to read (7 seconds)
-	await get_tree().create_timer(8.0).timeout
+	await get_tree().create_timer(16.0).timeout
 	
 	## Fade back to black
 	#anim.play("fade_out")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://2ljprocdvo4q"]
+[gd_scene load_steps=8 format=3 uid="uid://2ljprocdvo4q"]
 
 [ext_resource type="Script" uid="uid://cieg47cuw3ya0" path="res://scripts/died_normally.gd" id="1_5bcvb"]
 [ext_resource type="Texture2D" uid="uid://crkbixg31m7wk" path="res://assets/ui/story images/died.png" id="2_iq4n3"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_ltj64"]
+[ext_resource type="AudioStream" uid="uid://qtwqd71xkcbo" path="res://assets/sounds/die normally.wav" id="4_5bcvb"]
 
 [sub_resource type="Animation" id="Animation_cgnwt"]
 length = 0.001
@@ -98,3 +99,6 @@ root_node = NodePath("../RichTextLabel")
 libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5bcvb")
