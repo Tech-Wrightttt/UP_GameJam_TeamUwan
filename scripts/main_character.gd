@@ -1,198 +1,227 @@
 extends CharacterBody2D
 
-#    ACCELERATION: Higher = snappier movement
-#    FRICTION: Higher = faster stopping
-#    AIR_RESISTANCE: Lower = more air control
-#    COYOTE_TIME: Longer = more forgiving platforming
-#    JUMP_BUFFER_TIME: Longer = more responsive jumps
-
-# Movement constants
+# =========================
+# MOVEMENT
+# =========================
 const SPEED = 300.0
 const ACCELERATION = 2000.0
 const FRICTION = 1800.0
 const AIR_RESISTANCE = 400.0
-
-# Jump constants
 const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
+const ROLL_DURATION = 0.4
+const BLOCK_HOLD_SPEED = 40.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# PlayerState machine
+# =========================
+# STATES
+# =========================
 enum PlayerState {
 	IDLE,
-	WALK,
+	RUN,
 	JUMP,
 	FALL,
+	ROLL,
+	BLOCK,       # Immediate block (F)
+	BLOCKHOLD,   # Toggle block (G)
 	ATTACK
 }
 
 var current_state: PlayerState = PlayerState.IDLE
 var previous_state: PlayerState = PlayerState.IDLE
 
-# Timers and tracking
-var coyote_timer: float = 0.0
-var jump_buffer_timer: float = 0.0
-var last_direction: int = 1
+# =========================
+# TIMERS
+# =========================
+var coyote_timer := 0.0
+var jump_buffer_timer := 0.0
+var roll_timer := 0.0
+var attack_timer := 0.0
 
-const ATTACK_DURATION = 1.00
-var attack_timer: float = 0.0
+var last_direction := 1
 
+# =========================
+# READY
+# =========================
 func _ready() -> void:
 	transition_to(PlayerState.IDLE)
 
+# =========================
+# MAIN LOOPS
+# =========================
 func _physics_process(delta: float) -> void:
-	# Update timers
 	update_timers(delta)
-	
-	# Handle input
 	handle_input()
-	
-	# Update current state
 	update_state(delta)
-	
-	# Apply physics
 	move_and_slide()
 
 func _process(_delta: float) -> void:
 	if current_state != previous_state:
 		print(PlayerState.keys()[current_state])
 		previous_state = current_state
-		
+
+# =========================
+# TIMERS
+# =========================
 func update_timers(delta: float) -> void:
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
-
+	roll_timer -= delta
 	if attack_timer > 0:
 		attack_timer -= delta
-	
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME
 
+# =========================
+# INPUT
+# =========================
 func handle_input() -> void:
+	# ===== ATTACKS =====
+	if Input.is_action_just_pressed("attack1"):
+		start_attack("attack1")
+		return
+	elif Input.is_action_just_pressed("attack2"):
+		start_attack("attack2")
+		return
+	elif Input.is_action_just_pressed("attack3"):
+		start_attack("attack3")
+		return
+
+	# ===== JUMP =====
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = JUMP_BUFFER_TIME
-	
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y *= JUMP_CUT_MULTIPLIER
-		
-	if Input.is_action_just_pressed("attack"):
-		if current_state != PlayerState.ATTACK:
-			transition_to(PlayerState.ATTACK)
-	
-	if Input.is_action_just_pressed("left"):
-		sprite.flip_h = true
-		last_direction = -1
-		
-	elif Input.is_action_just_pressed("right"):
-		sprite.flip_h = false
-		last_direction = 1
 
+	# ===== ROLL =====
+	if Input.is_action_just_pressed("roll") and is_on_floor():
+		transition_to(PlayerState.ROLL)
+		return
+
+	# ===== BLOCK (F) ===== immediate
+	if Input.is_action_just_pressed("block"):
+		transition_to(PlayerState.BLOCK)
+		return
+
+	# ===== BLOCKHOLD (G) toggle =====
+	if Input.is_action_just_pressed("blockhold"):
+		if current_state == PlayerState.BLOCKHOLD:
+			transition_to(PlayerState.IDLE)
+		else:
+			transition_to(PlayerState.BLOCKHOLD)
+		return
+
+	# ===== DIRECTION =====
+	if current_state != PlayerState.BLOCKHOLD: # normal movement except blockhold
+		if Input.is_action_pressed("left"):
+			sprite.flip_h = true
+			last_direction = -1
+		elif Input.is_action_pressed("right"):
+			sprite.flip_h = false
+			last_direction = 1
+
+# =========================
+# STATE MACHINE
+# =========================
 func update_state(delta: float) -> void:
 	match current_state:
 		PlayerState.IDLE:
 			state_idle(delta)
-		PlayerState.WALK:
-			state_walk(delta)
+		PlayerState.RUN:
+			state_run(delta)
 		PlayerState.JUMP:
 			state_jump(delta)
 		PlayerState.FALL:
 			state_fall(delta)
+		PlayerState.ROLL:
+			state_roll(delta)
+		PlayerState.BLOCK:
+			state_block(delta)
+		PlayerState.BLOCKHOLD:
+			state_blockhold(delta)
 		PlayerState.ATTACK:
 			state_attack(delta)
 
+# =========================
+# STATES
+# =========================
 func state_idle(delta: float) -> void:
 	apply_friction(delta)
 	apply_gravity(delta)
-	
-	var direction = Input.get_axis("left", "right")
-	
-	# Transition checks
 	if try_jump():
 		return
-	
+	var dir = Input.get_axis("left", "right")
 	if not is_on_floor():
 		transition_to(PlayerState.FALL)
-	elif direction != 0:
-		transition_to(PlayerState.WALK)
+	elif dir != 0:
+		transition_to(PlayerState.RUN)
 
-func state_walk(delta: float) -> void:
+func state_run(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
-	
-	var direction = Input.get_axis("left", "right")
-	
-	# Transition checks
 	if try_jump():
 		return
-	
+	var dir = Input.get_axis("left", "right")
 	if not is_on_floor():
 		transition_to(PlayerState.FALL)
-	elif direction == 0:
+	elif dir == 0:
 		transition_to(PlayerState.IDLE)
 
 func state_jump(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
-	
-	# Transition checks
 	if velocity.y >= 0:
 		transition_to(PlayerState.FALL)
-	elif is_on_floor():
-		var direction = Input.get_axis("left", "right")
-		if direction != 0:
-			transition_to(PlayerState.WALK)
-		else:
-			transition_to(PlayerState.IDLE)
 
 func state_fall(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
-	
-	# Transition checks
 	if try_jump():
 		return
-	
 	if is_on_floor():
-		var direction = Input.get_axis("left", "right")
-		if direction != 0:
-			transition_to(PlayerState.WALK)
-		else:
-			transition_to(PlayerState.IDLE)
-			
+		var dir = Input.get_axis("left", "right")
+		transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
+
+func state_roll(delta: float) -> void:
+	velocity.x = last_direction * SPEED * 1.4
+	apply_gravity(delta)
+	if roll_timer <= 0:
+		transition_to(PlayerState.IDLE)
+
+func state_block(delta: float) -> void:
+	# Immediate block, short pause animation, no toggle
+	velocity.x = 0
+	apply_gravity(delta)
+	# Auto return to IDLE after animation finishes
+	if not sprite.is_playing():
+		transition_to(PlayerState.IDLE)
+
+func state_blockhold(delta: float) -> void:
+	# Slow movement while holding
+	var dir = Input.get_axis("left", "right")
+	velocity.x = move_toward(velocity.x, dir * BLOCK_HOLD_SPEED, ACCELERATION * delta)
+	apply_gravity(delta)
+	# stays in this state until toggle pressed
+
 func state_attack(delta: float) -> void:
-	# Stop horizontal movement while attacking
 	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	apply_gravity(delta)
-
-	# Attack finished
-	if attack_timer <= 0:
+	if not sprite.is_playing():
 		if not is_on_floor():
 			transition_to(PlayerState.FALL)
 		else:
-			var direction = Input.get_axis("left", "right")
-			if direction != 0:
-				transition_to(PlayerState.WALK)
-			else:
-				transition_to(PlayerState.IDLE)
+			var dir = Input.get_axis("left", "right")
+			transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
 
-func apply_gravity(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-func apply_horizontal_movement(delta: float) -> void:
-	var direction = Input.get_axis("left", "right")
-	
-	if direction != 0:
-		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
-	else:
-		var deceleration = AIR_RESISTANCE if not is_on_floor() else FRICTION
-		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
-
-func apply_friction(delta: float) -> void:
-	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+# =========================
+# ACTIONS
+# =========================
+func start_attack(anim: String) -> void:
+	transition_to(PlayerState.ATTACK)
+	sprite.play(anim)
 
 func try_jump() -> bool:
 	if jump_buffer_timer > 0 and coyote_timer > 0:
@@ -203,35 +232,55 @@ func try_jump() -> bool:
 		return true
 	return false
 
+# =========================
+# PHYSICS HELPERS
+# =========================
+func apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
+func apply_horizontal_movement(delta: float) -> void:
+	var dir = Input.get_axis("left", "right")
+	# Blockhold allows slow movement
+	if current_state == PlayerState.BLOCKHOLD:
+		velocity.x = move_toward(velocity.x, dir * BLOCK_HOLD_SPEED, ACCELERATION * delta)
+		return
+	if dir != 0:
+		velocity.x = move_toward(velocity.x, dir * SPEED, ACCELERATION * delta)
+	else:
+		var decel = AIR_RESISTANCE if not is_on_floor() else FRICTION
+		velocity.x = move_toward(velocity.x, 0, decel * delta)
+
+func apply_friction(delta: float) -> void:
+	if current_state == PlayerState.BLOCKHOLD:
+		return
+	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+
+# =========================
+# STATE TRANSITIONS
+# =========================
 func transition_to(new_state: PlayerState) -> void:
 	if current_state == new_state:
 		return
-	
-	# Exit current state
-	exit_state(current_state)
-	
-	# Update state
-	previous_state = current_state
 	current_state = new_state
-	
-	# Enter new state
 	enter_state(new_state)
 
 func enter_state(state: PlayerState) -> void:
 	match state:
 		PlayerState.IDLE:
 			sprite.play("default")
-		PlayerState.WALK:
-			sprite.play("walk")
+		PlayerState.RUN:
+			sprite.play("run")
 		PlayerState.JUMP:
 			sprite.play("jump")
 		PlayerState.FALL:
 			sprite.play("fall")
+		PlayerState.ROLL:
+			roll_timer = ROLL_DURATION
+			sprite.play("roll")
+		PlayerState.BLOCK:
+			sprite.play("block")
+		PlayerState.BLOCKHOLD:
+			sprite.play("blockhold")
 		PlayerState.ATTACK:
-			sprite.play("attack")
-			attack_timer = ATTACK_DURATION
-
-func exit_state(state: PlayerState) -> void:
-	# Clean up when leaving a state (if needed)
-	pass
+			pass
