@@ -32,6 +32,10 @@ right={
 ]
 }
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
 [display]
 
 window/size/viewport_width=1920
