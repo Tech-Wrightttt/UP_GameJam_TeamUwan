@@ -1,0 +1,230 @@
+[gd_scene load_steps=17 format=3 uid="uid://d8ef4upks62e"]
+
+[ext_resource type="Script" uid="uid://7yhls2uba6bw" path="res://scripts/bad_ending.gd" id="1_j2hm2"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="2_v5npv"]
+[ext_resource type="Texture2D" uid="uid://depa7la5e7mpn" path="res://assets/true_narrator.png" id="3_j2hm2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5npv"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(0, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgqcr"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(160, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfwwu"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(320, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux68n"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(480, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q600e"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(640, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6qdo"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(800, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyvju"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(960, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fjdq"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(1120, 810, 160, 81)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b8my"]
+atlas = ExtResource("3_j2hm2")
+region = Rect2(1280, 810, 160, 81)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sbjnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5npv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgqcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfwwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux68n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q600e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6qdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyvju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fjdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b8my")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les")
+}
+
+[node name="trueending" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j2hm2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.15900001
+anchor_top = 0.60400003
+anchor_right = 0.88000005
+anchor_bottom = 0.873
+offset_left = 0.7199707
+offset_top = -0.32000732
+offset_right = 0.39990234
+offset_bottom = 0.15997314
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_v5npv")
+theme_override_font_sizes/normal_font_size = 31
+text = "The world you knew existed within a loop — a cycle woven by the God of Fate, the Narrator himself. Again and again, the Demon King would rise, the Hero would awaken, and the story would repeat."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(708.00006, 243)
+scale = Vector2(5.0368743, 5.6576247)
+sprite_frames = SubResource("SpriteFrames_sbjnl")
+animation = &"hurt"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.22200002
+anchor_top = 0.628
+anchor_right = 0.85700005
+anchor_bottom = 0.873
+offset_left = -0.24002075
+offset_top = -0.24005127
+offset_right = 0.5599365
+offset_bottom = 28.159973
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_v5npv")
+theme_override_font_sizes/normal_font_size = 31
+text = "But this time, you broke the cycle.
+
+You followed the forgotten path. You made your own choice.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer2"]
+position = Vector2(708.00006, 243)
+scale = Vector2(5.0368743, 5.6576247)
+sprite_frames = SubResource("SpriteFrames_sbjnl")
+animation = &"hurt"
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.31500003
+anchor_top = 0.64500004
+anchor_right = 0.822
+anchor_bottom = 0.88000005
+offset_left = -25.800049
+offset_top = 13.399963
+offset_right = 0.76000977
+offset_bottom = -0.40008545
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_fonts/normal_font = ExtResource("2_v5npv")
+theme_override_font_sizes/normal_font_size = 31
+text = "And for that… you are truly free.
+
+You are THE HERO."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer3"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer3"]
+position = Vector2(708.00006, 243)
+scale = Vector2(5.0368743, 5.6576247)
+sprite_frames = SubResource("SpriteFrames_sbjnl")
+animation = &"hurt"
