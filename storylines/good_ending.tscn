@@ -43,7 +43,7 @@ _data = {
 &"typewriter": SubResource("Animation_r1les")
 }
 
-[node name="IntroStory" type="Control"]
+[node name="goodending" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
