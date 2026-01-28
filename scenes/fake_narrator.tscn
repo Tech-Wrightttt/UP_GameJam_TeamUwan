@@ -1,16 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=42 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
 [ext_resource type="Texture2D" uid="uid://cxpby1qjlb0xx" path="res://assets/fake narrator/player-Sword Slash.png" id="1_jpui6"]
-[ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scenes/fake_narrator.gd" id="1_u6kjf"]
 [ext_resource type="Texture2D" uid="uid://lch1uexq7s8u" path="res://assets/fake narrator/player-AirSwordSlash.png" id="2_mpwst"]
 [ext_resource type="Texture2D" uid="uid://neh8v2outyep" path="res://assets/fake narrator/player-Hurt.png" id="3_fcj57"]
 [ext_resource type="Texture2D" uid="uid://csc7dcfss7w1e" path="res://assets/fake narrator/player-Run.png" id="5_i4cr4"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="6_fcj57"]
-[ext_resource type="Script" uid="uid://ctbipx83c2shk" path="res://state.gd" id="6_mpwst"]
-[ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scenes/idle.gd" id="7_i4cr4"]
-[ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scenes/follow.gd" id="9_40g78"]
-[ext_resource type="Script" uid="uid://cgc24ul0anvn2" path="res://scenes/attack.gd" id="10_n1hse"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6kjf"]
 atlas = ExtResource("1_jpui6")
@@ -265,7 +260,6 @@ height = 34.0
 radius = 5.0
 
 [node name="fake narrator" type="CharacterBody2D"]
-script = ExtResource("1_u6kjf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
@@ -304,16 +298,12 @@ script = ExtResource("6_fcj57")
 initial_state = NodePath("idle")
 
 [node name="idle" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("7_i4cr4")
 
 [node name="follow" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("9_40g78")
 
 [node name="attack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("10_n1hse")
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("6_mpwst")
 
 [node name="debug" type="Label" parent="."]
 offset_left = -12.0
