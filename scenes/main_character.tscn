@@ -109,10 +109,55 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_kvjf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f1khg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wyspq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_22120")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_isxyb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_w51ho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3jlp4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kvjf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7eddf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3xr8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_imsw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5k4cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8mpxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_vr7rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_p1clu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_dn22e")
 }],
 "loop": false,
 "name": &"attack1",
-"speed": 13.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -416,6 +461,6 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(2.3841858e-07, 5.9999995)
 scale = Vector2(0.823125, 0.76266235)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
-animation = &"block"
-frame = 4
+animation = &"attack1"
+frame = 21
 frame_progress = 1.0
