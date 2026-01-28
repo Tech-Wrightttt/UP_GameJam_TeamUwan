@@ -86,19 +86,17 @@ func update_timers(delta: float) -> void:
 # =========================
 # INPUT
 # =========================
+var attack_index: int = 0
+var attacks := ["attack1", "attack2", "attack3"]
 func handle_input() -> void:
 	# =====================
 	# ATTACKS (highest priority)
 	# =====================
 	if Input.is_action_just_pressed("attack1"):
-		start_attack("attack1")
+		attack_index = (attack_index + 1) % attacks.size()
+		start_attack(attacks[attack_index])
 		return
-	elif Input.is_action_just_pressed("attack2"):
-		start_attack("attack2")
-		return
-	elif Input.is_action_just_pressed("attack3"):
-		start_attack("attack3")
-		return
+
 
 	# =====================
 	# JUMP
