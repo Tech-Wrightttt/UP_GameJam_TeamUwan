@@ -12,11 +12,14 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 @onready var hitbox_attack1 = $Hitbox_Attack1
 @onready var hitbox_attack2 = $Hitbox_Attack2
+@export var effects_animation_player: AnimationPlayer
+@export var knockback_decay := 6.0
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
 var is_dead := false
 var knockback_velocity := Vector2.ZERO
+var is_hurt := false
 
 func _ready():
 	set_physics_process(false)
@@ -28,9 +31,17 @@ func _ready():
 	hitbox_attack2.deactivate()
 	fsm.start()
 
-func _on_hurt(damage: int, kb_direction: Vector2, force: float):
+func on_hurt(kb_direction: Vector2, force: float):
+	if is_dead:
+		return
+	
 	knockback_velocity = kb_direction * force
-	print("Enemy knocked back with force: ", force)
+	
+	if effects_animation_player:
+		effects_animation_player.stop()
+		effects_animation_player.play("hurt")
+	
+	is_hurt = true
 
 func play_anim(name: String):
 	if uses_sprite and sprite:
@@ -54,23 +65,27 @@ func _process(_delta):
 		sprite.flip_h = false
 		$Hitbox_Attack1/attack_up.position.x = 22
 		$Hitbox_Attack2/attack.position.x = 31
+		
 func _physics_process(delta):
 	if is_dead:
+		set_physics_process(false)
 		return
-		
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
 		velocity.y = 0
-	
-	if knockback_velocity.length() > 0:
+
+	if knockback_velocity.length() > 1.0:
 		velocity.x = knockback_velocity.x
-		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 5.0 * delta)
-	elif can_move and direction != Vector2.ZERO:
-		velocity.x = direction.normalized().x * move_speed
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay * delta)
 	else:
-		velocity.x = 0
-	
+		knockback_velocity = Vector2.ZERO
+		if can_move and direction != Vector2.ZERO:
+			velocity.x = direction.normalized().x * move_speed
+		else:
+			velocity.x = 0
+
 	move_and_slide()
 
 func _on_enemy_died():
@@ -78,4 +93,9 @@ func _on_enemy_died():
 		return
 	is_dead = true
 	print("Enemy died!")
+	animation_player.stop(false)
+	effects_animation_player.stop(false)
+	hurtbox.monitoring = false
+	hitbox_attack1.deactivate()
+	hitbox_attack2.deactivate()
 	fsm.change_state("death")

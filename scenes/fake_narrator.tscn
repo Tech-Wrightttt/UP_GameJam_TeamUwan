@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=59 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_40g78"]
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
@@ -183,9 +183,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j3x0j")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -295,10 +295,23 @@ tracks/0/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_lk7e6"]
+resource_name = "death"
+
+[sub_resource type="Animation" id="Animation_s23sm"]
+resource_name = "hurt"
+length = 0.5
+
+[sub_resource type="Animation" id="Animation_6ynvd"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lk7e6"]
 _data = {
+&"RESET": SubResource("Animation_6ynvd"),
 &"attack1": SubResource("Animation_4dfc4"),
-&"attack2": SubResource("Animation_xvv06")
+&"attack2": SubResource("Animation_xvv06"),
+&"death": SubResource("Animation_lk7e6"),
+&"hurt": SubResource("Animation_s23sm")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lk7e6"]
@@ -312,9 +325,47 @@ height = 34.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvx0s"]
 radius = 5.0
 
-[node name="fake narrator" type="CharacterBody2D" groups=["enemy"]]
+[sub_resource type="Animation" id="Animation_dvhn7"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mf48g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf48g"]
+_data = {
+&"RESET": SubResource("Animation_mf48g"),
+&"hurt": SubResource("Animation_dvhn7")
+}
+
+[node name="fake narrator" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_40g78")
+effects_animation_player = NodePath("EffectsAnimationPlayer")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_t1j4c")
@@ -322,8 +373,9 @@ script = ExtResource("2_t1j4c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"attack2"
-frame_progress = 0.51389194
+animation = &"hurt"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -388,6 +440,11 @@ script = ExtResource("13_xvv06")
 position = Vector2(31, 9.536743e-07)
 rotation = 1.1588986
 shape = SubResource("CapsuleShape2D_vvx0s")
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mf48g")
+}
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
