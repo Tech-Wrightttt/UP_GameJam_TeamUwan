@@ -18,6 +18,8 @@ extends CharacterBody2D
 @export var knockback_decay := 6.0
 @export var minion_scene: PackedScene
 @export var summon_offset := Vector2(48, 0)
+@export var bullet_node: PackedScene
+@export var projectile_spawn_offset := Vector2(32, -16)
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
@@ -32,7 +34,34 @@ func spawn_minion():
 	var minion = minion_scene.instantiate()
 	minion.global_position = global_position + summon_offset
 	get_parent().add_child(minion)
+	
+func shoot():
+	if not bullet_node:
+		print("ERROR: No bullet_node assigned!")
+		return
+	
+	if not player:
+		print("ERROR: No player reference!")
+		return
 
+	var projectile = bullet_node.instantiate()
+	
+	# Adjust spawn position based on flip
+	var spawn_offset = projectile_spawn_offset
+	if sprite.flip_h:
+		spawn_offset.x = -abs(spawn_offset.x)
+	else:
+		spawn_offset.x = abs(spawn_offset.x)
+	
+	projectile.global_position = global_position + spawn_offset
+
+	var dir = (player.global_position - global_position).normalized()
+	projectile.set_direction(dir)
+	
+	print("Spawning projectile at: ", projectile.global_position, " targeting: ", player.global_position)
+
+	get_parent().add_child(projectile)
+	
 func _ready():
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
@@ -172,9 +201,9 @@ func perform_attack(attack_name: String):
 			play_anim("summon")
 			animation_player.play("summon")
 
-		"skill":
-			play_anim("skill")
-			animation_player.play("skill")
+		"ranged_attack":
+			play_anim("ranged_attack")
+			animation_player.play("ranged_attack")
 
 		_:
 			push_warning("Unknown attack: " + attack_name)
