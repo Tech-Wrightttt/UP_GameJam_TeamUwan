@@ -13,11 +13,7 @@ extends CharacterBody2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox = $Hurtbox
 @onready var hitbox_attack1 = $Hitbox_Attack1
-@onready var hitbox_attack2 = $Hitbox_Attack2
-@export var effects_animation_player: AnimationPlayer
 @export var knockback_decay := 6.0
-@export var minion_scene: PackedScene
-@export var summon_offset := Vector2(48, 0)
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
@@ -25,19 +21,11 @@ var is_dead := false
 var knockback_velocity := Vector2.ZERO
 var is_hurt := false
 
-func spawn_minion():
-	if not minion_scene:
-		return
-
-	var minion = minion_scene.instantiate()
-	minion.global_position = global_position + summon_offset
-	get_parent().add_child(minion)
 
 func _ready():
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
 	hitbox_attack1.deactivate()
-	hitbox_attack2.deactivate()
 	fsm.start()
 
 func on_hurt(kb_direction: Vector2, force: float):
@@ -45,10 +33,7 @@ func on_hurt(kb_direction: Vector2, force: float):
 		return
 	
 	knockback_velocity = kb_direction * force
-	
-	if effects_animation_player:
-		effects_animation_player.stop()
-		effects_animation_player.play("hurt")
+	play_anim("hurt")
 	
 	is_hurt = true
 
@@ -74,13 +59,11 @@ func _process(_delta):
 	if direction.x < 0:
 		sprite.flip_h = true
 		$Hitbox_Attack1/attack_up.position.x = -abs($Hitbox_Attack1/attack_up.position.x)
-		$Hitbox_Attack2/attack.position.x = -abs($Hitbox_Attack2/attack.position.x)
 		wall_ray.target_position.x = -abs(wall_ray.target_position.x)
 		$PlayerDetection/CollisionShape2D.position.x = -abs($PlayerDetection/CollisionShape2D.position.x)
 	else:
 		sprite.flip_h = false
 		$Hitbox_Attack1/attack_up.position.x = abs($Hitbox_Attack1/attack_up.position.x)
-		$Hitbox_Attack2/attack.position.x = abs($Hitbox_Attack2/attack.position.x)
 		wall_ray.target_position.x = abs(wall_ray.target_position.x)
 		$PlayerDetection/CollisionShape2D.position.x = abs($PlayerDetection/CollisionShape2D.position.x)
 		
@@ -110,16 +93,12 @@ func _on_enemy_died():
 	is_dead = true
 	
 	animation_player.stop(false)
-	if effects_animation_player:
-		effects_animation_player.stop(false)
 	
 	hurtbox.monitoring = false
 	hurtbox.monitorable = false
 	
 	hitbox_attack1.deactivate()
 	hitbox_attack1.monitorable = false
-	hitbox_attack2.deactivate()
-	hitbox_attack2.monitorable = false
 	
 	set_physics_process(false)
 	can_move = false
@@ -136,11 +115,8 @@ func stop_all_enemy_behavior():
 
 	if animation_player:
 		animation_player.stop(false)
-	if effects_animation_player:
-		effects_animation_player.stop(false)
 
 	hitbox_attack1.deactivate()
-	hitbox_attack2.deactivate()
 	set_physics_process(false)
 	set_process(false)
 	velocity = Vector2.ZERO
@@ -165,16 +141,3 @@ func try_jump():
 	if should_jump():
 		velocity.y = jump_force
 		print("Enemy jumped!")
-
-func perform_attack(attack_name: String):
-	match attack_name:
-		"summon":
-			play_anim("summon")
-			animation_player.play("summon")
-
-		"skill":
-			play_anim("skill")
-			animation_player.play("skill")
-
-		_:
-			push_warning("Unknown attack: " + attack_name)

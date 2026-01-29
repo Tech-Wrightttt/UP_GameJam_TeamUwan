@@ -2,6 +2,7 @@ extends State
 
 var follow_timer := 0.0
 @onready var attack_range = boss.get_node("PlayerDetection")
+@export var dist := 100
 
 func enter():
 	super()
@@ -12,6 +13,7 @@ func enter():
 func _physics_process(delta):
 	super(delta)
 	boss.try_jump()
+	transition()  # ADD THIS LINE
 
 func transition():
 	follow_timer += get_physics_process_delta_time()
@@ -19,5 +21,7 @@ func transition():
 		return
 	
 	var distance = boss.direction.length()
-	if distance < 80:
+	print("Follow - Distance: ", distance, " | Threshold: ", dist)  # Debug
+	if distance < dist:
+		print("Changing to ATTACK")  # Debug
 		fsm.change_state("attack")

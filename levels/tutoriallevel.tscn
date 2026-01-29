@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=33 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="10_xt1gw"]
 [ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
+[ext_resource type="PackedScene" uid="uid://d3u5q0qrcfex0" path="res://scenes/true_narrator.tscn" id="16_38agi"]
+[ext_resource type="PackedScene" uid="uid://co6vgetfw3515" path="res://scenes/skeleton_summon.tscn" id="17_r48ml"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2429,3 +2431,10 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("13_6x4ie")
 theme_override_font_sizes/normal_font_size = 31
 text = "Don't go here, this is off limits."
+
+[node name="true_narrator" parent="." instance=ExtResource("16_38agi")]
+position = Vector2(-1095, 416)
+scale = Vector2(2, 2)
+
+[node name="skeleton_summon" parent="." instance=ExtResource("17_r48ml")]
+position = Vector2(-1786, 488)

@@ -22,8 +22,7 @@ func enter():
 		current_attack_index = randi() % attack_animations.size()
 		var random_attack = attack_animations[current_attack_index]
 		print("Starting attack: ", random_attack)
-		boss.play_anim(random_attack)
-		boss.animation_player.play(random_attack)
+		boss.perform_attack(random_attack)
 	else:
 		boss.play_anim("idle")
 

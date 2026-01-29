@@ -8,16 +8,21 @@ signal died
 var current_health: int
 var is_dead := false
 
-func _ready():
+func _init():
 	current_health = max_health
+
+func _ready():
+	health_changed.emit(current_health, max_health)
 
 func take_damage(amount: int):
 	if is_dead:
 		return
-
+	
 	current_health = max(current_health - amount, 0)
 	print(get_parent().name, "HP:", current_health, "/", max_health)
-
+	
+	health_changed.emit(current_health, max_health)  
+	
 	if current_health == 0:
 		is_dead = true
 		died.emit()

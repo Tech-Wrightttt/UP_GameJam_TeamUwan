@@ -15,7 +15,7 @@ func change_state(state_name: String):
 	if new_state == null:
 		push_error("State not found: " + state_name)
 		return
-
+	print("changing to state " + state_name)
 	current_state.exit()
 	current_state = new_state
 	current_state.enter()
