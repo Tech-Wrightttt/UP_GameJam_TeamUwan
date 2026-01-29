@@ -21,10 +21,8 @@ func _on_area_entered(area):
 	var my_owner = get_parent()
 	var other_owner = area.get_parent()
 
-	# Prevent self-hits
 	if my_owner == other_owner:
 		return
 
 	if area.has_method("take_hit"):
-		# Pass attacker position for knockback
 		area.take_hit(damage, my_owner.global_position)

@@ -23,10 +23,7 @@ var is_hurt := false
 
 func _ready():
 	set_physics_process(false)
-	
 	health_component.died.connect(_on_enemy_died)
-	
-	# Make sure both hitboxes start deactivated
 	hitbox_attack1.deactivate()
 	hitbox_attack2.deactivate()
 	fsm.start()
@@ -92,10 +89,22 @@ func _on_enemy_died():
 	if is_dead:
 		return
 	is_dead = true
-	print("Enemy died!")
+	
 	animation_player.stop(false)
-	effects_animation_player.stop(false)
+	if effects_animation_player:
+		effects_animation_player.stop(false)
+	
 	hurtbox.monitoring = false
+	hurtbox.monitorable = false
+	
 	hitbox_attack1.deactivate()
+	hitbox_attack1.monitorable = false
 	hitbox_attack2.deactivate()
+	hitbox_attack2.monitorable = false
+	
+	set_physics_process(false)
+	can_move = false
+	
+	if fsm and fsm.current_state:
+		fsm.current_state.exit() 
 	fsm.change_state("death")
