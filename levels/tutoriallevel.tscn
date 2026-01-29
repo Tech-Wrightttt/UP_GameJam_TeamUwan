@@ -2448,17 +2448,15 @@ shape = SubResource("RectangleShape2D_xt1gw")
 position = Vector2(2313, 201.0625)
 shape = SubResource("RectangleShape2D_38agi")
 
-<<<<<<< Updated upstream
 [node name="true_narrator" parent="." instance=ExtResource("16_38agi")]
 position = Vector2(-1222, 390)
 scale = Vector2(2, 2)
-=======
+
 [node name="marker" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
 position = Vector2(2061, 351)
 shape = SubResource("RectangleShape2D_r48ml")
->>>>>>> Stashed changes
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]
