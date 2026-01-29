@@ -431,6 +431,7 @@ animation = &"death"
 shape = SubResource("CapsuleShape2D_kilpx")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 visible = false
