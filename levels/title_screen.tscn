@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://be8isvqoydruy"]
 
 [ext_resource type="Texture2D" uid="uid://4jtiv5fdsmih" path="res://assets/ui/UNBOUND HER0 - GAMEFLOW.png" id="1_1xnr2"]
-[ext_resource type="Script" path="res://levels/title_screen.gd" id="1_gynrd"]
+[ext_resource type="Script" uid="uid://d0jxgurj8rt2k" path="res://scripts/title_screen.gd" id="1_gynrd"]
 [ext_resource type="Texture2D" uid="uid://bjqtjiiotcr2n" path="res://assets/ui/play btn (1).png" id="2_gynrd"]
 [ext_resource type="Texture2D" uid="uid://clkrmwmodx278" path="res://assets/ui/play hover btn.png" id="3_ryob0"]
 
