@@ -16,6 +16,8 @@ const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
+const DASH_SPEED = 800.0
+const DASH_DURATION = 0.15
 
 # =========================
 # ROLL / BLOCK
@@ -35,7 +37,8 @@ enum PlayerState {
 	FALL,
 	ROLL,
 	BLOCK,
-	ATTACK
+	ATTACK,
+	DASH,
 }
 
 var current_state: PlayerState = PlayerState.IDLE
@@ -48,9 +51,8 @@ var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
 var roll_timer := 0.0
 var attack_timer := 0.0
-
 var last_direction := 1
-
+var dash_timer := 0.0
 var attack_index: int = 0
 var attacks := ["attack1", "attack2", "attack3"]
 var combo_window: float = 0.4  # Grace period AFTER attack ends
@@ -165,6 +167,7 @@ func update_timers(delta: float) -> void:
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
 	roll_timer -= delta
+	dash_timer -= delta
 	if attack_timer > 0:
 		attack_timer -= delta
 
@@ -177,8 +180,19 @@ func update_timers(delta: float) -> void:
 
 
 func handle_input() -> void:
+	
+	
 	# =====================
-	# ATTACKS (highest priority)
+	# DASH (space - highest priority)
+	# =====================
+	if Input.is_action_just_pressed("dash") and dash_timer <= 0 and current_state != PlayerState.ATTACK:
+		print("SPACE PRESSED!") 
+		transition_to(PlayerState.DASH)
+		return
+	
+	
+	# =====================
+	# ATTACKS (highest priority) 
 	# =====================
 	
 	if Input.is_action_just_pressed("attack1"):
@@ -189,9 +203,6 @@ func handle_input() -> void:
 			# Queue next attack
 			attack_index = (attack_index % attacks.size()) + 1
 			combo_pending = true
-
-
-
 
 
 	# =====================
@@ -222,7 +233,9 @@ func handle_input() -> void:
 	# =====================
 	# FACING
 	# =====================
-	if current_state != PlayerState.BLOCK: # block prevents direction changes
+
+		
+	if current_state != PlayerState.BLOCK and current_state != PlayerState.DASH:
 		if Input.is_action_pressed("left"):
 			sprite.flip_h = true
 			last_direction = -1
@@ -235,7 +248,7 @@ func handle_input() -> void:
 			$Hitbox_Attack1/attack1.position.x = 24
 			$Hitbox_Attack2/attack2.position.x = 23
 			$Hitbox_Attack3/attack3.position.x = 25
-
+			
 # =========================
 # STATE MACHINE
 # =========================
@@ -250,15 +263,26 @@ func update_state(delta: float) -> void:
 		PlayerState.FALL:
 			state_fall(delta)
 		PlayerState.ROLL:
+			roll_timer = ROLL_DURATION 
 			state_roll(delta)
 		PlayerState.BLOCK:
 			state_block(delta)
 		PlayerState.ATTACK:
 			state_attack(delta)
+		PlayerState.DASH:
+			state_dash(delta)
+
 
 # =========================
 # STATES
 # =========================
+
+func state_dash(_delta: float) -> void:  # NEW
+	velocity.x = last_direction * DASH_SPEED
+	velocity.y = 0  # No vertical movement during dash
+	if dash_timer <= 0:
+		transition_to(PlayerState.IDLE)
+
 func state_idle(delta: float) -> void:
 	apply_friction(delta)
 	apply_gravity(delta)
@@ -343,12 +367,20 @@ const GRAVITY_FALL := 600.0      # main gravity
 const GRAVITY_RISE := 850.0      # lower gravity while going up
 
 func apply_gravity(delta: float) -> void:
+	
+	if current_state == PlayerState.DASH:
+		return  # No gravity during dash
+
 	if velocity.y < 0:
 		velocity.y += GRAVITY_RISE * delta
 	else:
 		velocity.y += GRAVITY_FALL * delta
 
 func apply_horizontal_movement(delta: float) -> void:
+	
+	if current_state == PlayerState.BLOCK or current_state == PlayerState.DASH:
+		return
+
 	# Block prevents horizontal input
 	if current_state == PlayerState.BLOCK:
 		return
@@ -359,7 +391,10 @@ func apply_horizontal_movement(delta: float) -> void:
 		var decel = AIR_RESISTANCE if not is_on_floor() else FRICTION
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
-func apply_friction(delta: float) -> void:
+func apply_friction(delta: float) -> void:	
+	if current_state == PlayerState.BLOCK or current_state == PlayerState.DASH:
+		return
+
 	if current_state == PlayerState.BLOCK:
 		return
 	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
@@ -388,6 +423,10 @@ func enter_state(state: PlayerState) -> void:
 			sprite.play("roll")
 		PlayerState.BLOCK:
 			sprite.play("block")
+		PlayerState.DASH:
+			dash_timer = DASH_DURATION
+			sprite.play("run")
+
 		PlayerState.ATTACK:
 			pass
 
