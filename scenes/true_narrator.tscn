@@ -725,10 +725,8 @@ max_health = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nbdxk")
-animation = &"ranged_attack"
+animation = &"summon"
 autoplay = "idle"
-frame = 16
-frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -755,13 +753,13 @@ script = ExtResource("4_yb3d6")
 
 [node name="follow" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("5_2vyt0")
-dist = 150
+dist = 250
 
 [node name="attack" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("7_yb3d6")
 attack_animations = Array[String](["summon", "ranged_attack"])
 attack_cooldown = 1.5
-dist = 150
+dist = 250
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("7_pcx46")

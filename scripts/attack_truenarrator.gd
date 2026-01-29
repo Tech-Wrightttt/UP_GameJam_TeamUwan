@@ -53,7 +53,7 @@ func transition():
 	var distance = boss.direction.length()
 	
 	if not is_in_cooldown:
-		if distance > dist:
+		if distance >= dist:
 			is_in_cooldown = false
 			fsm.change_state("follow")
 		else:
@@ -61,7 +61,7 @@ func transition():
 			state_timer = 0.0
 			boss.play_anim("idle")
 	else:
-		if distance > dist:
+		if distance >= dist:
 			is_in_cooldown = false
 			fsm.change_state("follow")
 		else:

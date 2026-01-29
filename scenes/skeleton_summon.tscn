@@ -411,7 +411,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vbu25")
-animation = &"attack"
+animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_8s1h1")
@@ -440,6 +440,7 @@ script = ExtResource("5_g5sas")
 
 [node name="follow" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_ihkab")
+dist = 80
 
 [node name="attack" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("7_0dwpm")

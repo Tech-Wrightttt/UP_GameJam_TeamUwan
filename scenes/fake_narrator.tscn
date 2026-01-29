@@ -428,7 +428,6 @@ sprite_frames = SubResource("SpriteFrames_mpwst")
 animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_kilpx")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
