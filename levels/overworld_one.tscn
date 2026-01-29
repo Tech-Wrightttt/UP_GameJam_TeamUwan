@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=31 format=3 uid="uid://7n6fktj3dlva"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_f13rg"]
+[ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_bw0tn"]
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_tpcej"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_fghf5"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_1yp7j"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_kgnju"]
+[ext_resource type="Texture2D" uid="uid://bj4y0bww0hf55" path="res://assets/narrator/Jotem spritesheet.png" id="10_u747v"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -548,8 +550,115 @@ texture = ExtResource("7_fghf5")
 [sub_resource type="TileSet" id="TileSet_gedp1"]
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw0tn"]
+atlas = ExtResource("10_u747v")
+region = Rect2(0, 0, 128, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpcej"]
+atlas = ExtResource("10_u747v")
+region = Rect2(128, 0, 128, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au0bf"]
+atlas = ExtResource("10_u747v")
+region = Rect2(256, 0, 128, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovgfw"]
+atlas = ExtResource("10_u747v")
+region = Rect2(384, 0, 128, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fghf5"]
+atlas = ExtResource("10_u747v")
+region = Rect2(512, 0, 128, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yp7j"]
+atlas = ExtResource("10_u747v")
+region = Rect2(640, 0, 128, 153)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgnju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw0tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpcej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au0bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovgfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fghf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yp7j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdoyt"]
+size = Vector2(47.696163, 50.826843)
+
+[sub_resource type="Animation" id="Animation_cgnwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r1les"]
+resource_name = "typewriter"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.766667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_rfvop"]
+resource_name = "typwriter2"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmj2g"]
+_data = {
+&"RESET": SubResource("Animation_cgnwt"),
+&"typewriter": SubResource("Animation_r1les"),
+&"typwriter2": SubResource("Animation_rfvop")
+}
+
 [node name="OverworldTwo" type="Node2D"]
-script = ExtResource("1_f13rg")
+script = ExtResource("1_u747v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -643,3 +752,84 @@ limit_right = 1800
 limit_bottom = 1000
 editor_draw_limits = true
 script = ExtResource("9_kgnju")
+
+[node name="npc" type="AnimatedSprite2D" parent="."]
+position = Vector2(1079, 506.99997)
+scale = Vector2(1.865, 1.61)
+sprite_frames = SubResource("SpriteFrames_kgnju")
+frame = 5
+frame_progress = 0.70045
+
+[node name="npcarea" type="Area2D" parent="npc"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/npcarea"]
+position = Vector2(0.7843071, 25.322987)
+scale = Vector2(0.99999934, 1)
+shape = SubResource("RectangleShape2D_qdoyt")
+
+[node name="InteractLabel" type="Label" parent="."]
+offset_left = 1032.0
+offset_top = 601.0
+offset_right = 1169.0
+offset_bottom = 642.0
+text = "[E] to interact"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+offset = Vector2(0, 0.495)
+transform = Transform2D(1, 0, 0, 1, 0, 0.495)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2"]
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.45600003
+anchor_right = 0.74100006
+anchor_bottom = 0.512
+offset_left = 1.8399658
+offset_top = 86.51996
+offset_right = 1.2799072
+offset_bottom = 86.03998
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("11_bw0tn")
+theme_override_font_sizes/normal_font_size = 23
+text = "“Once, I bore the same title as you — hero. \""
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3"]
+anchors_preset = -1
+anchor_left = 0.416
+anchor_top = 0.43800002
+anchor_right = 0.739
+anchor_bottom = 0.5
+offset_left = 5.2799683
+offset_top = 97.95996
+offset_right = 5.119995
+offset_bottom = 99.0
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("11_bw0tn")
+theme_override_font_sizes/normal_font_size = 20
+text = "If you ever find the shard pieces scattered across this cursed world, bring them here. Perhaps then, the story might finally end.
+"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer3"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
+[connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
+[connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
