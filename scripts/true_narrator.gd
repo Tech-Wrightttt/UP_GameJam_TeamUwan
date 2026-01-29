@@ -64,16 +64,14 @@ func _process(_delta):
 	direction = player.global_position - global_position
 	if direction.x < 0:
 		sprite.flip_h = true
-		$Hitbox_Attack1/attack_up.position.x = -abs($Hitbox_Attack1/attack_up.position.x)
-		$Hitbox_Attack2/attack.position.x = -abs($Hitbox_Attack2/attack.position.x)
+		$Hitbox_Attack1/attack_up.position.x = -22
+		$Hitbox_Attack2/attack.position.x = -31
 		wall_ray.target_position.x = -abs(wall_ray.target_position.x)
-		$PlayerDetection/CollisionShape2D.position.x = -abs($PlayerDetection/CollisionShape2D.position.x)
 	else:
 		sprite.flip_h = false
-		$Hitbox_Attack1/attack_up.position.x = abs($Hitbox_Attack1/attack_up.position.x)
-		$Hitbox_Attack2/attack.position.x = abs($Hitbox_Attack2/attack.position.x)
+		$Hitbox_Attack1/attack_up.position.x = 22
+		$Hitbox_Attack2/attack.position.x = 31
 		wall_ray.target_position.x = abs(wall_ray.target_position.x)
-		$PlayerDetection/CollisionShape2D.position.x = abs($PlayerDetection/CollisionShape2D.position.x)
 		
 func _physics_process(delta):
 	if is_dead:

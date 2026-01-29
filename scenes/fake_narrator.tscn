@@ -280,6 +280,21 @@ height = 42.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8rt2"]
 size = Vector2(250, 42)
 
+[sub_resource type="Animation" id="Animation_6ynvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_4dfc4"]
 resource_name = "attack1"
 length = 0.5
@@ -341,21 +356,6 @@ tracks/0/keys = {
 resource_name = "hurt"
 length = 0.5
 
-[sub_resource type="Animation" id="Animation_6ynvd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lk7e6"]
 _data = {
 &"RESET": SubResource("Animation_6ynvd"),
@@ -376,6 +376,21 @@ height = 34.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvx0s"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_mf48g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_dvhn7"]
 resource_name = "hurt"
 length = 0.5
@@ -390,21 +405,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_mf48g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mf48g"]
@@ -424,9 +424,7 @@ script = ExtResource("2_t1j4c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"jump"
-frame = 2
-frame_progress = 1.0
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -475,7 +473,7 @@ shape = SubResource("CapsuleShape2D_lk7e6")
 
 [node name="Hitbox_Attack1" type="Area2D" parent="." groups=["hitbox"]]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 20
 script = ExtResource("13_xvv06")
 
 [node name="attack_up" type="CollisionShape2D" parent="Hitbox_Attack1"]
@@ -484,7 +482,7 @@ shape = SubResource("CapsuleShape2D_2xkqr")
 
 [node name="Hitbox_Attack2" type="Area2D" parent="." groups=["hitbox"]]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 20
 script = ExtResource("13_xvv06")
 
 [node name="attack" type="CollisionShape2D" parent="Hitbox_Attack2"]
