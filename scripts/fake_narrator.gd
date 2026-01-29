@@ -79,21 +79,27 @@ func _physics_process(delta):
 	if is_dead:
 		set_physics_process(false)
 		return
-
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
+	
+	velocity.y += gravity * delta
+	
+	velocity.y = min(velocity.y, 1000.0)
+	
 	if knockback_velocity.length() > 1.0:
 		velocity.x = knockback_velocity.x
-		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay * delta)
+		knockback_velocity.x = lerp(knockback_velocity.x, 0.0, knockback_decay * delta)
+		
+		if abs(knockback_velocity.x) < 1.0:
+			knockback_velocity = Vector2.ZERO
 	else:
 		knockback_velocity = Vector2.ZERO
 		if can_move and direction != Vector2.ZERO:
 			velocity.x = direction.normalized().x * move_speed
 		else:
 			velocity.x = 0
-
+	
 	move_and_slide()
+	if is_on_floor():
+		velocity.y = 0
 
 func _on_enemy_died():
 	if is_dead:
@@ -139,16 +145,18 @@ func stop_all_enemy_behavior():
 func should_jump() -> bool:
 	if not is_on_floor():
 		return false
-		
-	if not wall_ray.is_colliding():
-		return false  
+	
+	var horizontal_distance = abs(player.global_position.x - global_position.x)
+	if horizontal_distance < 50:  
+		return false
 	
 	if wall_ray.is_colliding():
+		if player.global_position.y < global_position.y - 50:  
+			return true
+
+	if not floor_ray.is_colliding():
 		if player.global_position.y < global_position.y - 20:
 			return true
-	
-	if not floor_ray.is_colliding() and not wall_ray.is_colliding():
-		return true
 	
 	return false
 

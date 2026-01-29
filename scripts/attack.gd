@@ -15,7 +15,7 @@ func enter():
 	
 	super()
 	boss.set_can_move(false)
-	boss.velocity = Vector2.ZERO
+	boss.velocity.x = 0
 	state_timer = 0.0
 	
 	if not is_in_cooldown:
