@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=20 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_d1nep"]
 [ext_resource type="Texture2D" uid="uid://cxwkp5m7ty8vs" path="res://assets/Background/BGFront.png" id="5_gedp1"]
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_l1egu"]
+[ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="8_hajqp"]
 [ext_resource type="PackedScene" uid="uid://bregye8nef5wb" path="res://scenes/fake_narrator.tscn" id="9_d1nep"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_gedp1"]
 [ext_resource type="PackedScene" uid="uid://cwtf02lj5bqjc" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
@@ -534,6 +535,10 @@ script = ExtResource("9_gedp1")
 position = Vector2(-457, 112)
 scale = Vector2(2, 2)
 
+[node name="Gargoyle" parent="." instance=ExtResource("8_hajqp")]
+position = Vector2(508.99997, 94.99999)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_utvb4")]
+visible = false

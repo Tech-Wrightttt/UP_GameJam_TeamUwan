@@ -2110,6 +2110,8 @@ layer_0/tile_data = PackedInt32Array(983096, 327681, 4, 1048632, 327681, 4, 1114
 [node name="main_character" parent="." instance=ExtResource("2_ptp65")]
 position = Vector2(89, 788)
 scale = Vector2(1.655, 1.655)
+collision_layer = 129
+collision_mask = 1
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
 texture_filter = 1
@@ -2253,5 +2255,13 @@ blend_mode = 2
 max_distance = 10395.0
 
 [node name="Gargoyle" parent="." instance=ExtResource("7_om42o")]
-position = Vector2(501, 790)
+position = Vector2(499, 788)
+scale = Vector2(2.3, 2.3)
+
+[node name="Gargoyle2" parent="." instance=ExtResource("7_om42o")]
+position = Vector2(1020, 785)
+scale = Vector2(2.3, 2.3)
+
+[node name="Gargoyle3" parent="." instance=ExtResource("7_om42o")]
+position = Vector2(2356, 537)
 scale = Vector2(2.3, 2.3)
