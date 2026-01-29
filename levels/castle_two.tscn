@@ -2184,7 +2184,6 @@ position = Vector2(-1343, 888.00006)
 scale = Vector2(1.655, 1.655)
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
-visible = false
 texture_filter = 1
 position = Vector2(2.4169083, 1.2084522)
 scale = Vector2(0.98342437, 4.932488)
@@ -2198,7 +2197,6 @@ texture_scale = 0.55
 height = 506.0
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
-visible = false
 offset = Vector2(0, -100)
 zoom = Vector2(1.2, 1.2)
 limit_left = -1380

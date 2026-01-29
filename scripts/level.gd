@@ -1,10 +1,11 @@
 extends Node2D
 
-@onready var mc = $main_character
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mc.global_position = GameManager.tutorialLocation
-	print(mc.global_position)
+	print($main_character.global_position)
+	$main_character.global_position = GameManager.spawn_points[0]
+	
 
 
 
@@ -33,6 +34,6 @@ func _on_marker_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
 		player = body  # Store the Node2D itself, not body.name
 		if player and is_instance_valid(player):
-			GameManager.setTutorialLocation(player.global_position)
+			GameManager.spawn_points[0] = player.global_position
 			print("OTEN")
 			print(GameManager.tutorialLocation)

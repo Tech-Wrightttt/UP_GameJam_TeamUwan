@@ -15,3 +15,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_towardsTUTORIAL_body_entered(body: Node2D) -> void:
+	if body.name == "main_character":
+		GameManager.fade_out(get_tree().current_scene,"res://levels/tutoriallevel.tscn",0.8,Color.BLACK)

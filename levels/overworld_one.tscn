@@ -848,7 +848,7 @@ shape = SubResource("RectangleShape2D_bw0tn")
 [node name="towardto2" type="Area2D" parent="towardtut"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="towardtut/towardto2"]
-position = Vector2(-3162, 387.51563)
+position = Vector2(1936, 577)
 shape = SubResource("RectangleShape2D_tpcej")
 
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]

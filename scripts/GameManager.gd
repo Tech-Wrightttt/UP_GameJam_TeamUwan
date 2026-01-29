@@ -8,6 +8,15 @@ var SCREEN: Dictionary = {
 
 
 var tutorialLocation: Vector2 = Vector2(1997.452, 329.6545)
+
+var spawn_points: Array[Vector2] = [
+	Vector2(-1973.0, 455.0), Vector2(3, 4), Vector2(5, 6),
+	Vector2(7, 8), Vector2(9, 10), Vector2(11, 12),
+	Vector2(13, 14), Vector2(15, 16), Vector2(17, 18),
+	Vector2(19, 20), Vector2(21, 22), Vector2(23, 24),
+	Vector2(25, 26)
+]
+
  
 
 

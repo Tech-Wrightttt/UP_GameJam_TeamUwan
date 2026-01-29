@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=23 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
@@ -2086,6 +2086,9 @@ fill = 1
 fill_from = Vector2(0.4909091, 0.5181818)
 fill_to = Vector2(0.73333335, 0.96060604)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_om42o"]
+size = Vector2(20, 267.5)
+
 [node name="CastleOne" type="Node2D"]
 script = ExtResource("1_fpfjo")
 
@@ -2114,7 +2117,6 @@ collision_layer = 129
 collision_mask = 1
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
-visible = false
 texture_filter = 1
 position = Vector2(1.2084503, 6.0422363)
 scale = Vector2(1.0646143, 3.2145064)
@@ -2128,7 +2130,6 @@ texture_scale = 0.55
 height = 506.0
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
-visible = false
 offset = Vector2(0, -100)
 zoom = Vector2(1.2, 1.2)
 limit_left = -730
@@ -2172,7 +2173,6 @@ layer_0/tile_data = PackedInt32Array(1310723, 720897, 805306368, 1245187, 720897
 color = Color(0.96767145, 0.96767133, 0.96767145, 1)
 
 [node name="PointLight2D8" type="PointLight2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(775.99994, 1063)
 scale = Vector2(52.546875, 18.357422)
@@ -2183,7 +2183,6 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(496, 707)
 scale = Vector2(4.2343745, 7.2734385)
@@ -2194,7 +2193,6 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(899, 719)
 scale = Vector2(3.843751, 6.296877)
@@ -2205,7 +2203,6 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D7" type="PointLight2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(1655, 542)
 scale = Vector2(13.718752, 14.070312)
@@ -2216,7 +2213,6 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(1316, 607)
 scale = Vector2(4.2968755, 6.687503)
@@ -2272,3 +2268,12 @@ scale = Vector2(2.3, 2.3)
 [node name="Gargoyle3" parent="." instance=ExtResource("7_om42o")]
 position = Vector2(2356, 537)
 scale = Vector2(2.3, 2.3)
+
+[node name="TowarsTutorial" type="Area2D" parent="."]
+position = Vector2(-604, 867)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowarsTutorial"]
+position = Vector2(-126, -118)
+shape = SubResource("RectangleShape2D_om42o")
+
+[connection signal="body_entered" from="TowarsTutorial" to="." method="_on_towardsTUTORIAL_body_entered"]
