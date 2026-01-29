@@ -1,8 +1,8 @@
 extends State
 
 @export var attack_animations: Array[String] = ["attack1", "attack2"]  
-@export var attack_duration := 1.2
-@export var attack_cooldown := 0.8
+@export var attack_duration := 0.5
+@export var attack_cooldown := 0.75
 
 var state_timer := 0.0
 var is_in_cooldown := false

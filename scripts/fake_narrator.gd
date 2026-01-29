@@ -53,6 +53,11 @@ func set_can_move(value: bool):
 func _process(_delta):
 	if is_dead or not player:
 		return
+		
+	if GameManager.get_is_player_dead():
+		stop_all_enemy_behavior()
+		return
+		
 	direction = player.global_position - global_position
 	if direction.x < 0:
 		sprite.flip_h = true
@@ -108,3 +113,19 @@ func _on_enemy_died():
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
 	fsm.change_state("death")
+
+func stop_all_enemy_behavior():
+	if fsm and fsm.current_state:
+		fsm.current_state.exit()
+		
+	can_move = false
+
+	if animation_player:
+		animation_player.stop(false)
+	if effects_animation_player:
+		effects_animation_player.stop(false)
+
+	hitbox_attack1.deactivate()
+	hitbox_attack2.deactivate()
+
+	velocity = Vector2.ZERO

@@ -8,6 +8,10 @@ func _ready():
 
 func activate():
 	monitoring = false
+	
+	if GameManager.get_is_player_dead():
+		return
+		
 	await get_tree().process_frame # force clean reset
 	monitoring = true
 	print(name, " activated on ", get_parent().name)
@@ -18,6 +22,9 @@ func deactivate():
 	print(name, " deactivated on ", get_parent().name)
 
 func _on_area_entered(area):
+	if GameManager.get_is_player_dead():
+		return
+	
 	var my_owner = get_parent()
 	var other_owner = area.get_parent()
 

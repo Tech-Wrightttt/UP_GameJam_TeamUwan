@@ -8,6 +8,9 @@ func start():
 	current_state.enter()
 
 func change_state(state_name: String):
+	if GameManager.get_is_player_dead():
+		return
+		
 	var new_state := find_child(state_name) as State
 	if new_state == null:
 		push_error("State not found: " + state_name)
