@@ -426,6 +426,7 @@ script = ExtResource("3_bf6gi")
 max_health = 50
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(95, -1)
