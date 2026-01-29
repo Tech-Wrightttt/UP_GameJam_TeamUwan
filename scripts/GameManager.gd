@@ -6,13 +6,25 @@ var SCREEN: Dictionary = {
 	"center": Vector2.ZERO
 }
 
+
+var tutorialLocation: Vector2 = Vector2(1997.452, 329.6545)
+ 
+
+
+
+
 func _ready() -> void:
 	SCREEN["center"] = Vector2(
 		SCREEN["width"] / 2,
 		SCREEN["height"] / 2
 	)
 
+
+func setTutorialLocation(location: Vector2) -> void:
+	tutorialLocation = location
 	
+
+
 
 var defeated_bosses: Dictionary = {}
 var player_dead := false
@@ -30,38 +42,38 @@ func set_is_player_dead(is_dead: bool):
 func get_is_player_dead():
 	return player_dead
 	
-	
-func fade_out(from, to, duration: float, color: Color) -> void:
-	var rootControl = CanvasLayer.new()
-	var colorRect = ColorRect.new()
-	var tween = get_tree().create_tween()
-	
-	rootControl.set_process_mode(PROCESS_MODE_ALWAYS)
-	colorRect.color = Color(0, 0, 0, 0)
+func fade_out(from: Node, to: String, duration: float, color: Color) -> void:
+	var root_control := CanvasLayer.new()
+	var color_rect := ColorRect.new()
+	var tween := create_tween()
 
-	get_tree().get_root().add_child(rootControl)
-	rootControl.add_child(colorRect)
+	root_control.process_mode = PROCESS_MODE_ALWAYS
+	color_rect.color = Color(0,0,0,0)
 
-	colorRect.set_size(Vector2(SCREEN.width, SCREEN.height))
+	get_tree().root.add_child(root_control)
+	root_control.add_child(color_rect)
+	color_rect.size = Vector2(SCREEN.width, SCREEN.height)
 
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(colorRect, "color", color, duration / 2.0)
-
-	var root = get_tree().root
+	tween.tween_property(color_rect, "color", color, duration / 2.0)
 	await tween.finished
 
-	from.queue_free()
+	# Safely replace scene
+	var current_scene := get_tree().current_scene
+	if is_instance_valid(current_scene):
+		current_scene.queue_free()
+		get_tree().root.remove_child(current_scene)
 
-	var new_scene = load(to).instantiate()
-	get_tree().get_root().add_child(new_scene)
+	var new_scene: Node = load(to).instantiate()
+	get_tree().root.add_child(new_scene)
+	get_tree().current_scene = new_scene
 
-	var tween2 = get_tree().create_tween()
+	var tween2 := create_tween()
 	tween2.set_ease(Tween.EASE_IN_OUT)
 	tween2.set_trans(Tween.TRANS_LINEAR)
-	tween2.tween_property(colorRect, "color", Color(0, 0, 0, 0), duration / 2.0)
-
+	tween2.tween_property(color_rect, "color", color, duration / 2.0)
 	await tween2.finished
 
-	get_tree().set_current_scene(new_scene)
-	rootControl.queue_free()
+	root_control.queue_free()
+	

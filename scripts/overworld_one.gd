@@ -88,3 +88,13 @@ func _on_npcarea_body_exited(body: Node2D) -> void:
 		player_near_npc = false
 		interact_label.visible = false
 		print("Player left NPC")
+
+
+func _on_towardtut_body_entered(body: Node2D) -> void:
+	if body.name == "main_character":
+		GameManager.fade_out(get_tree().current_scene,"res://levels/tutoriallevel.tscn",0.8,Color.BLACK)
+
+
+func _on_towardto_2_body_entered(body: Node2D) -> void:
+	if body.name == "main_character":
+		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_two.tscn",0.8,Color.BLACK)

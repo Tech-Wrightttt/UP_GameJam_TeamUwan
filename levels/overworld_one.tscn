@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://7n6fktj3dlva"]
+[gd_scene load_steps=33 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -657,6 +657,12 @@ _data = {
 &"typwriter2": SubResource("Animation_rfvop")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bw0tn"]
+size = Vector2(146, 241.03125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpcej"]
+size = Vector2(146, 241.03125)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_u747v")
 
@@ -793,7 +799,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("11_bw0tn")
 theme_override_font_sizes/normal_font_size = 23
-text = "“Once, I bore the same title as you — hero. \""
+text = "
+“Once, I bore the same title as you — hero. I followed every command, every shining promise… until I realized none of it was mine. 
+"
 visible_characters = 0
 visible_ratio = 0.0
 
@@ -831,5 +839,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
 
+[node name="towardtut" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardtut"]
+position = Vector2(-3162, 387.51563)
+shape = SubResource("RectangleShape2D_bw0tn")
+
+[node name="towardto2" type="Area2D" parent="towardtut"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardtut/towardto2"]
+position = Vector2(-3162, 387.51563)
+shape = SubResource("RectangleShape2D_tpcej")
+
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
+[connection signal="body_entered" from="towardtut" to="." method="_on_towardtut_body_entered"]
+[connection signal="body_entered" from="towardtut/towardto2" to="." method="_on_towardto_2_body_entered"]
