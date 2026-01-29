@@ -4,7 +4,7 @@ extends CharacterBody2D
 # MOVEMENT TUNING
 # =========================
 const SPEED = 300.0
-const attackSPEED = 400.0
+const attackSPEED = 300.0
 const ACCELERATION = 2000.0
 const FRICTION = 1800.0
 const AIR_RESISTANCE = 400.0
@@ -372,7 +372,7 @@ func try_jump() -> bool:
 # PHYSICS HELPERS
 # =========================
 
-const GRAVITY_FALL := 600.0      # main gravity
+const GRAVITY_FALL := 1000.0      # main gravity
 const GRAVITY_RISE := 850.0      # lower gravity while going up
 
 func apply_gravity(delta: float) -> void:
