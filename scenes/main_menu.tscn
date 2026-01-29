@@ -32,7 +32,6 @@ script = ExtResource("1_l6cm7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(954, 538)
-zoom = Vector2(0.74, 0.685)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
