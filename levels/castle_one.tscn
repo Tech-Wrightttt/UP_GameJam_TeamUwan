@@ -2108,12 +2108,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(983096, 327681, 4, 1048632, 327681, 4, 1114168, 131073, 26, 1179704, 131073, 27, 983097, 393217, 4, 1114169, 196609, 26, 1179705, 196609, 27, 917560, 327681, 4, 917561, 393217, 4, 852024, 327681, 4, 852025, 393217, 4, 786488, 327681, 4, 786489, 393217, 4, 720952, 327681, 4, 720953, 393217, 4, 655416, 327681, 4, 655417, 393217, 4, 983099, 131073, 4, 852026, 131073, 4, 720954, 786433, 28, 720955, 786433, 28, 786490, 917505, 32, 786484, 393217, 18, 852020, 393217, 18, 917556, 393217, 18, 983092, 393217, 18, 1048628, 393217, 18, 1114164, 393217, 19, 720948, 393217, 17, 1179707, 524289, 5, 1179708, 524289, 5, 1179706, 458753, 5, 786482, 589825, 17, 852018, 589825, 18, 786483, 655361, 17, 1114162, 589825, 19, 1114161, 524289, 19, 1114163, 655361, 19, 1048625, 524289, 18, 983089, 524289, 18, 917553, 524289, 18, 852017, 524289, 18, 786481, 524289, 17, 1769468, 327681, 2, 1769469, 393217, 2, 1703955, 589825, 2, 786473, 589825, 3, 589880, 327681, 3, 589881, 393217, 3, 1179703, 589825, 1, 393255, 589825, 2, 852019, 655361, 18, 917555, 655361, 18, 983091, 655361, 18, 1048627, 655361, 18, 917554, 589825, 18, 983090, 589825, 18, 1048626, 589825, 18, 1769482, 131073, 4, 1769481, 131073, 4, 1769480, 262145, 2, 1769483, 1, 2, 1835016, 262145, 5, 1835019, 1, 5, 1835017, 65537, 2, 1835018, 65537, 5)
 
 [node name="main_character" parent="." instance=ExtResource("2_ptp65")]
-position = Vector2(89, 788)
+position = Vector2(-555, 795)
 scale = Vector2(1.655, 1.655)
 collision_layer = 129
 collision_mask = 1
 
 [node name="PointLight2D8" type="PointLight2D" parent="main_character"]
+visible = false
 texture_filter = 1
 position = Vector2(1.2084503, 6.0422363)
 scale = Vector2(1.0646143, 3.2145064)
@@ -2127,6 +2128,7 @@ texture_scale = 0.55
 height = 506.0
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
+visible = false
 offset = Vector2(0, -100)
 zoom = Vector2(1.2, 1.2)
 limit_left = -730
@@ -2170,8 +2172,9 @@ layer_0/tile_data = PackedInt32Array(1310723, 720897, 805306368, 1245187, 720897
 color = Color(0.96767145, 0.96767133, 0.96767145, 1)
 
 [node name="PointLight2D8" type="PointLight2D" parent="."]
+visible = false
 texture_filter = 1
-position = Vector2(929.5, 964.43756)
+position = Vector2(775.99994, 1063)
 scale = Vector2(52.546875, 18.357422)
 color = Color(0.4326237, 0.43262374, 0.4326237, 1)
 range_item_cull_mask = 15
@@ -2180,6 +2183,7 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(496, 707)
 scale = Vector2(4.2343745, 7.2734385)
@@ -2190,6 +2194,7 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(899, 719)
 scale = Vector2(3.843751, 6.296877)
@@ -2200,6 +2205,7 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D7" type="PointLight2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(1655, 542)
 scale = Vector2(13.718752, 14.070312)
@@ -2210,6 +2216,7 @@ texture = SubResource("GradientTexture2D_fm0u3")
 height = 506.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(1316, 607)
 scale = Vector2(4.2968755, 6.687503)
