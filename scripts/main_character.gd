@@ -16,7 +16,7 @@ const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
-const DASH_SPEED = 800.0
+const DASH_SPEED = 690.0
 const DASH_DURATION = 0.15
 
 # =========================
@@ -24,6 +24,9 @@ const DASH_DURATION = 0.15
 # =========================
 const ROLL_DURATION = 0.4
 const BLOCK_HOLD_SPEED = 40.0
+
+const ROLL_COOLDOWN = 1.0
+const DASH_COOLDOWN = 1.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -59,6 +62,8 @@ var combo_window: float = 0.4  # Grace period AFTER attack ends
 var combo_timer: float = 0.0
 var is_attacking: bool = false
 var combo_pending: bool = false
+var roll_cooldown_timer := 0.0
+var dash_cooldown_timer := 0.0
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -168,6 +173,9 @@ func update_timers(delta: float) -> void:
 	jump_buffer_timer -= delta
 	roll_timer -= delta
 	dash_timer -= delta
+	roll_cooldown_timer = maxf(0, roll_cooldown_timer - delta)
+	dash_cooldown_timer = maxf(0, dash_cooldown_timer - delta)
+	
 	if attack_timer > 0:
 		attack_timer -= delta
 
@@ -185,9 +193,10 @@ func handle_input() -> void:
 	# =====================
 	# DASH (space - highest priority)
 	# =====================
-	if Input.is_action_just_pressed("dash") and dash_timer <= 0 and current_state != PlayerState.ATTACK:
-		print("SPACE PRESSED!") 
+# DASH input  
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and current_state != PlayerState.ATTACK:
 		transition_to(PlayerState.DASH)
+		dash_cooldown_timer = DASH_COOLDOWN  # Set cooldown
 		return
 	
 	
@@ -216,8 +225,9 @@ func handle_input() -> void:
 	# =====================
 	# ROLL
 	# =====================
-	if Input.is_action_just_pressed("roll") and is_on_floor():
+	if Input.is_action_just_pressed("roll") and is_on_floor() and roll_cooldown_timer <= 0:
 		transition_to(PlayerState.ROLL)
+		roll_cooldown_timer = ROLL_COOLDOWN  # Set cooldown
 		return
 
 	# =====================
@@ -263,7 +273,6 @@ func update_state(delta: float) -> void:
 		PlayerState.FALL:
 			state_fall(delta)
 		PlayerState.ROLL:
-			roll_timer = ROLL_DURATION 
 			state_roll(delta)
 		PlayerState.BLOCK:
 			state_block(delta)
