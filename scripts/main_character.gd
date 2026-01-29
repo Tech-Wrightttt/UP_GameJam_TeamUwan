@@ -16,7 +16,7 @@ const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
-const DASH_SPEED = 690.0
+const DASH_SPEED =720.0
 const DASH_DURATION = 0.15
 
 # =========================
@@ -195,6 +195,7 @@ func handle_input() -> void:
 	# =====================
 # DASH input  
 	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and current_state != PlayerState.ATTACK:
+		$explosion.emitting = true
 		transition_to(PlayerState.DASH)
 		dash_cooldown_timer = DASH_COOLDOWN  # Set cooldown
 		return
@@ -212,7 +213,7 @@ func handle_input() -> void:
 			# Queue next attack
 			attack_index = (attack_index % attacks.size()) + 1
 			combo_pending = true
-
+	
 
 	# =====================
 	# JUMP

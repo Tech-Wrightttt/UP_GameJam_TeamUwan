@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=99 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
@@ -84,6 +84,10 @@
 [ext_resource type="Texture2D" uid="uid://dukibduhwkfir" path="res://assets/mc/Roll/HeroKnight_Roll_8.png" id="71_s48db"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="83_ikepn"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="84_7ghjf"]
+
+[sub_resource type="Curve" id="Curve_m40x0"]
+_data = [Vector2(0.060109288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.153682), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tqm6u"]
 radius = 8.0
@@ -491,6 +495,21 @@ _data = {
 &"death": SubResource("Animation_22120")
 }
 
+[sub_resource type="Animation" id="Animation_wyspq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_f1khg"]
 resource_name = "hurt"
 length = 0.5
@@ -507,21 +526,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1), Color(1, 1, 1, 0.31372547), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_wyspq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_22120"]
 _data = {
 &"RESET": SubResource("Animation_wyspq"),
@@ -532,6 +536,21 @@ _data = {
 collision_mask = 3
 script = ExtResource("1_tqm6u")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
+
+[node name="explosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 80
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(-1, 0)
+spread = 84.43
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_m40x0")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_m40x0")
