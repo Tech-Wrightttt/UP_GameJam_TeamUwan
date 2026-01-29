@@ -432,7 +432,8 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(2.3841858e-07, 5.9999995)
 scale = Vector2(0.823125, 0.76266235)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
-animation = &"attack2"
+animation = &"run"
+frame_progress = 0.94345903
 
 [node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("83_ikepn")

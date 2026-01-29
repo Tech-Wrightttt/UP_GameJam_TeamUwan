@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=22 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_ylynx"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="5_de36y"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="6_ylynx"]
+[ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="7_om42o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2250,3 +2251,7 @@ color = Color(0, 0, 0, 1)
 energy = 0.6
 blend_mode = 2
 max_distance = 10395.0
+
+[node name="Gargoyle" parent="." instance=ExtResource("7_om42o")]
+position = Vector2(501, 790)
+scale = Vector2(2.3, 2.3)
