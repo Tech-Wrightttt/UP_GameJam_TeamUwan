@@ -415,6 +415,12 @@ func apply_friction(delta: float) -> void:
 func transition_to(new_state: PlayerState) -> void:
 	if current_state == new_state:
 		return
+		
+	if new_state != PlayerState.ATTACK:
+		is_attacking = false
+		combo_pending = false
+		attack_index = 0  # Bonus: reset combo
+		
 	current_state = new_state
 	enter_state(new_state)
 
