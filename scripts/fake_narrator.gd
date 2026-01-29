@@ -3,7 +3,9 @@ extends CharacterBody2D
 @export var uses_sprite := true
 @export var move_speed := 200.0
 @export var gravity := 980.0
-
+@export var jump_force := -420.0
+@onready var floor_ray: RayCast2D = $FloorRay
+@onready var wall_ray: RayCast2D = $WallRay
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fsm = $FiniteStateMachine
@@ -12,25 +14,34 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 @onready var hitbox_attack1 = $Hitbox_Attack1
 @onready var hitbox_attack2 = $Hitbox_Attack2
+@export var effects_animation_player: AnimationPlayer
+@export var knockback_decay := 6.0
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
 var is_dead := false
 var knockback_velocity := Vector2.ZERO
+var is_hurt := false
+
 
 func _ready():
 	set_physics_process(false)
-	
 	health_component.died.connect(_on_enemy_died)
-	
-	# Make sure both hitboxes start deactivated
 	hitbox_attack1.deactivate()
 	hitbox_attack2.deactivate()
 	fsm.start()
 
-func _on_hurt(damage: int, kb_direction: Vector2, force: float):
+func on_hurt(kb_direction: Vector2, force: float):
+	if is_dead:
+		return
+	
 	knockback_velocity = kb_direction * force
-	print("Enemy knocked back with force: ", force)
+	
+	if effects_animation_player:
+		effects_animation_player.stop()
+		effects_animation_player.play("hurt")
+	
+	is_hurt = true
 
 func play_anim(name: String):
 	if uses_sprite and sprite:
@@ -45,37 +56,101 @@ func set_can_move(value: bool):
 func _process(_delta):
 	if is_dead or not player:
 		return
+		
+	if GameManager.get_is_player_dead():
+		stop_all_enemy_behavior()
+		return
+		
 	direction = player.global_position - global_position
 	if direction.x < 0:
 		sprite.flip_h = true
 		$Hitbox_Attack1/attack_up.position.x = -22
 		$Hitbox_Attack2/attack.position.x = -31
-	else :
+		wall_ray.target_position.x = -abs(wall_ray.target_position.x)
+	else:
 		sprite.flip_h = false
 		$Hitbox_Attack1/attack_up.position.x = 22
 		$Hitbox_Attack2/attack.position.x = 31
+		wall_ray.target_position.x = abs(wall_ray.target_position.x)
+		
 func _physics_process(delta):
 	if is_dead:
+		set_physics_process(false)
 		return
-		
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
-		velocity.y = 0
-	
-	if knockback_velocity.length() > 0:
+
+	if knockback_velocity.length() > 1.0:
 		velocity.x = knockback_velocity.x
-		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 5.0 * delta)
-	elif can_move and direction != Vector2.ZERO:
-		velocity.x = direction.normalized().x * move_speed
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay * delta)
 	else:
-		velocity.x = 0
-	
+		knockback_velocity = Vector2.ZERO
+		if can_move and direction != Vector2.ZERO:
+			velocity.x = direction.normalized().x * move_speed
+		else:
+			velocity.x = 0
+
 	move_and_slide()
 
 func _on_enemy_died():
 	if is_dead:
 		return
 	is_dead = true
-	print("Enemy died!")
+	
+	animation_player.stop(false)
+	if effects_animation_player:
+		effects_animation_player.stop(false)
+	
+	hurtbox.monitoring = false
+	hurtbox.monitorable = false
+	
+	hitbox_attack1.deactivate()
+	hitbox_attack1.monitorable = false
+	hitbox_attack2.deactivate()
+	hitbox_attack2.monitorable = false
+	
+	set_physics_process(false)
+	can_move = false
+	
+	if fsm and fsm.current_state:
+		fsm.current_state.exit() 
 	fsm.change_state("death")
+
+func stop_all_enemy_behavior():
+	if fsm and fsm.current_state:
+		fsm.current_state.exit()
+		
+	can_move = false
+
+	if animation_player:
+		animation_player.stop(false)
+	if effects_animation_player:
+		effects_animation_player.stop(false)
+
+	hitbox_attack1.deactivate()
+	hitbox_attack2.deactivate()
+	set_physics_process(false)
+	set_process(false)
+	velocity = Vector2.ZERO
+
+func should_jump() -> bool:
+	if not is_on_floor():
+		return false
+		
+	if not wall_ray.is_colliding():
+		return false  
+	
+	if wall_ray.is_colliding():
+		if player.global_position.y < global_position.y - 20:
+			return true
+	
+	if not floor_ray.is_colliding() and not wall_ray.is_colliding():
+		return true
+	
+	return false
+
+func try_jump():
+	if should_jump():
+		velocity.y = jump_force
+		print("Enemy jumped!")

@@ -4,6 +4,7 @@ extends CharacterBody2D
 # MOVEMENT TUNING
 # =========================
 const SPEED = 300.0
+const attackSPEED = 400.0
 const ACCELERATION = 2000.0
 const FRICTION = 1800.0
 const AIR_RESISTANCE = 400.0
@@ -63,6 +64,11 @@ var combo_pending: bool = false
 @onready var hitbox_attack2: Area2D = $Hitbox_Attack2
 @onready var hitbox_attack3: Area2D = $Hitbox_Attack3
 
+@export var effects_animation_player: AnimationPlayer  
+@export var knockback_decay := 6.0
+var knockback_velocity := Vector2.ZERO
+var is_hurt := false
+
 func _ready() -> void:
 	transition_to(PlayerState.IDLE)
 	
@@ -75,12 +81,34 @@ func _ready() -> void:
 func start_attack(anim: String):
 	is_attacking = true
 	transition_to(PlayerState.ATTACK)
+	velocity.x = last_direction * attackSPEED
 	sprite.play(anim)
 	animation_player.play(anim) 
 
 func _on_player_died():
 	print("Player died!")
+	GameManager.set_is_player_dead(true)
+	
+	# Stop all animations
+	animation_player.stop(false)
+	if effects_animation_player:
+		effects_animation_player.stop(false)
+	
+	# Disable hitboxes
+	hitbox_attack1.deactivate()
+	hitbox_attack1.monitorable = false
+	hitbox_attack2.deactivate()
+	hitbox_attack2.monitorable = false
+	hitbox_attack3.deactivate()
+	hitbox_attack3.monitorable = false
+	
+	# Disable hurtbox
+	$Hurtbox.monitoring = false
+	$Hurtbox.monitorable = false
+	
 	set_physics_process(false)
+	sprite.play("death")  # If you have a death animation
+	
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if not sprite.animation.begins_with("attack"):
@@ -109,6 +137,7 @@ func _physics_process(delta: float) -> void:
 	update_timers(delta)
 	handle_input()
 	update_state(delta)
+	apply_knockback(delta)
 	move_and_slide()
 
 func _process(_delta: float) -> void:
@@ -120,6 +149,14 @@ func _process(_delta: float) -> void:
 		combo_timer -= _delta
 		if combo_timer <= 0.0:
 			attack_index = 0  # Reset after window
+
+func apply_knockback(delta: float) -> void:
+	if knockback_velocity.length() > 1.0:
+		velocity.x = knockback_velocity.x
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, knockback_decay * delta)
+	else:
+		knockback_velocity = Vector2.ZERO
+		is_hurt = false
 
 # =========================
 # TIMERS
@@ -282,7 +319,8 @@ func state_block(delta: float) -> void:
 # ATTACK STATE
 # =========================
 func state_attack(delta: float) -> void:
-	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+	var _decel := 0.0 if not is_on_floor() else FRICTION
+	velocity.x = move_toward(velocity.x, 0, _decel * delta)
 	apply_gravity(delta)
 
 # =========================
@@ -300,9 +338,15 @@ func try_jump() -> bool:
 # =========================
 # PHYSICS HELPERS
 # =========================
+
+const GRAVITY_FALL := 600.0      # main gravity
+const GRAVITY_RISE := 850.0      # lower gravity while going up
+
 func apply_gravity(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if velocity.y < 0:
+		velocity.y += GRAVITY_RISE * delta
+	else:
+		velocity.y += GRAVITY_FALL * delta
 
 func apply_horizontal_movement(delta: float) -> void:
 	# Block prevents horizontal input
@@ -346,3 +390,19 @@ func enter_state(state: PlayerState) -> void:
 			sprite.play("block")
 		PlayerState.ATTACK:
 			pass
+
+func on_hurt(kb_direction: Vector2, force: float):
+	# Don't take knockback if already dead
+	if health_component.current_health <= 0:
+		return
+	
+	knockback_velocity = kb_direction * force
+	
+	# Play hurt effect animation
+	if effects_animation_player:
+		effects_animation_player.stop()
+		effects_animation_player.play("hurt")
+	
+	is_hurt = true
+	print("Player was hurt! Knockback: ", knockback_velocity)
+	

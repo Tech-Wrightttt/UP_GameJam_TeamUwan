@@ -1,19 +1,19 @@
 extends Area2D
-func _ready():
-	area_entered.connect(_on_area_entered)
-	print(
-	name,
-	" HURTBOX Layer:", collision_layer,
-	" Mask:", collision_mask
-	)
-func take_hit(damage: int):
-	var health = get_parent().find_child("HealthComponent", true, false)
+
+@export var knockback_force := 300.0
+
+func take_hit(damage: int, from_position: Vector2):
+	var owner = get_parent()
+	
+	if owner.has_method("get") and owner.get("is_dead"):
+		return 
+	
+	var health = owner.find_child("HealthComponent", true, false)
 	if health:
 		health.take_damage(damage)
 	else:
-		push_warning("No HealthComponent found for " + get_parent().name)
-func _on_area_entered(area):
-	print(
-		"HITBOX owner:", get_parent().name,
-		"| detected HURTBOX owner:", area.get_parent().name
-	)
+		push_warning("no HealthComponent found for " + owner.name)
+	
+	var kb_dir = (owner.global_position - from_position).normalized()
+	if owner.has_method("on_hurt"):
+		owner.on_hurt(kb_dir, knockback_force)
