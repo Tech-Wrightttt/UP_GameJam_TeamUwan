@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=33 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cigltnilhc4gn" path="res://assets/Foreground/Tree-Assets.png" id="9_2p6v0"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_gedp1"]
 [ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="10_xt1gw"]
-[ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
+[ext_resource type="PackedScene" uid="uid://cwtf02lj5bqjc" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
 [ext_resource type="PackedScene" uid="uid://co6vgetfw3515" path="res://scenes/skeleton_summon.tscn" id="17_r48ml"]
 
@@ -2170,6 +2170,12 @@ texture = ExtResource("10_xt1gw")
 [sub_resource type="TileSet" id="TileSet_r48ml"]
 sources/1 = SubResource("TileSetAtlasSource_38agi")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt1gw"]
+size = Vector2(644.5, 187.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38agi"]
+size = Vector2(380, 382.125)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_vkqs5")
 
@@ -2304,6 +2310,7 @@ editor_draw_limits = true
 script = ExtResource("9_gedp1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_utvb4")]
 custom_minimum_size = Vector2(1920, 1080)
@@ -2428,3 +2435,18 @@ text = "Don't go here, this is off limits."
 
 [node name="skeleton_summon" parent="." instance=ExtResource("17_r48ml")]
 position = Vector2(-1549, 476)
+
+[node name="towardso1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardso1"]
+position = Vector2(1037.75, 741.625)
+shape = SubResource("RectangleShape2D_xt1gw")
+
+[node name="towardsc1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardsc1"]
+position = Vector2(2313, 201.0625)
+shape = SubResource("RectangleShape2D_38agi")
+
+[connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]

@@ -151,8 +151,8 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
-position = Vector2(708.00006, 243)
-scale = Vector2(5.0368743, 5.6576247)
+position = Vector2(974.94995, 314.1338)
+scale = Vector2(6.677, 7.5)
 sprite_frames = SubResource("SpriteFrames_sbjnl")
 animation = &"hurt"
 
@@ -191,8 +191,8 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer2"]
-position = Vector2(708.00006, 243)
-scale = Vector2(5.0368743, 5.6576247)
+position = Vector2(974.94995, 314.1338)
+scale = Vector2(6.677, 7.5)
 sprite_frames = SubResource("SpriteFrames_sbjnl")
 animation = &"hurt"
 
@@ -204,10 +204,10 @@ anchor_left = 0.31500003
 anchor_top = 0.64500004
 anchor_right = 0.822
 anchor_bottom = 0.88000005
-offset_left = -25.800049
-offset_top = 13.399963
-offset_right = 0.76000977
-offset_bottom = -0.40008545
+offset_left = 116.19995
+offset_top = -14.600037
+offset_right = 142.76001
+offset_bottom = -28.400085
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_fonts/normal_font = ExtResource("2_v5npv")
 theme_override_font_sizes/normal_font_size = 31
@@ -224,7 +224,7 @@ libraries = {
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer3"]
-position = Vector2(708.00006, 243)
-scale = Vector2(5.0368743, 5.6576247)
+position = Vector2(974.94995, 314.1338)
+scale = Vector2(6.677, 7.5)
 sprite_frames = SubResource("SpriteFrames_sbjnl")
 animation = &"hurt"
