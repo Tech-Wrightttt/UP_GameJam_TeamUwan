@@ -9,22 +9,28 @@ extends CharacterBody2D
 @onready var fsm = $FiniteStateMachine
 @onready var player = get_parent().find_child("main_character", true, false)
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var hitbox_attack1: HitboxComponent = $Hitbox_Attack1
-@onready var hitbox_attack2: HitboxComponent = $Hitbox_Attack2
+@onready var hurtbox = $Hurtbox
+@onready var hitbox_attack1 = $Hitbox_Attack1
+@onready var hitbox_attack2 = $Hitbox_Attack2
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
-var is_dead := false  # Prevent multiple death triggers
+var is_dead := false
+var knockback_velocity := Vector2.ZERO
 
 func _ready():
 	set_physics_process(false)
 	
-	if health_component:
-		health_component.died.connect(_on_enemy_died)
-		print("Enemy health: ", health_component.current_health, "/", health_component.max_health)
+	health_component.died.connect(_on_enemy_died)
 	
-	disable_all_hitboxes()
+	# Make sure both hitboxes start deactivated
+	hitbox_attack1.deactivate()
+	hitbox_attack2.deactivate()
 	fsm.start()
+
+func _on_hurt(damage: int, kb_direction: Vector2, force: float):
+	knockback_velocity = kb_direction * force
+	print("Enemy knocked back with force: ", force)
 
 func play_anim(name: String):
 	if uses_sprite and sprite:
@@ -40,8 +46,14 @@ func _process(_delta):
 	if is_dead or not player:
 		return
 	direction = player.global_position - global_position
-	sprite.flip_h = direction.x < 0
-
+	if direction.x < 0:
+		sprite.flip_h = true
+		$Hitbox_Attack1/attack_up.position.x = -22
+		$Hitbox_Attack2/attack.position.x = -31
+	else :
+		sprite.flip_h = false
+		$Hitbox_Attack1/attack_up.position.x = 22
+		$Hitbox_Attack2/attack.position.x = 31
 func _physics_process(delta):
 	if is_dead:
 		return
@@ -51,35 +63,19 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 	
-	if can_move and direction != Vector2.ZERO:
+	if knockback_velocity.length() > 0:
+		velocity.x = knockback_velocity.x
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 5.0 * delta)
+	elif can_move and direction != Vector2.ZERO:
 		velocity.x = direction.normalized().x * move_speed
 	else:
 		velocity.x = 0
 	
 	move_and_slide()
 
-func _on_enemy_died() -> void:
+func _on_enemy_died():
 	if is_dead:
-		return  # Prevent multiple death calls
-		
+		return
 	is_dead = true
-	print("Enemy died! Health: ", health_component.current_health)
+	print("Enemy died!")
 	fsm.change_state("death")
-
-func enable_hitbox_attack1() -> void:
-	disable_all_hitboxes()
-	if hitbox_attack1:
-		hitbox_attack1.monitoring = true
-		print("Enabled hitbox attack1")
-
-func enable_hitbox_attack2() -> void:
-	disable_all_hitboxes()
-	if hitbox_attack2:
-		hitbox_attack2.monitoring = true
-		print("Enabled hitbox attack2")
-
-func disable_all_hitboxes() -> void:
-	if hitbox_attack1:
-		hitbox_attack1.monitoring = false
-	if hitbox_attack2:
-		hitbox_attack2.monitoring = false

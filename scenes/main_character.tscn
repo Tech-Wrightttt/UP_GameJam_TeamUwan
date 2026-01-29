@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=94 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
@@ -417,8 +417,78 @@ height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sj5qt"]
 
+[sub_resource type="Animation" id="Animation_m40x0"]
+resource_name = "attack1"
+length = 0.4375
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox_Attack1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate"
+}, {
+"args": [],
+"method": &"deactivate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ikepn"]
+resource_name = "attack2"
+length = 0.6154
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox_Attack2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.13333334, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate"
+}, {
+"args": [],
+"method": &"deactivate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7ghjf"]
+resource_name = "attack3"
+length = 0.6923
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox_Attack3")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.23333333, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate"
+}, {
+"args": [],
+"method": &"deactivate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1khg"]
+_data = {
+&"attack1": SubResource("Animation_m40x0"),
+&"attack2": SubResource("Animation_ikepn"),
+&"attack3": SubResource("Animation_7ghjf")
+}
+
 [node name="main_character" type="CharacterBody2D" groups=["player"]]
-collision_layer = 129
+collision_mask = 3
 script = ExtResource("1_tqm6u")
 
 [node name="HealthComponent" type="Node" parent="."]
@@ -432,17 +502,20 @@ shape = SubResource("CapsuleShape2D_tqm6u")
 position = Vector2(2.3841858e-07, 5.9999995)
 scale = Vector2(0.823125, 0.76266235)
 sprite_frames = SubResource("SpriteFrames_n3rqm")
-animation = &"attack2"
+animation = &"attack1"
 
-[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
 script = ExtResource("83_ikepn")
-health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_7ip3e")
 
 [node name="Hitbox_Attack1" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("84_7ghjf")
 
 [node name="attack1" type="CollisionShape2D" parent="Hitbox_Attack1"]
@@ -450,6 +523,8 @@ position = Vector2(24, 9)
 shape = SubResource("CapsuleShape2D_yum8o")
 
 [node name="Hitbox_Attack2" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("84_7ghjf")
 
 [node name="attack2" type="CollisionShape2D" parent="Hitbox_Attack2"]
@@ -458,10 +533,17 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_sj5qt")
 
 [node name="Hitbox_Attack3" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("84_7ghjf")
 
 [node name="attack3" type="CollisionShape2D" parent="Hitbox_Attack3"]
 position = Vector2(25, 10)
 shape = SubResource("CapsuleShape2D_yum8o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f1khg")
+}
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

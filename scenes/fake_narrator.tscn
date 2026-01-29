@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=53 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_40g78"]
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
@@ -38,10 +38,6 @@ region = Rect2(512, 0, 128, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dfc4"]
 atlas = ExtResource("1_jpui6")
 region = Rect2(640, 0, 128, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lk7e6"]
-atlas = ExtResource("2_mpwst")
-region = Rect2(128, 0, 128, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s23sm"]
 atlas = ExtResource("2_mpwst")
@@ -157,13 +153,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_4dfc4")
 }],
 "loop": true,
-"name": &"attack",
-"speed": 8.0
+"name": &"attack1",
+"speed": 12.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lk7e6")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s23sm")
 }, {
@@ -177,8 +170,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_mf48g")
 }],
 "loop": true,
-"name": &"attack_up",
-"speed": 6.66
+"name": &"attack2",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -260,8 +253,56 @@ height = 42.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8rt2"]
 size = Vector2(250, 42)
 
+[sub_resource type="Animation" id="Animation_4dfc4"]
+resource_name = "attack1"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox_Attack1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.23333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate"
+}, {
+"args": [],
+"method": &"deactivate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xvv06"]
+resource_name = "attack2"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox_Attack2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate"
+}, {
+"args": [],
+"method": &"deactivate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lk7e6"]
+_data = {
+&"attack1": SubResource("Animation_4dfc4"),
+&"attack2": SubResource("Animation_xvv06")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lk7e6"]
-radius = 13.0
+radius = 18.0
 height = 42.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xkqr"]
@@ -271,7 +312,8 @@ height = 34.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvx0s"]
 radius = 5.0
 
-[node name="fake narrator" type="CharacterBody2D"]
+[node name="fake narrator" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_40g78")
 
 [node name="HealthComponent" type="Node" parent="."]
@@ -280,8 +322,8 @@ script = ExtResource("2_t1j4c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"hurt"
-frame_progress = 0.8548235
+animation = &"attack2"
+frame_progress = 0.51389194
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -293,6 +335,9 @@ position = Vector2(95, -1)
 shape = SubResource("RectangleShape2D_d8rt2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lk7e6")
+}
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("6_fcj57")
@@ -317,21 +362,26 @@ offset_right = 55.0
 offset_bottom = 23.0
 text = "DEBUG"
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
 script = ExtResource("12_4dfc4")
-health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_lk7e6")
 
-[node name="Hitbox_Attack1" type="Area2D" parent="."]
+[node name="Hitbox_Attack1" type="Area2D" parent="." groups=["hitbox"]]
+collision_layer = 32
+collision_mask = 4
 script = ExtResource("13_xvv06")
 
 [node name="attack_up" type="CollisionShape2D" parent="Hitbox_Attack1"]
 position = Vector2(22, -8)
 shape = SubResource("CapsuleShape2D_2xkqr")
 
-[node name="Hitbox_Attack2" type="Area2D" parent="."]
+[node name="Hitbox_Attack2" type="Area2D" parent="." groups=["hitbox"]]
+collision_layer = 32
+collision_mask = 4
 script = ExtResource("13_xvv06")
 
 [node name="attack" type="CollisionShape2D" parent="Hitbox_Attack2"]
@@ -340,3 +390,4 @@ rotation = 1.1588986
 shape = SubResource("CapsuleShape2D_vvx0s")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

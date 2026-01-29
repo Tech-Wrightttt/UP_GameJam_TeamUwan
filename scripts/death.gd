@@ -6,7 +6,6 @@ func enter():
 	super()
 	boss.set_can_move(false)
 	boss.velocity = Vector2.ZERO
-	boss.disable_all_hitboxes()
 	boss.play_anim(death_animation)
 	
 	# Disable collision

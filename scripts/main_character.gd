@@ -58,52 +58,33 @@ var is_attacking: bool = false
 var combo_pending: bool = false
 
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var hitbox_attack1: HitboxComponent = $Hitbox_Attack1
-@onready var hitbox_attack2: HitboxComponent = $Hitbox_Attack2
-@onready var hitbox_attack3: HitboxComponent = $Hitbox_Attack3
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hitbox_attack1: Area2D = $Hitbox_Attack1
+@onready var hitbox_attack2: Area2D = $Hitbox_Attack2
+@onready var hitbox_attack3: Area2D = $Hitbox_Attack3
 
 func _ready() -> void:
 	transition_to(PlayerState.IDLE)
 	
-	# Connect to health events
 	health_component.died.connect(_on_player_died)
-	health_component.health_changed.connect(_on_health_changed)
 	
-	# Disable all hitboxes initially
-	disable_all_hitboxes()
+	hitbox_attack1.deactivate()
+	hitbox_attack2.deactivate()
+	hitbox_attack3.deactivate()
 
-# Add these helper functions:
-func disable_all_hitboxes() -> void:
-	hitbox_attack1.monitoring = false
-	hitbox_attack2.monitoring = false
-	hitbox_attack3.monitoring = false
-
-func enable_hitbox(attack_num: int) -> void:
-	disable_all_hitboxes()
-	match attack_num:
-		1:
-			hitbox_attack1.monitoring = true
-		2:
-			hitbox_attack2.monitoring = true
-		3:
-			hitbox_attack3.monitoring = true
-
-# Modify start_attack:
-func start_attack(anim: String) -> void:
+func start_attack(anim: String):
 	is_attacking = true
 	transition_to(PlayerState.ATTACK)
 	sprite.play(anim)
-	
-	# Enable the appropriate hitbox
-	enable_hitbox(attack_index)
+	animation_player.play(anim) 
 
-# Modify _on_animated_sprite_2d_animation_finished:
+func _on_player_died():
+	print("Player died!")
+	set_physics_process(false)
+
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if not sprite.animation.begins_with("attack"):
 		return
-	
-	# Disable hitboxes when attack ends
-	disable_all_hitboxes()
 	
 	if combo_pending:
 		combo_pending = false
@@ -118,16 +99,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			var dir = Input.get_axis("left", "right")
 			transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
 
-# Add health callbacks:
-func _on_player_died() -> void:
-	print("Player died - Game Over!")
-	# Handle death (restart level, show game over screen, etc.)
-	set_physics_process(false)
-	sprite.play("death")  # If you have a death animation
-
 func _on_health_changed(new_health: int, max_health: int) -> void:
 	print("Player health: ", new_health, "/", max_health)
-
 
 # =========================
 # MAIN LOOPS
@@ -216,9 +189,15 @@ func handle_input() -> void:
 		if Input.is_action_pressed("left"):
 			sprite.flip_h = true
 			last_direction = -1
+			$Hitbox_Attack1/attack1.position.x = -24
+			$Hitbox_Attack2/attack2.position.x = -23
+			$Hitbox_Attack3/attack3.position.x = -25
 		elif Input.is_action_pressed("right"):
 			sprite.flip_h = false
 			last_direction = 1
+			$Hitbox_Attack1/attack1.position.x = 24
+			$Hitbox_Attack2/attack2.position.x = 23
+			$Hitbox_Attack3/attack3.position.x = 25
 
 # =========================
 # STATE MACHINE
@@ -309,12 +288,6 @@ func state_attack(delta: float) -> void:
 # =========================
 # ACTIONS
 # =========================
-#func start_attack(anim: String) -> void:
-	#is_attacking = true
-	##combo_pending = false 
-	#transition_to(PlayerState.ATTACK)
-	#sprite.play(anim)
-
 func try_jump() -> bool:
 	if jump_buffer_timer > 0 and coyote_timer > 0:
 		velocity.y = JUMP_VELOCITY
@@ -373,22 +346,3 @@ func enter_state(state: PlayerState) -> void:
 			sprite.play("block")
 		PlayerState.ATTACK:
 			pass
-
-
-#func _on_animated_sprite_2d_animation_finished() -> void:
-	#if not sprite.animation.begins_with("attack"):
-		#return
-#
-	#if combo_pending:
-		#combo_pending = false
-		#start_attack(attacks[attack_index - 1])
-	#else:
-		## Open combo timeout AFTER attack ends
-		#combo_timer = combo_window
-		#is_attacking = false
-#
-		#if not is_on_floor():
-			#transition_to(PlayerState.FALL)
-		#else:
-			#var dir = Input.get_axis("left", "right")
-			#transition_to(PlayerState.RUN if dir != 0 else PlayerState.IDLE)
