@@ -4,6 +4,7 @@ extends CharacterBody2D
 # MOVEMENT TUNING
 # =========================
 const SPEED = 300.0
+const attackSPEED = 400.0
 const ACCELERATION = 2000.0
 const FRICTION = 1800.0
 const AIR_RESISTANCE = 400.0
@@ -75,6 +76,7 @@ func _ready() -> void:
 func start_attack(anim: String):
 	is_attacking = true
 	transition_to(PlayerState.ATTACK)
+	velocity.x = last_direction * attackSPEED
 	sprite.play(anim)
 	animation_player.play(anim) 
 
@@ -282,7 +284,8 @@ func state_block(delta: float) -> void:
 # ATTACK STATE
 # =========================
 func state_attack(delta: float) -> void:
-	velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+	var _decel := 0.0 if not is_on_floor() else FRICTION
+	velocity.x = move_toward(velocity.x, 0, _decel * delta)
 	apply_gravity(delta)
 
 # =========================
@@ -300,9 +303,15 @@ func try_jump() -> bool:
 # =========================
 # PHYSICS HELPERS
 # =========================
+
+const GRAVITY_FALL := 600.0      # main gravity
+const GRAVITY_RISE := 850.0      # lower gravity while going up
+
 func apply_gravity(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if velocity.y < 0:
+		velocity.y += GRAVITY_RISE * delta
+	else:
+		velocity.y += GRAVITY_FALL * delta
 
 func apply_horizontal_movement(delta: float) -> void:
 	# Block prevents horizontal input
