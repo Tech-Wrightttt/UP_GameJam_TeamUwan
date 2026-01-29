@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cb6fh6d6npk52"]
+[gd_scene load_steps=17 format=3 uid="uid://cb6fh6d6npk52"]
 
 [ext_resource type="Script" uid="uid://chlmv4ahcpgqw" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://4jtiv5fdsmih" path="res://assets/ui/UNBOUND HER0 - GAMEFLOW.png" id="2_wu84c"]
@@ -13,6 +13,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flqon"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcqid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ajci"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtw2f"]
@@ -20,6 +24,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jk1qb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7b55j"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_l6cm7")
@@ -72,12 +78,16 @@ offset_left = -1934.0
 offset_top = 581.0
 offset_right = -1597.0
 offset_bottom = 676.0
+theme_override_colors/font_pressed_color = Color(5.0055983e-06, 0.8115703, 0.8152194, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("6_rtw2f")
 theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oa1go")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_lgwnu")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_flqon")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rcqid")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1ajci")
 text = "Credits"
 
 [node name="Quit" type="Button" parent="ButtonManager"]
@@ -86,14 +96,16 @@ offset_left = -1945.0
 offset_top = 716.0
 offset_right = -1587.0
 offset_bottom = 811.0
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(5.0055983e-06, 0.8115703, 0.8152194, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.34509805, 0.34509805, 0.34509805, 0)
 theme_override_fonts/font = ExtResource("6_rtw2f")
 theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tbmy8")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtw2f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_jk1qb")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5dd4i")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7b55j")
 text = "Quit"
 
 [connection signal="pressed" from="ButtonManager/Start" to="." method="_on_start_pressed"]
