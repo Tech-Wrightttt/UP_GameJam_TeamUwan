@@ -31,7 +31,7 @@ func _ready() -> void:
 	await play_layer_sequence(layer2, anim_player2, 10) 
 	await play_layer_sequence(layer3, anim_player3, 15) 
 	
-	get_tree().change_scene_to_file("res://levels/title_screen.tscn")
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer, animation_length: float) -> void:
 	layer.show()

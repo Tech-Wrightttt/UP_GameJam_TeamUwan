@@ -2182,16 +2182,17 @@ follow_viewport_enabled = true
 [node name="Parallax2D" type="Parallax2D" parent="CanvasLayer2"]
 scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Parallax2D"]
-scale = Vector2(5, 5)
+position = Vector2(0, 2.9999847)
+scale = Vector2(5, 4.9812503)
 texture = ExtResource("2_3svnx")
 
 [node name="Parallax2D2" type="Parallax2D" parent="CanvasLayer2"]
 scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Parallax2D2"]
 scale = Vector2(5, 5)
@@ -2200,7 +2201,7 @@ texture = ExtResource("3_l1egu")
 [node name="Parallax2D3" type="Parallax2D" parent="CanvasLayer2"]
 scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Parallax2D3"]
 scale = Vector2(5, 5)
@@ -2209,7 +2210,7 @@ texture = ExtResource("4_d1nep")
 [node name="Parallax2D4" type="Parallax2D" parent="CanvasLayer2"]
 scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Parallax2D4"]
 scale = Vector2(5, 5)
@@ -2295,10 +2296,10 @@ scale = Vector2(2.5, 2.5)
 [node name="Camera2D" type="Camera2D" parent="main_character"]
 offset = Vector2(0, -100)
 zoom = Vector2(1.115, 1.04)
-limit_left = -2142
-limit_top = -377
-limit_right = 2518
-limit_bottom = 943
+limit_left = -2110
+limit_top = -371
+limit_right = 2445
+limit_bottom = 919
 editor_draw_limits = true
 script = ExtResource("9_gedp1")
 
