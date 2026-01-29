@@ -1,4 +1,3 @@
-[gd_scene load_steps=33 format=3 uid="uid://bmd3a553wrbj0"]
 [gd_scene load_steps=34 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
@@ -2177,6 +2176,9 @@ size = Vector2(644.5, 187.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38agi"]
 size = Vector2(380, 382.125)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r48ml"]
+size = Vector2(100, 79.5)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_vkqs5")
 
@@ -2446,9 +2448,18 @@ shape = SubResource("RectangleShape2D_xt1gw")
 position = Vector2(2313, 201.0625)
 shape = SubResource("RectangleShape2D_38agi")
 
+<<<<<<< Updated upstream
 [node name="true_narrator" parent="." instance=ExtResource("16_38agi")]
 position = Vector2(-1222, 390)
 scale = Vector2(2, 2)
+=======
+[node name="marker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
+position = Vector2(2061, 351)
+shape = SubResource("RectangleShape2D_r48ml")
+>>>>>>> Stashed changes
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]
+[connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
