@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgwgq60bg2o1i"]
+
+[ext_resource type="Script" uid="uid://dew81t00yo3fu" path="res://scripts/health_bar.gd" id="1_1bvlm"]
+
+[node name="HealthBar" type="ProgressBar"]
+offset_left = -28.0
+offset_top = -36.0
+offset_right = 85.0
+offset_bottom = -9.0
+scale = Vector2(0.5, 0.5)
+max_value = 150.0
+script = ExtResource("1_1bvlm")
+offset_above_enemy = Vector2(-25, -40)

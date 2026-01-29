@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://d3u5q0qrcfex0"]
+[gd_scene load_steps=104 format=3 uid="uid://d3u5q0qrcfex0"]
 
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="1_t350m"]
 [ext_resource type="Script" uid="uid://c2u8247y6v3my" path="res://scripts/true_narrator.gd" id="1_yb3d6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cxo31vmosf0kx" path="res://scripts/attack_truenarrator.gd" id="7_yb3d6"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="8_0m88j"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="9_t3ypp"]
+[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="12_shqxs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxi2v"]
 atlas = ExtResource("2_umar6")
@@ -780,6 +781,9 @@ text = "DEBUG
 libraries = {
 &"": SubResource("AnimationLibrary_mf48g")
 }
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_shqxs")]
+health_component = NodePath("../HealthComponent")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfodbh52etqh" path="res://scripts/skeleton.gd" id="1_0dwpm"]
 [ext_resource type="Texture2D" uid="uid://cg7rx74umip6j" path="res://assets/Skeleton enemy.png" id="1_h1m0o"]
+[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="2_bf6gi"]
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="3_bf6gi"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="4_1l286"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scripts/idle.gd" id="5_g5sas"]
@@ -10,7 +11,6 @@
 [ext_resource type="Script" uid="uid://dvyk5lt448d8o" path="res://scripts/death_skeleton.gd" id="8_bf6gi"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="9_36f1b"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="10_yxg4p"]
-[ext_resource type="Script" uid="uid://dew81t00yo3fu" path="res://scripts/health_bar.gd" id="11_bf6gi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqtvt"]
 atlas = ExtResource("1_h1m0o")
@@ -406,13 +406,7 @@ scale = Vector2(2, 2)
 collision_layer = 2
 script = ExtResource("1_0dwpm")
 
-[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_component")]
-offset_left = -28.0
-offset_top = -36.0
-offset_right = 85.0
-offset_bottom = -9.0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("11_bf6gi")
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_bf6gi")]
 health_component = NodePath("../HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

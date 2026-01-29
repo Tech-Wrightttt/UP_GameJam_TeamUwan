@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=64 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_40g78"]
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="12_4dfc4"]
 [ext_resource type="Script" uid="uid://bq6my177xprct" path="res://scripts/death.gd" id="12_xvv06"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="13_xvv06"]
+[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="16_lk7e6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6kjf"]
 atlas = ExtResource("1_jpui6")
@@ -505,6 +506,9 @@ position = Vector2(0, 7)
 target_position = Vector2(42, 0)
 
 [node name="FloorRay" type="RayCast2D" parent="."]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("16_lk7e6")]
+health_component = NodePath("../HealthComponent")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

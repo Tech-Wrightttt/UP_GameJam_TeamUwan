@@ -8,10 +8,8 @@ signal died
 var current_health: int
 var is_dead := false
 
-func _init():
-	current_health = max_health
-
 func _ready():
+	current_health = max_health
 	health_changed.emit(current_health, max_health)
 
 func take_damage(amount: int):
