@@ -739,6 +739,7 @@ position = Vector2(0, 28)
 shape = SubResource("CapsuleShape2D_y6rnd")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(97, 27)
