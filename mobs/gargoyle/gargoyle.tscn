@@ -1,13 +1,13 @@
-[gd_scene load_steps=43 format=3 uid="uid://jqcn8wer5qdy"]
+[gd_scene load_steps=42 format=3 uid="uid://jqcn8wer5qdy"]
 
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="1_8ghts"]
+[ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_gespr"]
 [ext_resource type="Texture2D" uid="uid://c21ipx1lpoc6c" path="res://mobs/gargoyle/attack.png" id="2_8pfr6"]
 [ext_resource type="Texture2D" uid="uid://ejjd5pado0oo" path="res://mobs/gargoyle/idle.png" id="3_31i5m"]
 [ext_resource type="Texture2D" uid="uid://h0xykcswbhvb" path="res://mobs/gargoyle/walk.png" id="4_ju6st"]
 [ext_resource type="Texture2D" uid="uid://sjajcev5vyyh" path="res://mobs/gargoyle/die.png" id="4_t0h4w"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="5_t0h4w"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="6_4rq6d"]
-[ext_resource type="Texture2D" uid="uid://d0732t78d5you" path="res://mobs/gargoyle/hurt.png" id="6_68uli"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="7_gespr"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scripts/idle.gd" id="8_68uli"]
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scripts/follow.gd" id="9_7ohkc"]
@@ -45,22 +45,6 @@ region = Rect2(0, 96, 176, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0xxa"]
 atlas = ExtResource("4_t0h4w")
 region = Rect2(176, 96, 176, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0dlgp"]
-atlas = ExtResource("3_31i5m")
-region = Rect2(0, 0, 176, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2g4wo"]
-atlas = ExtResource("6_68uli")
-region = Rect2(0, 0, 176, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n25tm"]
-atlas = ExtResource("3_31i5m")
-region = Rect2(0, 96, 176, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q82ib"]
-atlas = ExtResource("6_68uli")
-region = Rect2(176, 0, 176, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rs47o"]
 atlas = ExtResource("3_31i5m")
@@ -145,23 +129,6 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0dlgp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2g4wo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n25tm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q82ib")
-}],
-"loop": true,
-"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -266,8 +233,46 @@ height = 22.4
 radius = 8.999908
 height = 31.608253
 
+[sub_resource type="Animation" id="Animation_mf48g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dvhn7"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf48g"]
+_data = {
+&"RESET": SubResource("Animation_mf48g"),
+&"hurt": SubResource("Animation_dvhn7")
+}
+
 [node name="Gargoyle" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(2.5, 2.5)
+script = ExtResource("1_gespr")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("1_8ghts")
@@ -276,8 +281,7 @@ script = ExtResource("1_8ghts")
 position = Vector2(1, 8)
 scale = Vector2(0.3068182, 0.30681822)
 sprite_frames = SubResource("SpriteFrames_4m4rr")
-animation = &"hurt"
-frame_progress = 0.56790346
+animation = &"attack2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -345,6 +349,17 @@ script = ExtResource("6_4rq6d")
 position = Vector2(21.599998, 11.200003)
 rotation = 1.1588986
 shape = SubResource("CapsuleShape2D_fgsyb")
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mf48g")
+}
+
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(42, 0)
+
+[node name="FloorRay" type="RayCast2D" parent="."]
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

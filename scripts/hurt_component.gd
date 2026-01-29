@@ -13,7 +13,6 @@ func take_hit(damage: int, from_position: Vector2):
 		health.take_damage(damage)
 	else:
 		push_warning("no HealthComponent found for " + owner.name)
-	
 	var kb_dir = (owner.global_position - from_position).normalized()
 	if owner.has_method("on_hurt"):
 		owner.on_hurt(kb_dir, knockback_force)

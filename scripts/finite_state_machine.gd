@@ -19,3 +19,7 @@ func change_state(state_name: String):
 	current_state.exit()
 	current_state = new_state
 	current_state.enter()
+
+
+func _on_player_detection_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

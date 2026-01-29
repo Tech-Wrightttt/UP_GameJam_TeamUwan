@@ -427,11 +427,13 @@ sprite_frames = SubResource("SpriteFrames_mpwst")
 animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_kilpx")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+visible = false
 position = Vector2(95, -1)
 shape = SubResource("RectangleShape2D_d8rt2")
 
@@ -457,6 +459,7 @@ script = ExtResource("10_t1j4c")
 script = ExtResource("12_xvv06")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -12.0
 offset_top = -42.0
 offset_right = 55.0
@@ -464,6 +467,7 @@ offset_bottom = 23.0
 text = "DEBUG"
 
 [node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("12_4dfc4")
@@ -472,6 +476,7 @@ script = ExtResource("12_4dfc4")
 shape = SubResource("CapsuleShape2D_lk7e6")
 
 [node name="Hitbox_Attack1" type="Area2D" parent="." groups=["hitbox"]]
+visible = false
 collision_layer = 32
 collision_mask = 20
 script = ExtResource("13_xvv06")

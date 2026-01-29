@@ -1,9 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://dxibxggf0tlv3"]
+[gd_scene load_steps=53 format=3 uid="uid://dxibxggf0tlv3"]
 
+[ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_sg4wi"]
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="2_cwfm1"]
 [ext_resource type="Texture2D" uid="uid://bstsk22a7sqi0" path="res://mobs/slime/attack.png" id="3_xddi5"]
 [ext_resource type="Texture2D" uid="uid://p7i6gqt77ed1" path="res://mobs/slime/die.png" id="4_sfto1"]
-[ext_resource type="Texture2D" uid="uid://b0iu4ugv6gme4" path="res://mobs/slime/hurt.png" id="5_drcj1"]
 [ext_resource type="Texture2D" uid="uid://b4svf1ueumsn" path="res://mobs/slime/idle.png" id="6_cwfm1"]
 [ext_resource type="Texture2D" uid="uid://fojldllq6mfh" path="res://mobs/slime/walk.png" id="6_ioytl"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="7_pp60g"]
@@ -73,22 +73,6 @@ region = Rect2(176, 48, 88, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bik3b"]
 atlas = ExtResource("4_sfto1")
 region = Rect2(264, 48, 88, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5c5to"]
-atlas = ExtResource("5_drcj1")
-region = Rect2(0, 0, 88, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sieht"]
-atlas = ExtResource("5_drcj1")
-region = Rect2(88, 0, 88, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jl54"]
-atlas = ExtResource("5_drcj1")
-region = Rect2(176, 0, 88, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_385xi"]
-atlas = ExtResource("5_drcj1")
-region = Rect2(264, 0, 88, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wff3"]
 atlas = ExtResource("6_cwfm1")
@@ -223,23 +207,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5c5to")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sieht")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jl54")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_385xi")
-}],
-"loop": true,
-"name": &"hurt",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_5wff3")
 }, {
 "duration": 1.0,
@@ -352,9 +319,47 @@ height = 33.6
 radius = 6.5052624
 height = 40.8
 
+[sub_resource type="Animation" id="Animation_mf48g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dvhn7"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf48g"]
+_data = {
+&"RESET": SubResource("Animation_mf48g"),
+&"hurt": SubResource("Animation_dvhn7")
+}
+
 [node name="Slime" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(0, -2.9999998)
 scale = Vector2(2.5, 2.5)
+script = ExtResource("1_sg4wi")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_cwfm1")
@@ -363,15 +368,13 @@ script = ExtResource("2_cwfm1")
 position = Vector2(0.4, 14)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_alyne")
-animation = &"idle"
-frame_progress = 0.2148619
+animation = &"attack1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.5527137e-15, 12)
 shape = SubResource("CapsuleShape2D_tb70n")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
-visible = false
 scale = Vector2(0.975, 0.975)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
@@ -434,6 +437,17 @@ script = ExtResource("13_t601b")
 position = Vector2(1.1920929e-07, 16.8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ma73y")
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mf48g")
+}
+
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(42, 0)
+
+[node name="FloorRay" type="RayCast2D" parent="."]
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
