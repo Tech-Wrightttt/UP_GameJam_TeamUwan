@@ -9,6 +9,10 @@ func enter():
 	boss.set_can_move(true)
 	follow_timer = 0.0
 
+func _physics_process(delta):
+	super(delta)
+	boss.try_jump()
+
 func transition():
 	follow_timer += get_physics_process_delta_time()
 	if follow_timer < 0.2:

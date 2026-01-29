@@ -3,7 +3,9 @@ extends CharacterBody2D
 @export var uses_sprite := true
 @export var move_speed := 200.0
 @export var gravity := 980.0
-
+@export var jump_force := -420.0
+@onready var floor_ray: RayCast2D = $FloorRay
+@onready var wall_ray: RayCast2D = $WallRay
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fsm = $FiniteStateMachine
@@ -20,6 +22,7 @@ var can_move := false
 var is_dead := false
 var knockback_velocity := Vector2.ZERO
 var is_hurt := false
+
 
 func _ready():
 	set_physics_process(false)
@@ -63,10 +66,12 @@ func _process(_delta):
 		sprite.flip_h = true
 		$Hitbox_Attack1/attack_up.position.x = -22
 		$Hitbox_Attack2/attack.position.x = -31
-	else :
+		wall_ray.target_position.x = -abs(wall_ray.target_position.x)
+	else:
 		sprite.flip_h = false
 		$Hitbox_Attack1/attack_up.position.x = 22
 		$Hitbox_Attack2/attack.position.x = 31
+		wall_ray.target_position.x = abs(wall_ray.target_position.x)
 		
 func _physics_process(delta):
 	if is_dead:
@@ -75,8 +80,6 @@ func _physics_process(delta):
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
-		velocity.y = 0
 
 	if knockback_velocity.length() > 1.0:
 		velocity.x = knockback_velocity.x
@@ -127,5 +130,27 @@ func stop_all_enemy_behavior():
 
 	hitbox_attack1.deactivate()
 	hitbox_attack2.deactivate()
-
+	set_physics_process(false)
+	set_process(false)
 	velocity = Vector2.ZERO
+
+func should_jump() -> bool:
+	if not is_on_floor():
+		return false
+		
+	if not wall_ray.is_colliding():
+		return false  
+	
+	if wall_ray.is_colliding():
+		if player.global_position.y < global_position.y - 20:
+			return true
+	
+	if not floor_ray.is_colliding() and not wall_ray.is_colliding():
+		return true
+	
+	return false
+
+func try_jump():
+	if should_jump():
+		velocity.y = jump_force
+		print("Enemy jumped!")

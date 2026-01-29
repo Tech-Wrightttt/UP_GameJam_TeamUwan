@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bregye8nef5wb"]
+[gd_scene load_steps=63 format=3 uid="uid://bregye8nef5wb"]
 
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_40g78"]
 [ext_resource type="Texture2D" uid="uid://cx0g3yy4a2pbq" path="res://assets/fake narrator/player-Idle.png" id="1_327wu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://neh8v2outyep" path="res://assets/fake narrator/player-Hurt.png" id="3_fcj57"]
 [ext_resource type="Texture2D" uid="uid://csc7dcfss7w1e" path="res://assets/fake narrator/player-Run.png" id="5_i4cr4"]
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="6_fcj57"]
+[ext_resource type="Texture2D" uid="uid://cc3tf5hnwl8vv" path="res://assets/fake narrator/player-JumpAttack.png" id="7_xvv06"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scripts/idle.gd" id="8_n1hse"]
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scripts/follow.gd" id="9_duvg7"]
 [ext_resource type="Script" uid="uid://cgc24ul0anvn2" path="res://scripts/attack.gd" id="10_t1j4c"]
@@ -82,6 +83,18 @@ region = Rect2(256, 0, 128, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpui6"]
 atlas = ExtResource("1_327wu")
 region = Rect2(384, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk7e6"]
+atlas = ExtResource("7_xvv06")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kilpx"]
+atlas = ExtResource("7_xvv06")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8rt2"]
+atlas = ExtResource("7_xvv06")
+region = Rect2(256, 0, 128, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rssgg"]
 atlas = ExtResource("5_i4cr4")
@@ -203,6 +216,20 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk7e6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kilpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8rt2")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -397,7 +424,9 @@ script = ExtResource("2_t1j4c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
 sprite_frames = SubResource("SpriteFrames_mpwst")
-animation = &"attack2"
+animation = &"jump"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kilpx")
@@ -467,6 +496,12 @@ shape = SubResource("CapsuleShape2D_vvx0s")
 libraries = {
 &"": SubResource("AnimationLibrary_mf48g")
 }
+
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2(0, 7)
+target_position = Vector2(42, 0)
+
+[node name="FloorRay" type="RayCast2D" parent="."]
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
