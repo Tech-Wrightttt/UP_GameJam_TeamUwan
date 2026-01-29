@@ -1,6 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwtf02lj5bqjc"]
+[gd_scene load_steps=9 format=3 uid="uid://r52b6jrxbn7r"]
 
 [ext_resource type="Script" uid="uid://bvp2lv3xi2bc1" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+[ext_resource type="FontFile" uid="uid://npvjvfpyjdso" path="res://assets/ui/fonts/ARCADECLASSIC.TTF" id="2_kukqi"]
+[ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="3_5d2l8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7l7mv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kukqi"]
+bg_color = Color(0.23921569, 0.23921569, 0.23921569, 0.68235296)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.17163703, 0.17163709, 0.17163688, 1)
+corner_radius_top_left = 55
+corner_radius_top_right = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
+bg_color = Color(0.2489197, 0.5694185, 0.5694558, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19076228, 0.19076237, 0.19076213, 1)
+corner_radius_top_left = 55
+corner_radius_top_right = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+expand_margin_left = 5.0
+expand_margin_top = 10.0
+expand_margin_right = 5.0
+expand_margin_bottom = 7.0
+shadow_color = Color(0.32172796, 0.32172796, 0.32172796, 1)
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1s2dm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_88e76"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -14,42 +52,70 @@ script = ExtResource("1_n87rw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -224.0
-offset_top = -278.0
-offset_right = 224.0
-offset_bottom = 278.0
+anchor_top = 0.23400001
+anchor_right = 0.94100004
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 0.27998352
+offset_right = -0.7200928
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 27
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = 3
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/font = ExtResource("2_kukqi")
+theme_override_font_sizes/font_size = 130
 text = "PAUSED"
 horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "RESUME
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(8.663535e-07, 0.5039224, 0.4454391, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7l7mv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kukqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v4r4p")
+text = "Resume
 "
 
 [node name="Restart" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "RESTART"
-
-[node name="Options" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "OPTIONS
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(8.663535e-07, 0.5039224, 0.4454391, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1s2dm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kukqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v4r4p")
+text = "Restart
 "
 
 [node name="Quit to Main Menu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "QUIT TO MAIN MENU"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(8.663535e-07, 0.5039224, 0.4454391, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 58
+theme_override_styles/normal = SubResource("StyleBoxEmpty_88e76")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kukqi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_v4r4p")
+text = "Main Menu
+"
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit to Main Menu" to="." method="_on_quit_to_main_menu_pressed"]
