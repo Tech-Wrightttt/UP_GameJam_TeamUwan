@@ -11,9 +11,9 @@ func _ready() -> void:
 	if audio_player:
 		audio_player.play()
 		
-	print("the line before await")
 	await play_layer_sequence(layer1, anim_player1)
-	print("line after await")
+	
+	GameManager.reset_spawn_points()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer) -> void:

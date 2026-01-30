@@ -12,6 +12,7 @@ func _ready() -> void:
 		audio_player.play()
 	await play_layer_sequence(layer1, anim_player1)
 	
+	GameManager.reset_spawn_points()
 	get_tree().change_scene_to_file("res://levels/tutoriallevel.tscn")
 
 func play_layer_sequence(layer: CanvasLayer, anim: AnimationPlayer) -> void:
