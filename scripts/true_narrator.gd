@@ -151,7 +151,7 @@ func _on_enemy_died():
 	if is_dead:
 		return
 	is_dead = true
-	
+	AudioManager.stop_music()
 	animation_player.stop(false)
 	if effects_animation_player:
 		effects_animation_player.stop(false)
