@@ -1,7 +1,7 @@
 extends Node
 
 var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
-var current_clocks: int = 3 
+var current_clocks: int = 0
 var voice_line_played := false  # Add this
 var voice_line_played2 := false  # Add this
 var voice_line_played3 := false  # Add this
@@ -95,7 +95,6 @@ func mark_boss_defeated(boss_id: String):
 	
 func restart():
 	defeated_bosses.clear()
-	level_clocks.clear()
 	current_clocks = 0
 	player_dead = false
 	for enemy in get_tree().get_nodes_in_group("enemies"):

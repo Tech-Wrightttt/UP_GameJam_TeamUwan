@@ -934,7 +934,8 @@ position = Vector2(1230, 533.00006)
 position = Vector2(-118.99988, 535)
 
 [node name="LevelPortal" parent="." instance=ExtResource("15_fghf5")]
-position = Vector2(-2418, 496.99997)
+position = Vector2(-2434, 515)
+scale = Vector2(0.15, 0.15)
 
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
