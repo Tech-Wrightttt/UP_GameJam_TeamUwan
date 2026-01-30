@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://dxibxggf0tlv3"]
 
-[ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_sg4wi"]
+[ext_resource type="Script" uid="uid://d1qc8iji7ioqc" path="res://scripts/mob.gd" id="1_cwfm1"]
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="2_cwfm1"]
 [ext_resource type="Texture2D" uid="uid://bstsk22a7sqi0" path="res://mobs/slime/attack.png" id="3_xddi5"]
 [ext_resource type="Texture2D" uid="uid://p7i6gqt77ed1" path="res://mobs/slime/die.png" id="4_sfto1"]
@@ -360,8 +360,9 @@ _data = {
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["enemy"]]
 position = Vector2(0, -2.9999998)
 scale = Vector2(2.5, 2.5)
-script = ExtResource("1_sg4wi")
+script = ExtResource("1_cwfm1")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
+boss_id = "fake_narrator"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_cwfm1")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=43 format=3 uid="uid://jqcn8wer5qdy"]
 
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="1_8ghts"]
-[ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_gespr"]
+[ext_resource type="Script" uid="uid://d1qc8iji7ioqc" path="res://scripts/mob.gd" id="1_68uli"]
 [ext_resource type="Texture2D" uid="uid://c21ipx1lpoc6c" path="res://mobs/gargoyle/attack.png" id="2_8pfr6"]
 [ext_resource type="Texture2D" uid="uid://ejjd5pado0oo" path="res://mobs/gargoyle/idle.png" id="3_31i5m"]
 [ext_resource type="Texture2D" uid="uid://h0xykcswbhvb" path="res://mobs/gargoyle/walk.png" id="4_ju6st"]
@@ -273,8 +273,9 @@ _data = {
 
 [node name="Gargoyle" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["enemy"]]
 scale = Vector2(2.5, 2.5)
-script = ExtResource("1_gespr")
+script = ExtResource("1_68uli")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
+boss_id = "fake_narrator"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("1_8ghts")
