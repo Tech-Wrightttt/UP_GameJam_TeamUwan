@@ -2,11 +2,24 @@ extends Node
 
 var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
 var current_clocks: int = 3 
-var current_clocks: int = 0 
 var voice_line_played := false  # Add this
 var voice_line_played2 := false  # Add this
 var voice_line_played3 := false  # Add this
 var voice_line_played4 := false  # Add this
+
+var castle1_voiceline_played := false
+var castle2_voiceline_played := false
+var castle3_voiceline_played := false
+var castle4_voiceline_played := false
+
+
+var overworld1_voiceline_played :=false
+var overworld2_voiceline_played :=false
+var overworld3_voiceline_played :=false
+var overworld4_voiceline_played :=false
+
+
+var dd_voiceline_played :=false
 
 
 signal clocks_changed(current: int, total: int)

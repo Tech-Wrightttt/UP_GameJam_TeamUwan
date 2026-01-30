@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjyyqynv06frs"
+path="res://.godot/imported/FAKE NARRATOR BOSS FIGHT.wav-6397364be3a2a3d1aefa81bc8c4c99c1.sample"
+
+[deps]
+
+source_file="res://assets/voicelines/FAKE NARRATOR BOSS FIGHT.wav"
+dest_files=["res://.godot/imported/FAKE NARRATOR BOSS FIGHT.wav-6397364be3a2a3d1aefa81bc8c4c99c1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
