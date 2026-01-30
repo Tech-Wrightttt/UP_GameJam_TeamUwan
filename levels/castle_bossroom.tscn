@@ -8,7 +8,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yee4r"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_podjh"]
 texture = ExtResource("1_6coua")
 1:0/0 = 0
 1:0/0/material = SubResource("CanvasItemMaterial_hjsbj")
@@ -992,7 +992,7 @@ texture = ExtResource("1_6coua")
 
 [sub_resource type="TileSet" id="TileSet_cbcmy"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_yee4r")
+sources/1 = SubResource("TileSetAtlasSource_podjh")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpfjo"]
 atlas = ExtResource("4_j5t3b")
@@ -1041,13 +1041,13 @@ fill = 1
 fill_from = Vector2(0.4909091, 0.5181818)
 fill_to = Vector2(0.73333335, 0.96060604)
 
-[sub_resource type="Gradient" id="Gradient_podjh"]
+[sub_resource type="Gradient" id="Gradient_yee4r"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.95726496, 1)
 colors = PackedColorArray(1, 1, 1, 1, 18.892157, 18.892157, 18.892157, 0.043137256, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_podjh"]
-gradient = SubResource("Gradient_podjh")
+gradient = SubResource("Gradient_yee4r")
 width = 124
 height = 49
 fill = 1
