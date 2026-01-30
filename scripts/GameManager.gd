@@ -68,6 +68,19 @@ func reset_spawn_points() -> void:
 	spawn_points[10] = Vector2(21, 22)
 	spawn_points[11] = Vector2(23, 24)
 	spawn_points[12] = Vector2(25, 26)
+	voice_line_played = false  # Add this
+	voice_line_played2 = false  # Add this
+	voice_line_played3 = false  # Add this
+	voice_line_played4 = false  # Add this
+
+	castle1_voiceline_played = false
+	castle2_voiceline_played = false
+	castle3_voiceline_played = false
+	castle4_voiceline_played = false
+	overworld1_voiceline_played = false
+	overworld2_voiceline_played = false
+	overworld3_voiceline_played = false
+	overworld4_voiceline_played = false
 	restart()
 
 	
