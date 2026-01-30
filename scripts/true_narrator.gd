@@ -18,6 +18,7 @@ extends CharacterBody2D
 @export var summon_offset := Vector2(48, 0)
 @export var bullet_node: PackedScene
 @export var projectile_spawn_offset := Vector2(32, -16)
+@export var boss_id := "true_narrator"
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
@@ -63,6 +64,9 @@ func shoot():
 	get_parent().add_child(projectile)
 	
 func _ready():
+	if GameManager.is_boss_defeated(boss_id):
+		queue_free()
+		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
 	fsm.start()
@@ -153,6 +157,7 @@ func _on_enemy_died():
 	
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
+	GameManager.mark_boss_defeated(boss_id)
 	fsm.change_state("death")
 
 func stop_all_enemy_behavior():

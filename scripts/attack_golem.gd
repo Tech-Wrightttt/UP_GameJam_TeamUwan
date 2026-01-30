@@ -4,6 +4,7 @@ extends State
 @export var attack_cooldown := 0.75
 @export var dist := 100
 
+
 var state_timer := 0.0
 var is_in_cooldown := false
 var current_attack_index := 0

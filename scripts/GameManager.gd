@@ -20,11 +20,6 @@ var spawn_points: Array[Vector2] = [
 	Vector2(25, 26)
 ]
 
- 
-
-
-
-
 func _ready() -> void:
 	SCREEN["center"] = Vector2(
 		SCREEN["width"] / 2,
@@ -39,9 +34,6 @@ func add_clock() -> void:
 func setTutorialLocation(location: Vector2) -> void:
 	tutorialLocation = location
 	
-
-
-
 var defeated_bosses: Dictionary = {}
 var player_dead := false
 
@@ -50,7 +42,7 @@ func is_boss_defeated(boss_id: String) -> bool:
 
 func mark_boss_defeated(boss_id: String):
 	defeated_bosses[boss_id] = true
-	print("Boss defeated:", boss_id)
+	print("✅ Boss defeated saved:", defeated_bosses)
 	
 func set_is_player_dead(is_dead: bool):
 	player_dead = is_dead
