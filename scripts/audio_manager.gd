@@ -4,7 +4,7 @@ extends Node2D
 # Player 			- AudioManager.play_sword_swing(player)
 # Music transitions - AudioManager.transition_music("dungeon")
 
-const SOUNDS = {
+const PLAYER_SOUNDS = {
 	"sword_swing": [
 		preload("res://soundFX/player/swordswing_1.wav"),
 		preload("res://soundFX/player/swordswing_2.wav"),
@@ -12,9 +12,18 @@ const SOUNDS = {
 		preload("res://soundFX/player/swordswing_4.wav"),
 		preload("res://soundFX/player/swordswing_5.wav")
 	],
-	"player_damage": [
+	"damage": [
 		preload("res://soundFX/player/player_hurt.mp3")
+	],
+	"walk_overworld": [
+		preload("res://soundFX/player/walking_overworld_1.mp3"),
+		preload("res://soundFX/player/walking_overworld_2.mp3"),
+		preload("res://soundFX/player/walking_overworld_3.mp3")
 	]
+}
+
+const ENEMY_SOUNDS = {
+	
 }
 
 const MUSIC = {
@@ -56,24 +65,24 @@ func play_sound(sound_key: String):
 		push_error("Player node not set. Call AudioManager.set_player() first.")
 		return
 	
-	if not SOUNDS.has(sound_key):
+	if not PLAYER_SOUNDS.has(sound_key):
 		push_error("Sound key '%s' not found" % sound_key)
 		return
 	
 	var config = AUDIO_CONFIGS.get(sound_key, {})
-	var sound_array = SOUNDS[sound_key]
+	var sound_array = PLAYER_SOUNDS[sound_key]
 	var stream = sound_array.pick_random() if sound_array is Array else sound_array
 	
 	_create_and_play_2d(stream, player_node, config)
 
 # Play sound at specific position
 func play_sound_at(sound_key: String, position: Vector2):
-	if not SOUNDS.has(sound_key):
+	if not PLAYER_SOUNDS.has(sound_key):
 		push_error("Sound key '%s' not found" % sound_key)
 		return
 	
 	var config = AUDIO_CONFIGS.get(sound_key, {})
-	var sound_array = SOUNDS[sound_key]
+	var sound_array = PLAYER_SOUNDS[sound_key]
 	var stream = sound_array.pick_random() if sound_array is Array else sound_array
 	
 	_create_and_play_2d_at_position(stream, position, config)
