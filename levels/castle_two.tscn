@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dr7aw4f5ckp1r"]
+[gd_scene load_steps=22 format=3 uid="uid://dr7aw4f5ckp1r"]
 
 [ext_resource type="Script" uid="uid://cqe0nx0dhykam" path="res://scripts/castle_two.gd" id="1_4xskk"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
@@ -2070,6 +2070,18 @@ fill = 1
 fill_from = Vector2(0.53939396, 0.51379097)
 fill_to = Vector2(0.8727273, 0.86654294)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xskk"]
+size = Vector2(261.5, 402.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irwje"]
+size = Vector2(261.5, 402.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxivw"]
+size = Vector2(127.75, 83.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i62bi"]
+size = Vector2(127.75, 83.25)
+
 [node name="CastleTwo" type="Node2D"]
 script = ExtResource("1_4xskk")
 
@@ -2221,3 +2233,32 @@ max_distance = 10395.0
 [node name="ClockFragment" parent="." instance=ExtResource("7_mnvaw")]
 position = Vector2(532, 338)
 scale = Vector2(0.36, 0.36)
+
+[node name="towards" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
+position = Vector2(-1506, 757)
+shape = SubResource("RectangleShape2D_4xskk")
+
+[node name="towards2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards2"]
+position = Vector2(1273, 740)
+shape = SubResource("RectangleShape2D_irwje")
+
+[node name="marker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
+position = Vector2(1052, 891)
+shape = SubResource("RectangleShape2D_lxivw")
+
+[node name="marker2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
+position = Vector2(-1211, 886)
+shape = SubResource("RectangleShape2D_i62bi")
+
+[connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="towards2" to="." method="_on_towardsc_1_body_entered"]
+[connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="marker2" to="." method="_on_marker_body_entered"]

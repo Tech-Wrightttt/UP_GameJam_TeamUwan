@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=26 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
@@ -2089,6 +2089,15 @@ fill_to = Vector2(0.73333335, 0.96060604)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_om42o"]
 size = Vector2(20, 267.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm0u3"]
+size = Vector2(15, 309.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwc3w"]
+size = Vector2(74, 70.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bujft"]
+size = Vector2(71, 64.28125)
+
 [node name="CastleOne" type="Node2D"]
 script = ExtResource("1_fpfjo")
 
@@ -2266,7 +2275,7 @@ position = Vector2(1020, 785)
 scale = Vector2(2.3, 2.3)
 
 [node name="Gargoyle3" parent="." instance=ExtResource("7_om42o")]
-position = Vector2(2356, 537)
+position = Vector2(1952, 541)
 scale = Vector2(2.3, 2.3)
 
 [node name="TowarsTutorial" type="Area2D" parent="."]
@@ -2276,4 +2285,28 @@ position = Vector2(-604, 867)
 position = Vector2(-126, -118)
 shape = SubResource("RectangleShape2D_om42o")
 
+[node name="TowarsTutorial3" type="Area2D" parent="."]
+position = Vector2(-604, 867)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowarsTutorial3"]
+position = Vector2(3085.5, -433.3125)
+shape = SubResource("RectangleShape2D_fm0u3")
+
+[node name="marker" type="Area2D" parent="."]
+position = Vector2(-604, 867)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
+position = Vector2(47, -64)
+shape = SubResource("RectangleShape2D_qwc3w")
+
+[node name="marker2" type="Area2D" parent="."]
+position = Vector2(-604, 866)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
+position = Vector2(2925, -308)
+shape = SubResource("RectangleShape2D_bujft")
+
 [connection signal="body_entered" from="TowarsTutorial" to="." method="_on_towardsTUTORIAL_body_entered"]
+[connection signal="body_entered" from="TowarsTutorial3" to="." method="_on_towardsc_1_body_entered"]
+[connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="marker2" to="." method="_on_marker_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4th0pe08cjp4"]
+[gd_scene load_steps=25 format=3 uid="uid://c4th0pe08cjp4"]
 
 [ext_resource type="Script" uid="uid://2c7yk1akjb4y" path="res://scripts/castle_three.gd" id="1_4cn4s"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_shegg"]
@@ -2100,6 +2100,18 @@ texture = ExtResource("6_dom3m")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_308tn")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dom3m"]
+size = Vector2(94, 575)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_308tn"]
+size = Vector2(94, 575)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwjc7"]
+size = Vector2(98, 68.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc8cq"]
+size = Vector2(98, 92.25)
+
 [node name="CastleThree" type="Node2D"]
 script = ExtResource("1_4cn4s")
 
@@ -2239,3 +2251,32 @@ scale = Vector2(2.55, 1.935)
 tile_set = SubResource("TileSet_qwjc7")
 format = 2
 layer_0/tile_data = PackedInt32Array(1638416, 786433, 0, 1703952, 786433, 1, 1638417, 851969, 0, 1703953, 851969, 1, 1638418, 786433, 0, 1703954, 786433, 1, 1638419, 851969, 0, 1703955, 851969, 1, 1572900, 655361, 0, 1638436, 655361, 1, 1638443, 655361, 0, 1703979, 655361, 1, 1638444, 655361, 0, 1703980, 655361, 1)
+
+[node name="towards" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
+position = Vector2(-1409, 783)
+shape = SubResource("RectangleShape2D_dom3m")
+
+[node name="towards2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards2"]
+position = Vector2(2458, 530)
+shape = SubResource("RectangleShape2D_308tn")
+
+[node name="mark" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark"]
+position = Vector2(2315, 649)
+shape = SubResource("RectangleShape2D_qwjc7")
+
+[node name="mark2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark2"]
+position = Vector2(-1105, 885)
+shape = SubResource("RectangleShape2D_pc8cq")
+
+[connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="towards2" to="." method="_on_towardsc_1_body_entered"]
+[connection signal="body_entered" from="mark" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="mark2" to="." method="_on_marker_body_entered"]
