@@ -5,7 +5,7 @@ extends Node2D
 func _ready() -> void:
 	if UI:
 		UI.show_hud()
-		
+	
 	print($main_character.global_position)
 	$main_character.global_position = GameManager.spawn_points[0]
 	

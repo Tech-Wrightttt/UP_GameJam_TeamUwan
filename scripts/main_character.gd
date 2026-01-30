@@ -16,7 +16,7 @@ const JUMP_VELOCITY = -400.0
 const JUMP_CUT_MULTIPLIER = 0.5
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.15
-const DASH_SPEED =2000.0
+@export var DASH_SPEED =720.0
 const DASH_DURATION = 0.15
 
 # =========================
