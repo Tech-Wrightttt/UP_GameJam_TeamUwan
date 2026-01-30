@@ -1326,15 +1326,19 @@ format = 2
 layer_0/tile_data = PackedInt32Array(1769481, 1179648, 0, 1769482, 1179648, 0, 1835017, 1179648, 1, 1835018, 1179648, 1, 1638438, 1179648, 1, 1638437, 1179648, 1, 1572901, 1179648, 0, 1572902, 1179648, 0, 1179698, 1179648, 0, 1179697, 1179648, 0, 1179702, 1179648, 0, 1179701, 1179648, 0, 1245238, 1179648, 1, 1245237, 1179648, 1, 1245234, 1179648, 1, 1245233, 1179648, 1)
 
 [node name="Spikes" parent="platform4" instance=ExtResource("9_qwc3w")]
+visible = false
 position = Vector2(155.68628, 429.97418)
 
 [node name="Spikes3" parent="platform4" instance=ExtResource("9_qwc3w")]
+visible = false
 position = Vector2(604.70593, 388.1137)
 
 [node name="Spikes4" parent="platform4" instance=ExtResource("9_qwc3w")]
+visible = false
 position = Vector2(796.47064, 290.9561)
 
 [node name="Spikes5" parent="platform4" instance=ExtResource("9_qwc3w")]
+visible = false
 position = Vector2(860, 289.9225)
 
 [connection signal="body_entered" from="TowarsTutorial" to="." method="_on_towardsTUTORIAL_body_entered"]
