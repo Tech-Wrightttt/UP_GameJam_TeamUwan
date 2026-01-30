@@ -761,6 +761,7 @@ dist = 250
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("7_pcx46")
+next_scene = "res://storylines/true_ending.tscn"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 8

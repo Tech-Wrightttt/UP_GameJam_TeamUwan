@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=35 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -14,8 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="10_xt1gw"]
 [ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
-[ext_resource type="PackedScene" path="res://scenes/true_narrator.tscn" id="16_r48ml"]
-[ext_resource type="PackedScene" path="res://scenes/golem.tscn" id="17_468ku"]
+[ext_resource type="PackedScene" uid="uid://cgwwfpi15kv6j" path="res://scenes/golem.tscn" id="17_468ku"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2464,12 +2463,6 @@ shape = SubResource("RectangleShape2D_r48ml")
 position = Vector2(1452, 599)
 shape = SubResource("RectangleShape2D_468ku")
 
-[node name="true_narrator" parent="." instance=ExtResource("16_r48ml")]
-position = Vector2(970, 343)
-
-[node name="golem" parent="." instance=ExtResource("17_468ku")]
-position = Vector2(456, 250)
-
 [node name="dash" type="RichTextLabel" parent="."]
 offset_left = -1449.0
 offset_top = 198.0
@@ -2482,6 +2475,9 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("13_6x4ie")
 theme_override_font_sizes/normal_font_size = 41
 text = "SPACE - Dash"
+
+[node name="golem" parent="." instance=ExtResource("17_468ku")]
+position = Vector2(-1010, 380)
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]

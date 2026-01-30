@@ -338,24 +338,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfkcr"]
 radius = 45.90449
 
-[sub_resource type="Animation" id="Animation_0auj5"]
-resource_name = "attack2"
-length = 0.9
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.76666665),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shoot"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_vl4ji"]
 resource_name = "attack1"
 length = 0.7
@@ -374,6 +356,24 @@ tracks/0/keys = {
 }, {
 "args": [],
 "method": &"deactivate"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0auj5"]
+resource_name = "attack2"
+length = 0.9
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.76666665),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
 }]
 }
 
@@ -489,6 +489,7 @@ dist = 200
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("8_mhixx")
+next_scene = "res://storylines/good_ending.tscn"
 
 [node name="debug" type="Label" parent="."]
 visible = false
