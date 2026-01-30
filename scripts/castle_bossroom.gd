@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 
 		if player_near_door and Input.is_action_just_pressed("interact"):
 			# go to ending (commented out)
-			get_tree().change_scene("res://storylines/died_demonking.tscn")
+			#get_tree().change_scene("res://storylines/died_demonking.tscn")
 			print("Player interacts with the door — ending triggered")
 
 # call this when boss is defeated
