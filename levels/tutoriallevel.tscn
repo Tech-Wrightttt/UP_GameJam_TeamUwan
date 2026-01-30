@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="10_xt1gw"]
 [ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
-[ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="16_38agi"]
-[ext_resource type="PackedScene" uid="uid://co6vgetfw3515" path="res://scenes/skeleton_summon.tscn" id="17_r48ml"]
+[ext_resource type="PackedScene" uid="uid://d3u5q0qrcfex0" path="res://scenes/true_narrator.tscn" id="16_r48ml"]
+[ext_resource type="PackedScene" uid="uid://cgwwfpi15kv6j" path="res://scenes/golem.tscn" id="17_468ku"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2464,11 +2464,11 @@ shape = SubResource("RectangleShape2D_r48ml")
 position = Vector2(1452, 599)
 shape = SubResource("RectangleShape2D_468ku")
 
-[node name="skeleton_summon" parent="." instance=ExtResource("17_r48ml")]
-position = Vector2(-781, 477)
+[node name="true_narrator" parent="." instance=ExtResource("16_r48ml")]
+position = Vector2(970, 343)
 
-[node name="Gargoyle" parent="." instance=ExtResource("16_38agi")]
-position = Vector2(-1320.0001, 455)
+[node name="golem" parent="." instance=ExtResource("17_468ku")]
+position = Vector2(456, 250)
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]
