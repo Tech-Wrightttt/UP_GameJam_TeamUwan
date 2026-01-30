@@ -535,7 +535,7 @@ _data = {
 collision_mask = 131
 script = ExtResource("1_tqm6u")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
-passive_heal_rate = 1
+passive_heal_rate = 3
 passive_heal_delay = 7.0
 
 [node name="explosion" type="CPUParticles2D" parent="."]
