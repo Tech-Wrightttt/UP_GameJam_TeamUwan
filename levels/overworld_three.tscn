@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0sodxrxiijbr"]
+[gd_scene load_steps=26 format=3 uid="uid://c0sodxrxiijbr"]
 
-[ext_resource type="Script" uid="uid://yuxm8c8g017u" path="res://scripts/overworld_three.gd" id="1_pw1ba"]
+[ext_resource type="Script" path="res://scripts/overworld_three.gd" id="1_pw1ba"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_2n6u6"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_pw1ba"]
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_uc1gp"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_u0jwh"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_3coct"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_dfgtn"]
-[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="13_kcis3"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="12_uc1gp"]
+[ext_resource type="PackedScene" path="res://scenes/clock_fragment.tscn" id="13_kcis3"]
+[ext_resource type="PackedScene" uid="uid://by34p2mrlif76" path="res://mobs/skeleton/skeleton.tscn" id="13_owyvo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw1ba"]
 texture = ExtResource("6_owyvo")
@@ -803,6 +805,16 @@ shape = SubResource("RectangleShape2D_owyvo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mark2"]
 position = Vector2(2776, 531.375)
 shape = SubResource("RectangleShape2D_u0jwh")
+
+[node name="outofbounds" parent="." instance=ExtResource("12_uc1gp")]
+position = Vector2(-2699, 1046)
+scale = Vector2(3, 3)
+
+[node name="Skeleton" parent="." instance=ExtResource("13_owyvo")]
+position = Vector2(-1124, 610)
+
+[node name="Skeleton2" parent="." instance=ExtResource("13_owyvo")]
+position = Vector2(1511, 580)
 
 [connection signal="body_entered" from="towardso2" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardso4" to="." method="_on_towardsc_1_body_entered"]

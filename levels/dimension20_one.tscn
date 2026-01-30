@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://crpnxkfjqnjck"]
+[gd_scene load_steps=23 format=3 uid="uid://di1ai8ffsj5cr"]
 
-[ext_resource type="Script" uid="uid://4vfkqv8awadu" path="res://levels/dimension_20_one.gd" id="1_xhbva"]
+[ext_resource type="Script" path="res://levels/dimension_20_one.gd" id="1_xhbva"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_xhbva"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_186yc"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_tb4he"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_t4fnm"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_3fbpf"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_xofas"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="12_186yc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("6_m4s48")
@@ -1667,6 +1668,10 @@ script = ExtResource("9_xofas")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
 position = Vector2(1834.75, 169)
 shape = SubResource("RectangleShape2D_186yc")
+
+[node name="outofbounds" parent="." instance=ExtResource("12_186yc")]
+position = Vector2(-3806, 1044)
+scale = Vector2(3, 3)
 
 [connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towards" to="." method="_on_towards_body_entered"]

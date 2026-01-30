@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fr4h6dfi8xxx"]
+[gd_scene load_steps=25 format=3 uid="uid://fr4h6dfi8xxx"]
 
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_824ov"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_hky8c"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_1xjtg"]
 [ext_resource type="Texture2D" uid="uid://civxfv6sf0l58" path="res://assets/ui/portal.png" id="8_hky8c"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_n38tb"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="10_hky8c"]
+[ext_resource type="PackedScene" uid="uid://bregye8nef5wb" path="res://scenes/fake_narrator.tscn" id="11_sm6o3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -706,3 +708,10 @@ text = "[E] to interact"
 
 [node name="main_character2" parent="." instance=ExtResource("8_1xjtg")]
 position = Vector2(1096, 288)
+
+[node name="outofbounds" parent="." instance=ExtResource("10_hky8c")]
+position = Vector2(-876, 833)
+
+[node name="fake narrator" parent="." instance=ExtResource("11_sm6o3")]
+position = Vector2(318, 456)
+scale = Vector2(2, 2)

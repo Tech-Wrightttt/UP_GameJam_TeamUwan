@@ -353,6 +353,7 @@ _data = {
 }
 
 [node name="Skeleton" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_f8ksr")
 
 [node name="HealthComponent" type="Node" parent="."]

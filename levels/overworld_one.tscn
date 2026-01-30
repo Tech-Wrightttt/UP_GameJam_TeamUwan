@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=39 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
 [ext_resource type="PackedScene" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_au0bf"]
+[ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="14_ovgfw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -887,6 +888,12 @@ shape = SubResource("RectangleShape2D_1yp7j")
 [node name="outofbounds" parent="." instance=ExtResource("13_au0bf")]
 position = Vector2(-2556, 1099)
 scale = Vector2(2, 2)
+
+[node name="Slime" parent="." instance=ExtResource("14_ovgfw")]
+position = Vector2(-1245.0001, 379)
+
+[node name="Slime2" parent="." instance=ExtResource("14_ovgfw")]
+position = Vector2(1230, 533.00006)
 
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
