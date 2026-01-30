@@ -466,7 +466,7 @@ script = ExtResource("3_hayyu")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-position = Vector2(182, -3.5)
+position = Vector2(1.3333282, -4)
 shape = SubResource("RectangleShape2D_bxwgr")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]

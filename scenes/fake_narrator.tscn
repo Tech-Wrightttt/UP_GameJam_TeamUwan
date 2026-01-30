@@ -423,6 +423,7 @@ effects_animation_player = NodePath("EffectsAnimationPlayer")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_t1j4c")
+max_health = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -28)
@@ -490,6 +491,7 @@ shape = SubResource("CapsuleShape2D_2xkqr")
 collision_layer = 32
 collision_mask = 20
 script = ExtResource("13_xvv06")
+damage = 12
 
 [node name="attack" type="CollisionShape2D" parent="Hitbox_Attack2"]
 position = Vector2(31, 9.536743e-07)

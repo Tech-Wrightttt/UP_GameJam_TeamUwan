@@ -1251,8 +1251,8 @@ position = Vector2(-994, 1445)
 scale = Vector2(2, 2)
 
 [node name="golem" parent="." instance=ExtResource("7_tk78h")]
-position = Vector2(755, 685)
-scale = Vector2(2.5, 2.5)
+position = Vector2(1085, 955)
+scale = Vector2(2.2, 2.2)
 
 [connection signal="body_entered" from="door/DoorArea" to="." method="_on_door_area_body_entered"]
 [connection signal="body_exited" from="door/DoorArea" to="." method="_on_door_area_body_exited"]
