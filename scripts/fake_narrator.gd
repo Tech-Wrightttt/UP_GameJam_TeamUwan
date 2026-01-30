@@ -29,6 +29,7 @@ func _ready():
 		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
+	print(health_component)
 	hitbox_attack1.deactivate()
 	hitbox_attack2.deactivate()
 	fsm.start()

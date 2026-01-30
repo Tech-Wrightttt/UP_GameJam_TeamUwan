@@ -21,7 +21,6 @@ func transition():
 		return
 	
 	var distance = boss.direction.length()
-	print("Follow - Distance: ", distance, " | Threshold: ", dist)  # Debug
 	if distance < dist:
 		print("Changing to ATTACK")  # Debug
 		fsm.change_state("attack")

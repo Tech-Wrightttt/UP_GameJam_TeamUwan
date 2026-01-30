@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://jqcn8wer5qdy"]
+[gd_scene load_steps=43 format=3 uid="uid://jqcn8wer5qdy"]
 
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="1_8ghts"]
 [ext_resource type="Script" uid="uid://cnfxu4i6oc685" path="res://scripts/fake_narrator.gd" id="1_gespr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scripts/follow.gd" id="9_7ohkc"]
 [ext_resource type="Script" uid="uid://cgc24ul0anvn2" path="res://scripts/attack.gd" id="10_du5so"]
 [ext_resource type="Script" uid="uid://bq6my177xprct" path="res://scripts/death.gd" id="11_rs47o"]
+[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="14_68uli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gespr"]
 atlas = ExtResource("2_8pfr6")
@@ -270,9 +271,10 @@ _data = {
 &"hurt": SubResource("Animation_dvhn7")
 }
 
-[node name="Gargoyle" type="CharacterBody2D" groups=["enemy"]]
+[node name="Gargoyle" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["enemy"]]
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_gespr")
+effects_animation_player = NodePath("EffectsAnimationPlayer")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("1_8ghts")
@@ -316,6 +318,7 @@ script = ExtResource("10_du5so")
 script = ExtResource("11_rs47o")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -3.6
 offset_top = -42.0
 offset_right = 55.0
@@ -360,6 +363,14 @@ position = Vector2(0, 7)
 target_position = Vector2(42, 0)
 
 [node name="FloorRay" type="RayCast2D" parent="."]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_68uli")]
+offset_left = -13.200001
+offset_top = -16.0
+offset_right = 99.8
+offset_bottom = 11.0
+scale = Vector2(0.24, 0.24)
+health_component = NodePath("../HealthComponent")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
