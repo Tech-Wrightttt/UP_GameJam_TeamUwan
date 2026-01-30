@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_8jacj"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_ou6lx"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="10_lqlue"]
-[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="11_j8prf"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="11_j8prf"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="12_fr8ju"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="13_fi3ig"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="14_njmm8"]

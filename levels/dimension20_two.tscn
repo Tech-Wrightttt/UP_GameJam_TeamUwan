@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="9_i4jnk"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="10_2v6eu"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="11_etslj"]
-[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="12_mu1n7"]
-[ext_resource type="PackedScene" path="res://scenes/skeleton.tscn" id="13_tmvrd"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="12_mu1n7"]
+[ext_resource type="PackedScene" uid="uid://dxlxvyaooe6lf" path="res://scenes/skeleton.tscn" id="13_tmvrd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("7_kqfsx")

@@ -16,7 +16,7 @@ var can_interact: bool = true     # Allow interaction
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	AudioManager.transition_music("overworld")
 	$main_character.global_position = GameManager.spawn_points[5]
 	if npc.has_method("play"):
 		npc.play("default")
@@ -94,11 +94,13 @@ func _on_npcarea_body_exited(body: Node2D) -> void:
 
 func _on_towardtut_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/tutoriallevel.tscn",0.8,Color.BLACK)
 
 
 func _on_towardto_2_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_two.tscn",0.8,Color.BLACK)
 
 

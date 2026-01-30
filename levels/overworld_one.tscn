@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bj4y0bww0hf55" path="res://assets/narrator/Jotem spritesheet.png" id="10_u747v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
 [ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
-[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="13_au0bf"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_au0bf"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="14_ovgfw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]

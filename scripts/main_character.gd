@@ -243,6 +243,7 @@ func handle_input() -> void:
 	# =====================
 # DASH input  
 	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and current_state != PlayerState.ATTACK:
+		AudioManager.play_sound("dash")
 		$explosion.emitting = true
 		transition_to(PlayerState.DASH)
 		dash_cooldown_timer = DASH_COOLDOWN  # Set cooldown
@@ -254,6 +255,7 @@ func handle_input() -> void:
 	# =====================
 	
 	if Input.is_action_just_pressed("attack1"):
+		AudioManager.play_sound("sword_swing")
 		if not is_attacking:
 			attack_index = 1
 			start_attack(attacks[attack_index - 1])
@@ -315,12 +317,16 @@ func update_state(delta: float) -> void:
 	match current_state:
 		PlayerState.IDLE:
 			state_idle(delta)
+			AudioManager.stop_walking()
 		PlayerState.RUN:
 			state_run(delta)
+			AudioManager.start_walking()
 		PlayerState.JUMP:
 			state_jump(delta)
+			AudioManager.stop_walking()
 		PlayerState.FALL:
 			state_fall(delta)
+			AudioManager.stop_walking()
 		PlayerState.ROLL:
 			state_roll(delta)
 		PlayerState.BLOCK:
@@ -328,7 +334,7 @@ func update_state(delta: float) -> void:
 		PlayerState.ATTACK:
 			state_attack(delta)
 		PlayerState.DASH:
-			state_dash(delta)
+			state_dash(delta)	
 
 
 # =========================
@@ -357,7 +363,6 @@ func state_idle(delta: float) -> void:
 func state_run(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
-	AudioManager.play_sound("walk_overworld")
 
 	if try_jump():
 		return
@@ -402,7 +407,6 @@ func state_block(delta: float) -> void:
 # ATTACK STATE
 # =========================
 func state_attack(delta: float) -> void:
-	AudioManager.play_sound("sword_swing")
 	var _decel := 0.0 if not is_on_floor() else FRICTION
 	velocity.x = move_toward(velocity.x, 0, _decel * delta)
 	apply_gravity(delta)

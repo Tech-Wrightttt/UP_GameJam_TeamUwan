@@ -9,6 +9,7 @@ var player_near_door: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioManager.transition_music("overworld")
 	print($main_character.global_position)
 	$main_character.global_position = GameManager.spawn_points[0]
 	
@@ -62,6 +63,7 @@ func _on_door_area_body_exited(body: Node2D) -> void:
 
 func _on_towardso_1_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_one.tscn", 0.8,Color.BLACK)
 
 
@@ -69,6 +71,7 @@ func _on_towardso_1_body_entered(body: Node2D) -> void:
 
 func _on_towardsc_1_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/castle_one.tscn",0.8,Color.BLACK)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 

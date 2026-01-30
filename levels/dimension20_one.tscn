@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_t4fnm"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_3fbpf"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_xofas"]
-[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="12_186yc"]
-[ext_resource type="PackedScene" path="res://scenes/skeleton.tscn" id="13_3fbpf"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="12_186yc"]
+[ext_resource type="PackedScene" uid="uid://dxlxvyaooe6lf" path="res://scenes/skeleton.tscn" id="13_3fbpf"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="13_t4fnm"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="14_3fbpf"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="15_xofas"]
@@ -2594,7 +2594,7 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_5bpx6")
 sources/0 = SubResource("TileSetAtlasSource_usxev")
 
-[node name="OverworldTwo" type="Node2D"]
+[node name="OverworldOne" type="Node2D"]
 script = ExtResource("1_xhbva")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
