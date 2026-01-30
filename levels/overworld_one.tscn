@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=34 format=3 uid="uid://7n6fktj3dlva"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_kgnju"]
 [ext_resource type="Texture2D" uid="uid://bj4y0bww0hf55" path="res://assets/narrator/Jotem spritesheet.png" id="10_u747v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
+[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -760,7 +761,7 @@ editor_draw_limits = true
 script = ExtResource("9_kgnju")
 
 [node name="npc" type="AnimatedSprite2D" parent="."]
-position = Vector2(1079, 506.99997)
+position = Vector2(-2264.9998, 538)
 scale = Vector2(1.865, 1.61)
 sprite_frames = SubResource("SpriteFrames_kgnju")
 frame = 5
@@ -850,6 +851,10 @@ shape = SubResource("RectangleShape2D_bw0tn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="towardtut/towardto2"]
 position = Vector2(1936, 577)
 shape = SubResource("RectangleShape2D_tpcej")
+
+[node name="ClockFragment" parent="." instance=ExtResource("12_tpcej")]
+position = Vector2(450, 555)
+scale = Vector2(0.36, 0.36)
 
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]

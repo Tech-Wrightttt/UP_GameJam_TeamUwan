@@ -1,5 +1,8 @@
 extends Node
 
+var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
+var current_clocks: int = 0 
+
 var SCREEN: Dictionary = {
 	"width": ProjectSettings.get_setting("display/window/size/viewport_width"),
 	"height": ProjectSettings.get_setting("display/window/size/viewport_height"),
@@ -10,9 +13,9 @@ var SCREEN: Dictionary = {
 var tutorialLocation: Vector2 = Vector2(1997.452, 329.6545)
 
 var spawn_points: Array[Vector2] = [
-	Vector2(-1973.0, 455.0), Vector2(3, 4), Vector2(5, 6),
-	Vector2(7, 8), Vector2(9, 10), Vector2(11, 12),
-	Vector2(13, 14), Vector2(15, 16), Vector2(17, 18),
+	Vector2(-1973.0, 455.0), Vector2(-555.0, 795.0), Vector2(-1343.0, 888.0001),
+	Vector2(-1284.0, 882.9999), Vector2(130.0, 1004.0), Vector2(-3025.0, 342.0),
+	Vector2(-3040.0, 66.0), Vector2(-2932.0, 410.0), Vector2(-1050.0, 336.0),
 	Vector2(19, 20), Vector2(21, 22), Vector2(23, 24),
 	Vector2(25, 26)
 ]
@@ -28,13 +31,16 @@ func _ready() -> void:
 		SCREEN["height"] / 2
 	)
 
+func add_clock() -> void: 
+	current_clocks += 1
+	print("Clocks: ", current_clocks, "/3")
+
 
 func setTutorialLocation(location: Vector2) -> void:
 	tutorialLocation = location
 	
-func register_player(player):
-	var health = player.health_component
-	$UI/Display/Healthbar.set_health_source(health)
+
+
 
 var defeated_bosses: Dictionary = {}
 var player_dead := false
