@@ -31,7 +31,6 @@ func exit():
 	super()
 	boss.velocity = Vector2.ZERO
 	boss.hitbox_attack1.deactivate()
-	boss.hitbox_attack2.deactivate()
 
 func _physics_process(delta):
 	if boss.is_dead:

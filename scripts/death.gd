@@ -7,11 +7,6 @@ func enter():
 	boss.set_can_move(false)
 	boss.velocity = Vector2.ZERO
 	
-	boss.hitbox_attack1.deactivate()
-	boss.hitbox_attack1.monitorable = false
-	boss.hitbox_attack2.deactivate()
-	boss.hitbox_attack2.monitorable = false
-	
 	boss.hurtbox.monitoring = false
 	boss.hurtbox.monitorable = false
 	

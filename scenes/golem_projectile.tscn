@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvosiu6dgulgm"]
+
+[ext_resource type="Script" uid="uid://cetnrmkbyaliq" path="res://scripts/projectile.gd" id="1_pxvpy"]
+[ext_resource type="Texture2D" uid="uid://4rl0ah4n314p" path="res://bosses/BOSS_MechaStoneGolem/character/Character_sheet.png" id="2_atbam"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b1f10"]
+radius = 11.0
+height = 60.0
+
+[node name="golem_projectile" type="Area2D"]
+script = ExtResource("1_pxvpy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_b1f10")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_atbam")
+region_enabled = true
+region_rect = Rect2(858.74036, 759.4813, 13.382507, 33.137634)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-10, -27, 20, 54)

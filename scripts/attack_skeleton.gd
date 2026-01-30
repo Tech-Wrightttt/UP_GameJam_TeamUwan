@@ -51,7 +51,6 @@ func transition():
 		return
 	
 	var distance = boss.direction.length()
-	print("Attack - Distance: ", distance, " | In cooldown: ", is_in_cooldown, " | Timer: ", state_timer)
 	
 	if not is_in_cooldown:
 		if distance > dist:

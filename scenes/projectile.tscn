@@ -20,5 +20,3 @@ region_enabled = true
 region_rect = Rect2(701.18506, 461.93924, 7.6277466, 7.766449)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

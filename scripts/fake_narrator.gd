@@ -25,6 +25,8 @@ var is_hurt := false
 
 
 func _ready():
+	if GameManager.is_boss_defeated(name):
+		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
 	hitbox_attack1.deactivate()
@@ -74,7 +76,7 @@ func _process(_delta):
 		$Hitbox_Attack2/attack.position.x = abs($Hitbox_Attack2/attack.position.x)
 		wall_ray.target_position.x = abs(wall_ray.target_position.x)
 		$PlayerDetection/CollisionShape2D.position.x = abs($PlayerDetection/CollisionShape2D.position.x)
-		
+			
 func _physics_process(delta):
 	if is_dead:
 		set_physics_process(false)
@@ -123,6 +125,7 @@ func _on_enemy_died():
 	
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
+	GameManager.mark_boss_defeated(name)
 	fsm.change_state("death")
 
 func stop_all_enemy_behavior():

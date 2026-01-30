@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d3u5q0qrcfex0"]
+[gd_scene load_steps=102 format=3 uid="uid://d3u5q0qrcfex0"]
 
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="1_t350m"]
 [ext_resource type="Script" uid="uid://c2u8247y6v3my" path="res://scripts/true_narrator.gd" id="1_yb3d6"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bq6my177xprct" path="res://scripts/death.gd" id="7_pcx46"]
 [ext_resource type="Script" uid="uid://cxo31vmosf0kx" path="res://scripts/attack_truenarrator.gd" id="7_yb3d6"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="8_0m88j"]
-[ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="9_t3ypp"]
 [ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="12_shqxs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxi2v"]
@@ -430,6 +429,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_ehmnv")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ehmnv")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jd0yh")
 }, {
 "duration": 1.0,
@@ -668,13 +670,6 @@ size = Vector2(250, 42)
 radius = 17.0
 height = 48.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2bflv"]
-radius = 17.0
-height = 34.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0gmjg"]
-radius = 5.0
-
 [sub_resource type="Animation" id="Animation_mf48g"]
 length = 0.001
 tracks/0/type = "value"
@@ -725,8 +720,10 @@ max_health = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nbdxk")
-animation = &"summon"
+animation = &"ranged_attack"
 autoplay = "idle"
+frame = 16
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -774,25 +771,6 @@ script = ExtResource("8_0m88j")
 position = Vector2(0, 29)
 shape = SubResource("CapsuleShape2D_67gox")
 
-[node name="Hitbox_Attack1" type="Area2D" parent="." groups=["hitbox"]]
-collision_layer = 32
-collision_mask = 20
-script = ExtResource("9_t3ypp")
-
-[node name="attack_up" type="CollisionShape2D" parent="Hitbox_Attack1"]
-position = Vector2(22, -8)
-shape = SubResource("CapsuleShape2D_2bflv")
-
-[node name="Hitbox_Attack2" type="Area2D" parent="." groups=["hitbox"]]
-collision_layer = 32
-collision_mask = 20
-script = ExtResource("9_t3ypp")
-
-[node name="attack" type="CollisionShape2D" parent="Hitbox_Attack2"]
-position = Vector2(31, 9.536743e-07)
-rotation = 1.1588986
-shape = SubResource("CapsuleShape2D_0gmjg")
-
 [node name="WallRay" type="RayCast2D" parent="."]
 position = Vector2(0, 7)
 target_position = Vector2(42, 0)
@@ -814,6 +792,9 @@ libraries = {
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_shqxs")]
 health_component = NodePath("../HealthComponent")
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(-15, 20)
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

@@ -12,10 +12,9 @@ extends CharacterBody2D
 @onready var player = get_parent().find_child("main_character", true, false)
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hurtbox = $Hurtbox
+@onready var hitbox_attack1 = $Hitbox_Attack1
 @export var effects_animation_player: AnimationPlayer
 @export var knockback_decay := 6.0
-@export var minion_scene: PackedScene
-@export var summon_offset := Vector2(48, 0)
 @export var bullet_node: PackedScene
 @export var projectile_spawn_offset := Vector2(32, -16)
 
@@ -25,46 +24,14 @@ var is_dead := false
 var knockback_velocity := Vector2.ZERO
 var is_hurt := false
 
-func spawn_minion():
-	if not minion_scene:
-		return
 
-	var minion = minion_scene.instantiate()
-	minion.global_position = global_position + summon_offset
-	get_parent().add_child(minion)
-	
-func shoot():
-	if not bullet_node:
-		print("ERROR: No bullet_node assigned!")
-		return
-	
-	if not player:
-		print("ERROR: No player reference!")
-		return
-
-	var projectile = bullet_node.instantiate()
-	
-	var spawn_pos: Vector2
-	if has_node("ProjectileSpawn"):
-		spawn_pos = $ProjectileSpawn.global_position
-	else:
-		var spawn_offset = projectile_spawn_offset
-		if sprite.flip_h:
-			spawn_offset.x = -abs(spawn_offset.x)
-		else:
-			spawn_offset.x = abs(spawn_offset.x)
-		spawn_pos = global_position + spawn_offset
-	
-	projectile.global_position = spawn_pos
-	
-	var dir = (player.global_position - spawn_pos).normalized() 
-	projectile.set_direction(dir)
-	
-	get_parent().add_child(projectile)
-	
 func _ready():
+	if GameManager.is_boss_defeated(name):
+		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
+	hitbox_attack1.deactivate()
+
 	fsm.start()
 
 func on_hurt(kb_direction: Vector2, force: float):
@@ -80,23 +47,10 @@ func on_hurt(kb_direction: Vector2, force: float):
 	is_hurt = true
 
 func play_anim(name: String):
-	print("🎬 [", Time.get_ticks_msec(), "] Playing animation: ", name, " on ", self.name)
+	print("🎬 Playing animation: ", name)  # ← Add this
 	if uses_sprite and sprite:
-		if sprite.sprite_frames:
-			if sprite.sprite_frames.has_animation(name):
-				print("  ✅ Animation '", name, "' EXISTS")
-				print("  📺 Current animation before change: ", sprite.animation)
-			else:
-				print("  ❌ NOT FOUND! Available: ", sprite.sprite_frames.get_animation_names())
 		sprite.call_deferred("play", name)
-		# Check what actually plays after deferred
-		await get_tree().process_frame
-		print("  📺 Animation NOW playing: ", sprite.animation)
 	elif animation_player:
-		if animation_player.has_animation(name):
-			print("  ✅ Animation '", name, "' EXISTS in AnimationPlayer")
-		else:
-			print("  ❌ NOT FOUND!")
 		animation_player.play(name)
 
 func set_can_move(value: bool):
@@ -114,15 +68,17 @@ func _process(_delta):
 	direction = player.global_position - global_position
 	if direction.x < 0:
 		sprite.flip_h = true
+		$Hitbox_Attack1/attack_up.position.x = -abs($Hitbox_Attack1/attack_up.position.x)
 		wall_ray.target_position.x = -abs(wall_ray.target_position.x)
 		$PlayerDetection/CollisionShape2D.position.x = -abs($PlayerDetection/CollisionShape2D.position.x)
 		$ProjectileSpawn.position.x = -abs($ProjectileSpawn.position.x)
 	else:
 		sprite.flip_h = false
+		$Hitbox_Attack1/attack_up.position.x = abs($Hitbox_Attack1/attack_up.position.x)
 		wall_ray.target_position.x = abs(wall_ray.target_position.x)
 		$PlayerDetection/CollisionShape2D.position.x = abs($PlayerDetection/CollisionShape2D.position.x)
 		$ProjectileSpawn.position.x = abs($ProjectileSpawn.position.x)
-	
+		
 func _physics_process(delta):
 	if is_dead:
 		set_physics_process(false)
@@ -161,11 +117,15 @@ func _on_enemy_died():
 	hurtbox.monitoring = false
 	hurtbox.monitorable = false
 	
+	hitbox_attack1.deactivate()
+	hitbox_attack1.monitorable = false
+	
 	set_physics_process(false)
 	can_move = false
 	
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
+	GameManager.mark_boss_defeated(name)
 	fsm.change_state("death")
 
 func stop_all_enemy_behavior():
@@ -179,6 +139,7 @@ func stop_all_enemy_behavior():
 	if effects_animation_player:
 		effects_animation_player.stop(false)
 
+	hitbox_attack1.deactivate()
 	set_physics_process(false)
 	set_process(false)
 	velocity = Vector2.ZERO
@@ -204,19 +165,48 @@ func should_jump() -> bool:
 func try_jump():
 	if should_jump():
 		velocity.y = jump_force
-		print("Enemy jumped!")
-
+		
 func perform_attack(attack_name: String):
 	match attack_name:
-		"summon":
-			print("  ✅ Matched 'summon'")
-			play_anim("summon")
-			animation_player.play("summon")
-
-		"ranged_attack":
-			print("  ✅ Matched 'ranged_attack'")
-			play_anim("ranged_attack")
-			animation_player.play("ranged_attack")
-
+		"attack1":
+			play_anim("attack1")
+			animation_player.play("attack1")
+			
+		"attack2":
+			play_anim("attack2")
+			animation_player.play("attack2")
+		
+		"skill":
+			play_anim("skill")
+			health_component.heal(10)
 		_:
 			push_warning("Unknown attack: " + attack_name)
+
+func shoot():
+	if not bullet_node:
+		print("ERROR: No bullet_node assigned!")
+		return
+	
+	if not player:
+		print("ERROR: No player reference!")
+		return
+
+	var projectile = bullet_node.instantiate()
+	
+	var spawn_pos: Vector2
+	if has_node("ProjectileSpawn"):
+		spawn_pos = $ProjectileSpawn.global_position
+	else:
+		var spawn_offset = projectile_spawn_offset
+		if sprite.flip_h:
+			spawn_offset.x = -abs(spawn_offset.x)
+		else:
+			spawn_offset.x = abs(spawn_offset.x)
+		spawn_pos = global_position + spawn_offset
+	
+	projectile.global_position = spawn_pos
+	
+	var dir = (player.global_position - spawn_pos).normalized() 
+	projectile.set_direction(dir)
+	
+	get_parent().add_child(projectile)
