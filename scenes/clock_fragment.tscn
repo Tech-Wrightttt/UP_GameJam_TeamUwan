@@ -107,7 +107,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_ird5t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_kwwgc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

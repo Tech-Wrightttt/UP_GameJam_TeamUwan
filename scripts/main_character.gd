@@ -94,6 +94,7 @@ func _ready() -> void:
 	hitbox_attack2.deactivate()
 	hitbox_attack3.deactivate()
 	
+	
 func handle_passive_healing(delta: float) -> void:
 	if not can_passive_heal:
 		return

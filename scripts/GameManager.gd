@@ -1,5 +1,8 @@
 extends Node
 
+var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
+var current_clocks: int = 0 
+
 var SCREEN: Dictionary = {
 	"width": ProjectSettings.get_setting("display/window/size/viewport_width"),
 	"height": ProjectSettings.get_setting("display/window/size/viewport_height"),
@@ -28,13 +31,16 @@ func _ready() -> void:
 		SCREEN["height"] / 2
 	)
 
+func add_clock() -> void: 
+	current_clocks += 1
+	print("Clocks: ", current_clocks, "/3")
+
 
 func setTutorialLocation(location: Vector2) -> void:
 	tutorialLocation = location
 	
-func register_player(player):
-	var health = player.health_component
-	$UI/Display/Healthbar.set_health_source(health)
+
+
 
 var defeated_bosses: Dictionary = {}
 var player_dead := false

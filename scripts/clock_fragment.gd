@@ -7,11 +7,14 @@ extends Area2D
 
 var collected = false
 
+func _ready():
+	# This connects the signal via code so you don't have to do it in the editor
+	body_entered.connect(_on_body_entered)
+	
 func _on_body_entered(body):
 	# Prevent double triggering if two players hit it at the exact same time
 	if collected: return
-	
-	if body.is_in_group("main_character"):
+	if body.is_in_group("player"):
 		collected = true
 		
 		# 1. Disable collision immediately so it can't be triggered again
