@@ -16,6 +16,8 @@ var can_interact: bool = true     # Allow interaction
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	$main_character.global_position = GameManager.spawn_points[5]
 	if npc.has_method("play"):
 		npc.play("default")
 	
@@ -98,3 +100,10 @@ func _on_towardtut_body_entered(body: Node2D) -> void:
 func _on_towardto_2_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
 		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_two.tscn",0.8,Color.BLACK)
+
+
+func _on_marker_body_entered(body: Node2D) -> void:
+	if body.name == "main_character":
+		player = body  # Store the Node2D itself, not body.name
+		if player and is_instance_valid(player):
+			GameManager.spawn_points[5] = player.global_position
