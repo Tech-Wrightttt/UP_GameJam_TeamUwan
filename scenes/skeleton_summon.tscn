@@ -390,8 +390,8 @@ _data = {
 &"attack": SubResource("Animation_dq0os")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6md57"]
-size = Vector2(250, 42)
+[sub_resource type="CircleShape2D" id="CircleShape2D_bf6gi"]
+radius = 425.01883
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lmajr"]
 radius = 13.0
@@ -435,7 +435,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_6md57")
+shape = SubResource("CircleShape2D_bf6gi")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
 script = ExtResource("4_1l286")

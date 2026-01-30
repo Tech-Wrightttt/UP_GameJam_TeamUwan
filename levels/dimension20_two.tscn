@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://cf3loj5xjepow"]
+[gd_scene load_steps=24 format=3 uid="uid://n506go4vdj4y"]
 
-[ext_resource type="Script" path="res://levels/dimension_20_two.gd" id="1_gmg1v"]
+[ext_resource type="Script" uid="uid://w6phghlyop2" path="res://levels/dimension_20_two.gd" id="1_gmg1v"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_mu1n7"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_tmvrd"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_dxyld"]
@@ -11,7 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="9_i4jnk"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="10_2v6eu"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="11_etslj"]
-[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="12_mu1n7"]
+[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="12_mu1n7"]
+[ext_resource type="PackedScene" path="res://scenes/skeleton.tscn" id="13_tmvrd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("7_kqfsx")
@@ -1671,5 +1672,17 @@ shape = SubResource("RectangleShape2D_mu1n7")
 [node name="outofbounds" parent="." instance=ExtResource("12_mu1n7")]
 position = Vector2(-1920, 987)
 scale = Vector2(2, 2)
+
+[node name="skeleton_summon" parent="." instance=ExtResource("13_tmvrd")]
+position = Vector2(634, 611)
+
+[node name="skeleton_summon2" parent="." instance=ExtResource("13_tmvrd")]
+position = Vector2(-1384, 339)
+
+[node name="skeleton_summon4" parent="." instance=ExtResource("13_tmvrd")]
+position = Vector2(-1384, 339)
+
+[node name="skeleton_summon3" parent="." instance=ExtResource("13_tmvrd")]
+position = Vector2(1274, 397)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_towardso_1_body_entered"]

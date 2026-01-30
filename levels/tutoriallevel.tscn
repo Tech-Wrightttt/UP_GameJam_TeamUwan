@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="15_xt1gw"]
-[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="16_38agi"]
+[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="16_38agi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2487,7 +2487,7 @@ position = Vector2(-2227, 387)
 shape = SubResource("RectangleShape2D_dpob4")
 
 [node name="Slime" parent="." instance=ExtResource("15_xt1gw")]
-position = Vector2(-849.99994, 457.99997)
+position = Vector2(-853.00006, 466)
 
 [node name="outofbounds" parent="." instance=ExtResource("16_38agi")]
 position = Vector2(-1443, 949)

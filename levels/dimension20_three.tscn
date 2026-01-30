@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bjqwp5vnylbsk"]
+[gd_scene load_steps=23 format=3 uid="uid://bnd18m5n1dyyb"]
 
 [ext_resource type="Script" uid="uid://do4pvfjsxt33q" path="res://levels/dimension_20_three.gd" id="1_0tdow"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_brbyq"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="9_qg8n0"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="10_1jwml"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="11_mpxwm"]
+[ext_resource type="PackedScene" uid="uid://co6vgetfw3515" path="res://scenes/skeleton_summon.tscn" id="12_brbyq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("7_r44yv")
@@ -1666,5 +1667,26 @@ script = ExtResource("11_mpxwm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
 position = Vector2(1526.25, 512)
 shape = SubResource("RectangleShape2D_brbyq")
+
+[node name="skeleton_summon" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(-693, -226)
+
+[node name="skeleton_summon2" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(-514, -198)
+
+[node name="skeleton_summon3" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(-184, -179)
+
+[node name="skeleton_summon4" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(139, -185)
+
+[node name="skeleton_summon5" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(538, -188)
+
+[node name="skeleton_summon6" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(871, -201)
+
+[node name="skeleton_summon7" parent="." instance=ExtResource("12_brbyq")]
+position = Vector2(871, -201)
 
 [connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
