@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://d1qc8iji7ioqc" path="res://scripts/mob.gd" id="16_dpob4"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="17_468ku"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="18_dpob4"]
+[ext_resource type="PackedScene" uid="uid://cgwwfpi15kv6j" path="res://scenes/golem.tscn" id="19_dpob4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -3537,6 +3538,9 @@ format = 2
 visible = false
 position = Vector2(307.84314, 199.48322)
 scale = Vector2(1.5, 1)
+
+[node name="golem" parent="." instance=ExtResource("19_dpob4")]
+position = Vector2(-1087, 381)
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]
