@@ -9,7 +9,6 @@ const TOTAL_CLOCKS := 3
 func add_clock() -> void:
 	current_clocks += 1
 	current_clocks = min(current_clocks, TOTAL_CLOCKS)
-	print("⏱ Clocks:", current_clocks, "/", TOTAL_CLOCKS)
 	clocks_changed.emit(current_clocks, TOTAL_CLOCKS)
 
 var SCREEN: Dictionary = {
@@ -35,9 +34,6 @@ func _ready() -> void:
 		SCREEN["height"] / 2
 	)
 
-
-
-
 func reset_spawn_points() -> void:
 	spawn_points.resize(13)
 	spawn_points[0] = Vector2(-1973.0, 455.0)
@@ -53,6 +49,7 @@ func reset_spawn_points() -> void:
 	spawn_points[10] = Vector2(21, 22)
 	spawn_points[11] = Vector2(23, 24)
 	spawn_points[12] = Vector2(25, 26)
+	restart()
 
 	
 var defeated_bosses: Dictionary = {}
@@ -63,7 +60,11 @@ func is_boss_defeated(boss_id: String) -> bool:
 
 func mark_boss_defeated(boss_id: String):
 	defeated_bosses[boss_id] = true
-	print("✅ Boss defeated saved:", defeated_bosses)
+	
+func restart():
+	defeated_bosses.clear()
+	level_clocks.clear()
+	player_dead = false
 	
 func set_is_player_dead(is_dead: bool):
 	player_dead = is_dead

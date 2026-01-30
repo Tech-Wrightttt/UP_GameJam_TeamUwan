@@ -15,7 +15,7 @@ extends Control
 @onready var sprite3 = $CanvasLayer3/AnimatedSprite2D
 
 func _ready() -> void:
-	# Hide all layers at the start just in case
+	UI.hide_hud()
 	layer1.hide()
 	layer2.hide()
 	layer3.hide()
