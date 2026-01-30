@@ -3,6 +3,15 @@ extends Node
 var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
 var current_clocks: int = 0 
 
+signal clocks_changed(current: int, total: int)
+
+const TOTAL_CLOCKS := 3
+func add_clock() -> void:
+	current_clocks += 1
+	current_clocks = min(current_clocks, TOTAL_CLOCKS)
+	print("⏱ Clocks:", current_clocks, "/", TOTAL_CLOCKS)
+	clocks_changed.emit(current_clocks, TOTAL_CLOCKS)
+
 var SCREEN: Dictionary = {
 	"width": ProjectSettings.get_setting("display/window/size/viewport_width"),
 	"height": ProjectSettings.get_setting("display/window/size/viewport_height"),
@@ -25,11 +34,6 @@ func _ready() -> void:
 		SCREEN["width"] / 2,
 		SCREEN["height"] / 2
 	)
-
-func add_clock() -> void: 
-	current_clocks += 1
-	print("Clocks: ", current_clocks, "/3")
-
 
 func setTutorialLocation(location: Vector2) -> void:
 	tutorialLocation = location
