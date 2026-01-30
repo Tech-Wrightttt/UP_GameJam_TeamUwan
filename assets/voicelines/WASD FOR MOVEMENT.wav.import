@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cn0g2ec2dxcgo"
+path="res://.godot/imported/WASD FOR MOVEMENT.wav-0cb4ddb93224855df8569783246bfa82.sample"
+
+[deps]
+
+source_file="res://assets/voicelines/WASD FOR MOVEMENT.wav"
+dest_files=["res://.godot/imported/WASD FOR MOVEMENT.wav-0cb4ddb93224855df8569783246bfa82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

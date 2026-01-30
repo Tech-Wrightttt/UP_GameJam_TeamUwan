@@ -1,4 +1,5 @@
 [gd_scene load_steps=43 format=3 uid="uid://bmd3a553wrbj0"]
+[gd_scene load_steps=55 format=3 uid="uid://bmd3a553wrbj0"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_vkqs5"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_3svnx"]
@@ -12,12 +13,20 @@
 [ext_resource type="Texture2D" uid="uid://cigltnilhc4gn" path="res://assets/Foreground/Tree-Assets.png" id="9_2p6v0"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_gedp1"]
 [ext_resource type="Texture2D" uid="uid://gy7ybidym7xh" path="res://assets/Foreground/Tiles.png" id="10_xt1gw"]
-[ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
+[ext_resource type="PackedScene" uid="uid://cwtf02lj5bqjc" path="res://scenes/pause_menu.tscn" id="11_utvb4"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="13_6x4ie"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="15_xt1gw"]
 [ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="16_38agi"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="17_468ku"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="18_dpob4"]
+[ext_resource type="AudioStream" uid="uid://cn0g2ec2dxcgo" path="res://assets/voicelines/WASD FOR MOVEMENT.wav" id="20_8to1l"]
+[ext_resource type="AudioStream" uid="uid://b0408ftemkqpn" path="res://assets/voicelines/INTRO.wav" id="20_t0vfg"]
+[ext_resource type="AudioStream" uid="uid://cw1a433v4v7y2" path="res://assets/voicelines/SPACE TO DASH.wav" id="21_s2ljr"]
+[ext_resource type="AudioStream" uid="uid://w1x0p7e4cadg" path="res://assets/voicelines/LEFT MOUSE TO ATTACK.wav" id="22_3iry3"]
+[ext_resource type="AudioStream" uid="uid://c6iop5npwh46b" path="res://assets/voicelines/HOLD W TO JUMP.wav" id="23_fpjmr"]
+[ext_resource type="AudioStream" uid="uid://cr4iu772to4ff" path="res://assets/voicelines/AVOID THOSE SPIKES.wav" id="24_yo5at"]
+[ext_resource type="AudioStream" uid="uid://weifhinxldcv" path="res://assets/voicelines/GO TO THE RIGHT SIDE AND DEFEAT THE DEMON KING.wav" id="25_yo5at"]
+[ext_resource type="AudioStream" uid="uid://c3wdd3g4qq80g" path="res://assets/voicelines/DONT GO THERE.wav" id="26_66kij"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -3220,6 +3229,18 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_8to1l")
 sources/0 = SubResource("TileSetAtlasSource_t0vfg")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8to1l"]
+size = Vector2(282, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2ljr"]
+size = Vector2(23, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66kij"]
+size = Vector2(52, 226)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ttbm"]
+size = Vector2(186, 31)
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_vkqs5")
 
@@ -3536,8 +3557,68 @@ visible = false
 position = Vector2(307.84314, 199.48322)
 scale = Vector2(1.5, 1)
 
+[node name="voice area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="voice area"]
+position = Vector2(-1607, 503)
+shape = SubResource("RectangleShape2D_8to1l")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="voice area"]
+stream = ExtResource("20_t0vfg")
+volume_db = 24.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="voice area"]
+stream = ExtResource("20_8to1l")
+volume_db = 24.0
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="voice area"]
+stream = ExtResource("21_s2ljr")
+volume_db = 24.0
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="voice area"]
+stream = ExtResource("22_3iry3")
+volume_db = 24.0
+
+[node name="voice area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="voice area2"]
+position = Vector2(-123, 398)
+shape = SubResource("RectangleShape2D_s2ljr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="voice area2"]
+stream = ExtResource("23_fpjmr")
+volume_db = 24.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="voice area2"]
+stream = ExtResource("24_yo5at")
+volume_db = 24.0
+
+[node name="voice area3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="voice area3"]
+position = Vector2(1295, 280)
+shape = SubResource("RectangleShape2D_66kij")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="voice area3"]
+stream = ExtResource("25_yo5at")
+volume_db = 24.0
+
+[node name="voice area4" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="voice area4"]
+position = Vector2(1557, 463)
+shape = SubResource("RectangleShape2D_4ttbm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="voice area4"]
+stream = ExtResource("26_66kij")
+volume_db = 24.0
+
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardsc1" to="." method="_on_towardsc_1_body_entered"]
 [connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="marker2" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="neutral_ending" to="." method="_on_neutral_ending_body_entered"]
+[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]
+[connection signal="body_entered" from="voice area2" to="." method="_on_voice_area_body_entered2"]
+[connection signal="body_entered" from="voice area3" to="." method="_on_voice_area_body_entered3"]
+[connection signal="body_entered" from="voice area4" to="." method="_on_voice_area_body_entered4"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6iop5npwh46b"
+path="res://.godot/imported/HOLD W TO JUMP.wav-8ef5211d81c65e31d98daf4675dbbd01.sample"
+
+[deps]
+
+source_file="res://assets/voicelines/HOLD W TO JUMP.wav"
+dest_files=["res://.godot/imported/HOLD W TO JUMP.wav-8ef5211d81c65e31d98daf4675dbbd01.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
