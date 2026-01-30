@@ -1,7 +1,7 @@
 extends Node2D
 
 # GUIDE FOR AUDIO PLAYING
-# Player 			- AudioManager.play_sword_swing(player)
+# Player 			- AudioManager.play_sound("sword_swing")
 # Music transitions - AudioManager.transition_music("dungeon")
 
 const PLAYER_SOUNDS = {
@@ -39,32 +39,29 @@ const AUDIO_CONFIGS = {
 		"pitch_max": 1.05,
 		"volume_db": 0.0
 	},
-	"player_damage": {
+	"damage": {
 		"pitch_min": 1.0,
 		"pitch_max": 1.0,
 		"volume_db": 0.0
 	},
+	"walk_overworld": {
+		"pitch_min": 0.98,
+		"pitch_max": 1.02,
+		"volume_db": -3.0
+	},
 	"music": {
 		"pitch_min": 1.0,
 		"pitch_max": 1.0,
-		"volume_db": -5.0
+		"volume_db": -18.0
 	}
 }
 
 var current_music_player: AudioStreamPlayer = null
 var current_music_state: String = ""
-var player_node: Node2D = null  # Reference to the player
 
-# Set the player reference (call this once during game initialization)
-func set_player(player: Node2D):
-	player_node = player
 
-# Main interface - play any sound effect at player position
+# Main interface - play any sound effect (no position needed)
 func play_sound(sound_key: String):
-	if not player_node:
-		push_error("Player node not set. Call AudioManager.set_player() first.")
-		return
-	
 	if not PLAYER_SOUNDS.has(sound_key):
 		push_error("Sound key '%s' not found" % sound_key)
 		return
@@ -73,9 +70,9 @@ func play_sound(sound_key: String):
 	var sound_array = PLAYER_SOUNDS[sound_key]
 	var stream = sound_array.pick_random() if sound_array is Array else sound_array
 	
-	_create_and_play_2d(stream, player_node, config)
+	_create_and_play(stream, config)
 
-# Play sound at specific position
+# Play sound at specific position (for positional audio)
 func play_sound_at(sound_key: String, position: Vector2):
 	if not PLAYER_SOUNDS.has(sound_key):
 		push_error("Sound key '%s' not found" % sound_key)
@@ -110,9 +107,9 @@ func stop_music():
 		current_music_state = ""
 
 # Internal helper methods
-func _create_and_play_2d(stream: AudioStream, parent: Node2D, config: Dictionary):
-	var player := AudioStreamPlayer2D.new()
-	parent.add_child(player)
+func _create_and_play(stream: AudioStream, config: Dictionary):
+	var player := AudioStreamPlayer.new()
+	add_child(player)
 	
 	player.stream = stream
 	player.pitch_scale = randf_range(
@@ -120,7 +117,6 @@ func _create_and_play_2d(stream: AudioStream, parent: Node2D, config: Dictionary
 		config.get("pitch_max", 1.0)
 	)
 	player.volume_db = config.get("volume_db", 0.0)
-	player.global_position = parent.global_position
 	player.finished.connect(player.queue_free)
 	
 	player.play()

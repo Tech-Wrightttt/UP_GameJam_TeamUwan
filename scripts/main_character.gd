@@ -94,7 +94,6 @@ func _ready() -> void:
 	hitbox_attack2.deactivate()
 	hitbox_attack3.deactivate()
 	
-	
 func handle_passive_healing(delta: float) -> void:
 	if not can_passive_heal:
 		return
@@ -116,6 +115,7 @@ func handle_passive_healing(delta: float) -> void:
 func _on_player_damaged(damage: int):
 	time_since_last_damage = 0.0
 	is_in_combat = true
+	AudioManager.play_sound("damage")
 
 func start_attack(anim: String):
 	is_attacking = true
@@ -357,6 +357,7 @@ func state_idle(delta: float) -> void:
 func state_run(delta: float) -> void:
 	apply_horizontal_movement(delta)
 	apply_gravity(delta)
+	AudioManager.play_sound("walk_overworld")
 
 	if try_jump():
 		return
@@ -401,6 +402,7 @@ func state_block(delta: float) -> void:
 # ATTACK STATE
 # =========================
 func state_attack(delta: float) -> void:
+	AudioManager.play_sound("sword_swing")
 	var _decel := 0.0 if not is_on_floor() else FRICTION
 	velocity.x = move_toward(velocity.x, 0, _decel * delta)
 	apply_gravity(delta)
