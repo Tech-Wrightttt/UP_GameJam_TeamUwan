@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b10bpweis6eyj"]
+[gd_scene load_steps=27 format=3 uid="uid://b10bpweis6eyj"]
 
 [ext_resource type="Script" uid="uid://cqbrai3nkdwak" path="res://levels/dimension_20_bossroom.gd" id="1_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_k3hg0"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="11_fvxnr"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_vpqxi"]
 [ext_resource type="PackedScene" uid="uid://d3u5q0qrcfex0" path="res://scenes/true_narrator.tscn" id="14_4wkfd"]
+[ext_resource type="PackedScene" uid="uid://cgijy6ivdxkpr" path="res://levels/voice_area.tscn" id="15_b73j0"]
+[ext_resource type="AudioStream" uid="uid://cow6kbcq5a0ri" path="res://assets/voicelines/DARKDIMENSIONBOSS.wav" id="16_uurvu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("7_uurvu")
@@ -2363,3 +2365,15 @@ scale = Vector2(4, 4)
 [node name="true_narrator" parent="." instance=ExtResource("14_4wkfd")]
 position = Vector2(372.99997, -39.999996)
 scale = Vector2(2.5, 2.5)
+
+[node name="voice area" parent="." instance=ExtResource("15_b73j0")]
+
+[node name="CollisionShape2D" parent="voice area" index="0"]
+position = Vector2(-966.625, -45.625)
+
+[node name="AudioStreamPlayer2D" parent="voice area" index="1"]
+stream = ExtResource("16_uurvu")
+
+[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]
+
+[editable path="voice area"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://fr4h6dfi8xxx"]
+[gd_scene load_steps=28 format=3 uid="uid://fr4h6dfi8xxx"]
 
+[ext_resource type="Script" uid="uid://k2nn0h7buktr" path="res://levels/overworld_bossroom.gd" id="1_i8rjl"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_824ov"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_hky8c"]
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_sm6o3"]
@@ -11,6 +12,8 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_n38tb"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="10_hky8c"]
 [ext_resource type="PackedScene" uid="uid://bregye8nef5wb" path="res://scenes/fake_narrator.tscn" id="11_sm6o3"]
+[ext_resource type="PackedScene" uid="uid://cgijy6ivdxkpr" path="res://levels/voice_area.tscn" id="13_m7je2"]
+[ext_resource type="AudioStream" uid="uid://bjyyqynv06frs" path="res://assets/voicelines/FAKE NARRATOR BOSS FIGHT.wav" id="14_1xjtg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -590,6 +593,7 @@ animations = [{
 size = Vector2(47.696163, 50.826843)
 
 [node name="OverworldTwo" type="Node2D"]
+script = ExtResource("1_i8rjl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -715,3 +719,13 @@ position = Vector2(-876, 833)
 [node name="fake narrator" parent="." instance=ExtResource("11_sm6o3")]
 position = Vector2(318, 456)
 scale = Vector2(2, 2)
+
+[node name="voice area" parent="." instance=ExtResource("13_m7je2")]
+
+[node name="CollisionShape2D" parent="voice area" index="0"]
+position = Vector2(-952, 301)
+
+[node name="AudioStreamPlayer2D" parent="voice area" index="1"]
+stream = ExtResource("14_1xjtg")
+
+[editable path="voice area"]

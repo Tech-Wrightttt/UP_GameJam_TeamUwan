@@ -13,13 +13,13 @@ var castle3_voiceline_played := false
 var castle4_voiceline_played := false
 
 
-var overworld1_voiceline_played :=false
-var overworld2_voiceline_played :=false
-var overworld3_voiceline_played :=false
-var overworld4_voiceline_played :=false
+var overworld1_voiceline_played := false
+var overworld2_voiceline_played := false
+var overworld3_voiceline_played := false
+var overworld4_voiceline_played := false
 
 
-var dd_voiceline_played :=false
+var dd_voiceline_played := false
 
 
 signal clocks_changed(current: int, total: int)

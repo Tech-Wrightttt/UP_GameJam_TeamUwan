@@ -196,3 +196,12 @@ func _on_marker_body_entered(body: Node2D) -> void:
 		player = body
 		if player and is_instance_valid(player):
 			GameManager.spawn_points[5] = player.global_position
+
+
+@onready var sound_player: AudioStreamPlayer2D = $"voice area/AudioStreamPlayer2D"
+func _on_voice_area_body_entered(body: Node2D) -> void:
+	if body.name != "main_character" or GameManager.overworld1_voiceline_played:
+		return
+	
+	GameManager.overworld1_voiceline_played = true
+	sound_player.play()
