@@ -460,6 +460,7 @@ script = ExtResource("10_t1j4c")
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("12_xvv06")
+next_scene = "res://storylines/bad_ending.tscn"
 
 [node name="debug" type="Label" parent="."]
 visible = false

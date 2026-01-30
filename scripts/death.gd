@@ -1,6 +1,7 @@
 extends State
 
 @export var death_animation := "death"
+@export var next_scene := ""
 
 func enter():
 	super()
@@ -22,6 +23,7 @@ func enter():
 	boss.set_collision_mask_value(2, false)
 	
 	await get_tree().create_timer(2).timeout
+	get_tree().change_scene_to_file(next_scene)
 	boss.queue_free()
 
 func exit():

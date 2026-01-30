@@ -86,9 +86,13 @@ func on_hurt(kb_direction: Vector2, force: float):
 func play_anim(name: String):
 	if uses_sprite and sprite:
 		sprite.call_deferred("play", name)
-		await get_tree().process_frame
+
+		if is_inside_tree():
+			await get_tree().process_frame
+
 	elif animation_player:
 		animation_player.play(name)
+
 
 func set_can_move(value: bool):
 	can_move = value
