@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dr7aw4f5ckp1r"]
+[gd_scene load_steps=17 format=3 uid="uid://dr7aw4f5ckp1r"]
 
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="2_22w3c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="3_m23qa"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_22w3c"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="4_mnvaw"]
+[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2214,3 +2215,7 @@ color = Color(0.3918189, 0.39181852, 0.39181864, 1)
 energy = 0.6
 blend_mode = 2
 max_distance = 10395.0
+
+[node name="ClockFragment" parent="." instance=ExtResource("7_mnvaw")]
+position = Vector2(552, 334)
+scale = Vector2(0.36, 0.36)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://fr4h6dfi8xxx"]
+[gd_scene load_steps=24 format=3 uid="uid://fr4h6dfi8xxx"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_om4ik"]
+[ext_resource type="Script" uid="uid://cswfere8f22a2" path="res://scripts/overworld_bossroom.gd" id="1_824ov"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_824ov"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_hky8c"]
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_sm6o3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dsff3e0i5avs3" path="res://assets/Foreground/Tileset.png" id="6_i8rjl"]
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_m7je2"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_1xjtg"]
+[ext_resource type="Texture2D" uid="uid://civxfv6sf0l58" path="res://assets/ui/portal.png" id="8_hky8c"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_n38tb"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
@@ -548,8 +549,47 @@ texture = ExtResource("7_m7je2")
 [sub_resource type="TileSet" id="TileSet_gedp1"]
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm6o3"]
+atlas = ExtResource("8_hky8c")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7s8p"]
+atlas = ExtResource("8_hky8c")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8rjl"]
+atlas = ExtResource("8_hky8c")
+region = Rect2(0, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7je2"]
+atlas = ExtResource("8_hky8c")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xjtg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm6o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7s8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8rjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7je2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n38tb"]
+size = Vector2(47.696163, 50.826843)
+
 [node name="OverworldTwo" type="Node2D"]
-script = ExtResource("1_om4ik")
+script = ExtResource("1_824ov")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -633,7 +673,7 @@ tile_set = SubResource("TileSet_5mrsh")
 format = 2
 
 [node name="main_character" parent="." instance=ExtResource("8_1xjtg")]
-position = Vector2(-1050, 336)
+position = Vector2(-1050, 354)
 scale = Vector2(1.975, 1.975)
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
@@ -646,3 +686,22 @@ limit_right = 1300
 limit_bottom = 800
 editor_draw_limits = true
 script = ExtResource("9_n38tb")
+
+[node name="door" type="AnimatedSprite2D" parent="."]
+position = Vector2(1322, 270)
+scale = Vector2(0.112, 0.085)
+sprite_frames = SubResource("SpriteFrames_1xjtg")
+
+[node name="DoorArea" type="Area2D" parent="door"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door/DoorArea"]
+position = Vector2(374.90195, 521.9638)
+scale = Vector2(0.9999995, 1)
+shape = SubResource("RectangleShape2D_n38tb")
+
+[node name="InteractLabel" type="Label" parent="."]
+offset_left = 908.0
+offset_top = 929.0
+offset_right = 1045.0
+offset_bottom = 970.0
+text = "[E] to interact"

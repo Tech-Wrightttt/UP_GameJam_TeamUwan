@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0sodxrxiijbr"]
+[gd_scene load_steps=27 format=3 uid="uid://i4oytjfafos8"]
 
 [ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_cwnw4"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_2n6u6"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://d4aqwjtdrjwpw" path="res://assets/Foreground/Trees.png" id="7_u0jwh"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="8_3coct"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_dfgtn"]
+[ext_resource type="Texture2D" uid="uid://civxfv6sf0l58" path="res://assets/ui/portal.png" id="12_uc1gp"]
+[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="13_kcis3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw1ba"]
 texture = ExtResource("6_owyvo")
@@ -667,6 +669,45 @@ texture = ExtResource("7_u0jwh")
 [sub_resource type="TileSet" id="TileSet_gedp1"]
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm6o3"]
+atlas = ExtResource("12_uc1gp")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7s8p"]
+atlas = ExtResource("12_uc1gp")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8rjl"]
+atlas = ExtResource("12_uc1gp")
+region = Rect2(0, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7je2"]
+atlas = ExtResource("12_uc1gp")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcis3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm6o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7s8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8rjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7je2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owyvo"]
+size = Vector2(47.696163, 50.826843)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_cwnw4")
 
@@ -762,3 +803,19 @@ limit_right = 3000
 limit_bottom = 928
 editor_draw_limits = true
 script = ExtResource("9_dfgtn")
+
+[node name="ClockFragment" parent="." instance=ExtResource("13_kcis3")]
+position = Vector2(2449, 555)
+scale = Vector2(0.36, 0.36)
+
+[node name="door" type="AnimatedSprite2D" parent="."]
+position = Vector2(3053.0002, 516)
+scale = Vector2(0.112, 0.085)
+sprite_frames = SubResource("SpriteFrames_kcis3")
+
+[node name="DoorArea" type="Area2D" parent="door"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door/DoorArea"]
+position = Vector2(374.90195, 521.9638)
+scale = Vector2(0.9999995, 1)
+shape = SubResource("RectangleShape2D_owyvo")
