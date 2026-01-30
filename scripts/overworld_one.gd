@@ -75,7 +75,7 @@ func start_dialogue():
 	
 	layer2.show()
 	anim_player2.play("typewriter")
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(9.0).timeout
 	layer2.hide()
 
 func _on_npcarea_body_entered(body: Node2D) -> void:

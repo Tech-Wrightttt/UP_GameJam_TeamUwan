@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=37 format=3 uid="uid://7n6fktj3dlva"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -685,7 +685,7 @@ follow_viewport_enabled = true
 [node name="Parallax2D" type="Parallax2D" parent="CanvasLayer"]
 scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Parallax2D"]
 scale = Vector2(5, 5)
@@ -694,7 +694,7 @@ texture = ExtResource("2_u747v")
 [node name="Parallax2D2" type="Parallax2D" parent="CanvasLayer"]
 scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Parallax2D2"]
 scale = Vector2(5, 5)
@@ -703,7 +703,7 @@ texture = ExtResource("3_bw0tn")
 [node name="Parallax2D3" type="Parallax2D" parent="CanvasLayer"]
 scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Parallax2D3"]
 scale = Vector2(5, 5)
@@ -712,7 +712,7 @@ texture = ExtResource("4_tpcej")
 [node name="Parallax2D4" type="Parallax2D" parent="CanvasLayer"]
 scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(2560, 0)
-repeat_times = 2
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Parallax2D4"]
 scale = Vector2(5, 5)
@@ -784,10 +784,10 @@ scale = Vector2(0.99999934, 1)
 shape = SubResource("RectangleShape2D_qdoyt")
 
 [node name="InteractLabel" type="Label" parent="."]
-offset_left = 1032.0
-offset_top = 601.0
-offset_right = 1169.0
-offset_bottom = 642.0
+offset_left = -2321.0
+offset_top = 640.0
+offset_right = -2184.0
+offset_bottom = 681.0
 text = "[E] to interact"
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
@@ -800,15 +800,15 @@ anchor_left = 0.448
 anchor_top = 0.45600003
 anchor_right = 0.74100006
 anchor_bottom = 0.512
-offset_left = 1.8399658
-offset_top = 86.51996
-offset_right = 1.2799072
-offset_bottom = 86.03998
+offset_left = -411.16003
+offset_top = 27.024963
+offset_right = 135.2799
+offset_bottom = 128.54498
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("11_bw0tn")
-theme_override_font_sizes/normal_font_size = 23
+theme_override_font_sizes/normal_font_size = 35
 text = "
 “Once, I bore the same title as you — hero. I followed every command, every shining promise… until I realized none of it was mine. 
 "
@@ -829,15 +829,15 @@ anchor_left = 0.416
 anchor_top = 0.43800002
 anchor_right = 0.739
 anchor_bottom = 0.5
-offset_left = 5.2799683
-offset_top = 97.95996
-offset_right = 5.119995
-offset_bottom = 99.0
+offset_left = -343.72003
+offset_top = 99.95996
+offset_right = 81.119995
+offset_bottom = 173.0
 theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("11_bw0tn")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 35
 text = "If you ever find the shard pieces scattered across this cursed world, bring them here. Perhaps then, the story might finally end.
 "
 visible_characters = 0
