@@ -3,6 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioManager.transition_music("overworld")
 	if UI:
 		UI.show_hud()
 		
@@ -11,6 +12,7 @@ func _ready() -> void:
 
 func _on_towardso_1_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_two.tscn", 0.8,Color.BLACK)
 
 
@@ -18,6 +20,7 @@ func _on_towardso_1_body_entered(body: Node2D) -> void:
 
 func _on_towardsc_1_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":
+		AudioManager.stop_music()
 		GameManager.fade_out(get_tree().current_scene,"res://levels/overworld_bossroom.tscn",0.8,Color.BLACK)
 
 

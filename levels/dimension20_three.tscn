@@ -1558,7 +1558,7 @@ sources/0 = SubResource("TileSetAtlasSource_186yc")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brbyq"]
 size = Vector2(201.5, 96)
 
-[node name="OverworldTwo" type="Node2D"]
+[node name="OverworldThree" type="Node2D"]
 script = ExtResource("1_0tdow")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
