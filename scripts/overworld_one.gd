@@ -14,7 +14,7 @@ var player_near_portal: bool = false  # Track if player is near portal
 @onready var anim_player2 = $CanvasLayer3/AnimationPlayer
 @onready var anim_player3 = $CanvasLayer4/AnimationPlayer
 
-@onready var portal: Area2D = $Portal  # Reference to portal
+@onready var portal: Area2D = $LevelPortal
 
 var dialogue_active: bool = false
 var can_interact: bool = true
@@ -37,15 +37,15 @@ func _ready() -> void:
 		portal.monitoring = false
 		print("Portal found and hidden")
 		# Connect portal signals manually if not connected
-		if not portal.body_entered.is_connected(_on_portal_body_entered):
-			portal.body_entered.connect(_on_portal_body_entered)
-			print("Portal body_entered signal connected")
-		if not portal.body_exited.is_connected(_on_portal_body_exited):
-			portal.body_exited.connect(_on_portal_body_exited)
-			print("Portal body_exited signal connected")
-	else:
-		print("ERROR: Portal node not found!")
-	
+		#if not portal.body_entered.is_connected(_on_portal_body_entered):
+			##portal.body_entered.connect(_on_portal_body_entered)
+			#print("Portal body_entered signal connected")
+		##if not portal.body_exited.is_connected(_on_portal_body_exited):
+			##portal.body_exited.connect(_on_portal_body_exited)
+			#print("Portal body_exited signal connected")
+	#else:
+		#print("ERROR: Portal node not found!")
+	#
 	find_player()
 
 func _process(delta: float) -> void:
@@ -160,26 +160,26 @@ func _on_npcarea_body_exited(body: Node2D) -> void:
 			interact_label.visible = false
 		print("Player left NPC")
 
-# Portal area entered
-func _on_portal_body_entered(body: Node2D) -> void:
-	print("PORTAL AREA ENTERED by: ", body.name, " | Is in player group: ", body.is_in_group("player"))
-	if body.is_in_group("player") and portal_unlocked:
-		player_near_portal = true
-		interact_label.visible = true
-		interact_label.text = "Press E to enter portal"
-		print("✓✓✓ Player near portal - Press E to enter")
-	elif body.is_in_group("player") and not portal_unlocked:
-		print("Player at portal but it's not unlocked yet")
-
-# Portal area exited
-func _on_portal_body_exited(body: Node2D) -> void:
-	print("PORTAL AREA EXITED by: ", body.name)
-	if body.is_in_group("player"):
-		player_near_portal = false
-		# Only hide label if not near NPC
-		if not player_near_npc:
-			interact_label.visible = false
-		print("Player left portal")
+## Portal area entered
+#func _on_portal_body_entered(body: Node2D) -> void:
+	#print("PORTAL AREA ENTERED by: ", body.name, " | Is in player group: ", body.is_in_group("player"))
+	#if body.is_in_group("player") and portal_unlocked:
+		#player_near_portal = true
+		#interact_label.visible = true
+		#interact_label.text = "Press E to enter portal"
+		#print("✓✓✓ Player near portal - Press E to enter")
+	#elif body.is_in_group("player") and not portal_unlocked:
+		#print("Player at portal but it's not unlocked yet")
+#
+## Portal area exited
+#func _on_portal_body_exited(body: Node2D) -> void:
+	#print("PORTAL AREA EXITED by: ", body.name)
+	#if body.is_in_group("player"):
+		#player_near_portal = false
+		## Only hide label if not near NPC
+		#if not player_near_npc:
+			#interact_label.visible = false
+		#print("Player left portal")
 
 func _on_towardtut_body_entered(body: Node2D) -> void:
 	if body.name == "main_character":

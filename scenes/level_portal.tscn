@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dx4mb7mhq6m40"]
 
-[ext_resource type="Script" uid="uid://cfp60qx2kshwn" path="res://level_portal.gd" id="1_njh1l"]
-[ext_resource type="Texture2D" uid="uid://cdlqhrk4togmt" path="res://thatgamejam/assets/portal.png" id="2_4bddq"]
+[ext_resource type="Script" uid="uid://qvonyh2jik6e" path="res://scripts/darkdimension_portal.gd" id="1_u3ui4"]
+[ext_resource type="Texture2D" uid="uid://ca4ht8s4rq2gd" path="res://assets/portal.png" id="2_4bddq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88cgg"]
 atlas = ExtResource("2_4bddq")
@@ -41,7 +41,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njh1l"]
@@ -50,14 +50,16 @@ height = 954.0
 
 [node name="LevelPortal" type="Area2D"]
 scale = Vector2(0.2, 0.2)
-script = ExtResource("1_njh1l")
+collision_layer = 0
+script = ExtResource("1_u3ui4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2ngis")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.46422225
+frame_progress = 0.8900759
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_njh1l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
