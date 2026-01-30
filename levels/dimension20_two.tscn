@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://n506go4vdj4y"]
+[gd_scene load_steps=22 format=3 uid="uid://dkvvdgqgxm10s"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_gmg1v"]
+[ext_resource type="Script" uid="uid://w6phghlyop2" path="res://levels/dimension_20_two.gd" id="1_gmg1v"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_mu1n7"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_tmvrd"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_dxyld"]
@@ -1554,6 +1554,9 @@ texture = ExtResource("9_i4jnk")
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 sources/0 = SubResource("TileSetAtlasSource_186yc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mu1n7"]
+size = Vector2(162.5, 155)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_gmg1v")
 
@@ -1645,7 +1648,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(720895, 393216, 4, 786431, 393216, 5, 851967, 393216, 6, 655360, 458752, 4, 720896, 458752, 5, 786432, 458752, 6, 851968, 458752, 7, 655361, 524288, 4, 720897, 524288, 5, 786433, 524288, 6, 851969, 524288, 7, 720898, 589824, 5, 851970, 589824, 7, 589778, 655360, 4, 786386, 655360, 7, 589779, 720896, 4, 655315, 720896, 5, 720851, 720896, 6, 786387, 720896, 7, 589780, 786432, 4, 655316, 786432, 5, 720852, 786432, 6, 786388, 786432, 7, 655317, 851968, 5, 720853, 851968, 6, 720934, 917504, 5, 786470, 917504, 6, 852006, 917504, 7, 655399, 983040, 4, 720935, 983040, 5, 786471, 983040, 6, 852007, 983040, 7, 655400, 1048576, 4, 720936, 1048576, 5, 786472, 1048576, 6, 852008, 1048576, 7, 720937, 1114112, 5, 786473, 1114112, 6, 852009, 1114112, 7, 917496, 0, 10, 983032, 0, 11, 917497, 65536, 10, 983033, 65536, 11, 917470, 131072, 10, 983006, 131072, 11, 917471, 196608, 10, 983007, 196608, 11, 983072, 262144, 11, 983073, 327680, 11)
 
 [node name="main_character" parent="." instance=ExtResource("10_2v6eu")]
-position = Vector2(-2096, 370)
+position = Vector2(-1896, 384.00003)
 scale = Vector2(1.975, 1.975)
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
@@ -1657,3 +1660,11 @@ limit_right = 1800
 limit_bottom = 950
 editor_draw_limits = true
 script = ExtResource("11_etslj")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1808.75, 460)
+shape = SubResource("RectangleShape2D_mu1n7")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_towardso_1_body_entered"]

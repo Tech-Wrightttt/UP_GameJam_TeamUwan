@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnd18m5n1dyyb"]
+[gd_scene load_steps=22 format=3 uid="uid://bjqwp5vnylbsk"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_0tdow"]
+[ext_resource type="Script" uid="uid://do4pvfjsxt33q" path="res://levels/dimension_20_three.gd" id="1_0tdow"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_brbyq"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_vkllp"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_uytr6"]
@@ -1554,6 +1554,9 @@ texture = ExtResource("9_qg8n0")
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 sources/0 = SubResource("TileSetAtlasSource_186yc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brbyq"]
+size = Vector2(201.5, 96)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_0tdow")
 
@@ -1645,7 +1648,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(1179626, 393216, 4, 1245162, 393216, 5, 1310698, 393216, 6, 1179627, 458752, 4, 1245163, 458752, 5, 1310699, 458752, 6, 1376235, 458752, 7, 1179628, 524288, 4, 1245164, 524288, 5, 1310700, 524288, 6, 1376236, 524288, 7, 1245165, 589824, 5, 1376237, 589824, 7, 1048597, 393216, 4, 1114133, 393216, 5, 1179669, 393216, 6, 1048598, 458752, 4, 1114134, 458752, 5, 1179670, 458752, 6, 1245206, 458752, 7, 1048599, 524288, 4, 1114135, 524288, 5, 1179671, 524288, 6, 1245207, 524288, 7, 1114136, 589824, 5, 1245208, 589824, 7, 1245175, 655360, 4, 1441783, 655360, 7, 1245176, 720896, 4, 1310712, 720896, 5, 1376248, 720896, 6, 1441784, 720896, 7, 1245177, 786432, 4, 1310713, 786432, 5, 1376249, 786432, 6, 1441785, 786432, 7, 1310714, 851968, 5, 1376250, 851968, 6, 983076, 917504, 5, 1048612, 917504, 6, 1114148, 917504, 7, 917541, 983040, 4, 983077, 983040, 5, 1048613, 983040, 6, 1114149, 983040, 7, 917542, 1048576, 4, 983078, 1048576, 5, 1048614, 1048576, 6, 1114150, 1048576, 7, 983079, 1114112, 5, 1048615, 1114112, 6, 1114151, 1114112, 7)
 
 [node name="main_character" parent="." instance=ExtResource("10_1jwml")]
-position = Vector2(-2096, 370)
+position = Vector2(-1407, 510)
 scale = Vector2(1.975, 1.975)
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]
@@ -1657,3 +1660,11 @@ limit_right = 1500
 limit_bottom = 950
 editor_draw_limits = true
 script = ExtResource("11_mpxwm")
+
+[node name="towards" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
+position = Vector2(1526.25, 512)
+shape = SubResource("RectangleShape2D_brbyq")
+
+[connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]

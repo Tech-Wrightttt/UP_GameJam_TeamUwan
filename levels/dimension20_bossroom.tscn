@@ -1,6 +1,5 @@
-[gd_scene load_steps=23 format=3 uid="uid://dr70h2ebrhdfq"]
+[gd_scene load_steps=22 format=3 uid="uid://bkqy4r30iw0wy"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_k5lmj"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_vpqxi"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_4wkfd"]
@@ -2252,7 +2251,6 @@ sources/0 = SubResource("TileSetAtlasSource_186yc")
 sources/2 = SubResource("TileSetAtlasSource_vpqxi")
 
 [node name="OverworldTwo" type="Node2D"]
-script = ExtResource("1_k5lmj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -2341,7 +2339,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(-524327, 327681, 2, -458791, 327681, 2, -393255, 327681, 2, -327719, 327681, 2, -262183, 327681, 2, -196647, 327681, 2, -131111, 327681, 2, -65575, 327681, 2, -39, 327681, 2, 65497, 327681, 2, 131033, 327681, 2, 196569, 327681, 2, 262105, 327681, 2, 327641, 327681, 2, -589787, 327681, 2, -524251, 327681, 2, -458715, 327681, 2, -393179, 327681, 2, -327643, 327681, 2, -262107, 327681, 2, -196571, 327681, 2, -131035, 327681, 2, -65499, 327681, 2, 37, 327681, 2, 65573, 327681, 2, 131109, 327681, 2, 196645, 327681, 2, 262181, 327681, 2, -589863, 327681, 2)
 
 [node name="main_character" parent="." instance=ExtResource("10_4rbfo")]
-position = Vector2(-2096, 370)
+position = Vector2(-1100, 2.0000305)
 scale = Vector2(1.975, 1.975)
 
 [node name="Camera2D" type="Camera2D" parent="main_character"]

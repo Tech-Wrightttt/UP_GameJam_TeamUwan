@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://di1ai8ffsj5cr"]
+[gd_scene load_steps=22 format=3 uid="uid://crpnxkfjqnjck"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_sm8h8"]
+[ext_resource type="Script" uid="uid://4vfkqv8awadu" path="res://levels/dimension_20_one.gd" id="1_xhbva"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_xhbva"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_186yc"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_tb4he"]
@@ -1554,8 +1554,11 @@ texture = ExtResource("7_t4fnm")
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 sources/0 = SubResource("TileSetAtlasSource_186yc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_186yc"]
+size = Vector2(224.5, 546.5)
+
 [node name="OverworldTwo" type="Node2D"]
-script = ExtResource("1_sm8h8")
+script = ExtResource("1_xhbva")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -1658,3 +1661,12 @@ limit_right = 1800
 limit_bottom = 1000
 editor_draw_limits = true
 script = ExtResource("9_xofas")
+
+[node name="towards" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towards"]
+position = Vector2(1834.75, 169)
+shape = SubResource("RectangleShape2D_186yc")
+
+[connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="towards" to="." method="_on_towards_body_entered"]
