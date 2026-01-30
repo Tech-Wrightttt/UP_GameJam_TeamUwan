@@ -18,6 +18,7 @@ extends CharacterBody2D
 @export var summon_offset := Vector2(48, 0)
 @export var bullet_node: PackedScene
 @export var projectile_spawn_offset := Vector2(32, -16)
+@export var boss_id := "true_narrator"
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
@@ -63,6 +64,9 @@ func shoot():
 	get_parent().add_child(projectile)
 	
 func _ready():
+	if GameManager.is_boss_defeated(boss_id):
+		queue_free()
+		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
 	fsm.start()
@@ -80,23 +84,10 @@ func on_hurt(kb_direction: Vector2, force: float):
 	is_hurt = true
 
 func play_anim(name: String):
-	print("🎬 [", Time.get_ticks_msec(), "] Playing animation: ", name, " on ", self.name)
 	if uses_sprite and sprite:
-		if sprite.sprite_frames:
-			if sprite.sprite_frames.has_animation(name):
-				print("  ✅ Animation '", name, "' EXISTS")
-				print("  📺 Current animation before change: ", sprite.animation)
-			else:
-				print("  ❌ NOT FOUND! Available: ", sprite.sprite_frames.get_animation_names())
 		sprite.call_deferred("play", name)
-		# Check what actually plays after deferred
 		await get_tree().process_frame
-		print("  📺 Animation NOW playing: ", sprite.animation)
 	elif animation_player:
-		if animation_player.has_animation(name):
-			print("  ✅ Animation '", name, "' EXISTS in AnimationPlayer")
-		else:
-			print("  ❌ NOT FOUND!")
 		animation_player.play(name)
 
 func set_can_move(value: bool):
@@ -166,6 +157,7 @@ func _on_enemy_died():
 	
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
+	GameManager.mark_boss_defeated(boss_id)
 	fsm.change_state("death")
 
 func stop_all_enemy_behavior():

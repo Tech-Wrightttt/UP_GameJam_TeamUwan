@@ -26,17 +26,6 @@ func _ready():
 	health_component.died.connect(_on_enemy_died)
 	hitbox_attack1.deactivate()
 	
-	# Check ALL physics nodes
-	print("=== ", name, " ALL COLLISION NODES ===")
-	for child in get_children():
-		if child is CollisionObject2D:
-			print("  Child: ", child.name, " Type: ", child.get_class())
-			print("    Layer: ", child.collision_layer, " Mask: ", child.collision_mask)
-	
-	# Check self
-	print("  Self (CharacterBody2D):")
-	print("    Layer: ", collision_layer, " Mask: ", collision_mask)
-	
 	fsm.start()
 
 func on_hurt(kb_direction: Vector2, force: float):

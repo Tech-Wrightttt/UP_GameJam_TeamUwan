@@ -16,6 +16,7 @@ extends CharacterBody2D
 @onready var hitbox_attack2 = $Hitbox_Attack2
 @export var effects_animation_player: AnimationPlayer
 @export var knockback_decay := 6.0
+@export var boss_id := "fake_narrator"
 
 var direction: Vector2 = Vector2.ZERO
 var can_move := false
@@ -25,7 +26,8 @@ var is_hurt := false
 
 
 func _ready():
-	if GameManager.is_boss_defeated(name):
+	if GameManager.is_boss_defeated(boss_id):
+		queue_free()
 		return
 	set_physics_process(false)
 	health_component.died.connect(_on_enemy_died)
@@ -125,7 +127,7 @@ func _on_enemy_died():
 	
 	if fsm and fsm.current_state:
 		fsm.current_state.exit() 
-	GameManager.mark_boss_defeated(name)
+	GameManager.mark_boss_defeated(boss_id)
 	fsm.change_state("death")
 
 func stop_all_enemy_behavior():

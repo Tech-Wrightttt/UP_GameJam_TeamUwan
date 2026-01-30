@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=38 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_kgnju"]
 [ext_resource type="Texture2D" uid="uid://bj4y0bww0hf55" path="res://assets/narrator/Jotem spritesheet.png" id="10_u747v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
+[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -663,6 +664,18 @@ size = Vector2(146, 241.03125)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpcej"]
 size = Vector2(146, 241.03125)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_au0bf"]
+size = Vector2(23.5, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovgfw"]
+size = Vector2(33.03125, 58.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fghf5"]
+size = Vector2(33.03125, 58.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yp7j"]
+size = Vector2(52.121094, 134.6875)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_u747v")
 
@@ -760,7 +773,7 @@ editor_draw_limits = true
 script = ExtResource("9_kgnju")
 
 [node name="npc" type="AnimatedSprite2D" parent="."]
-position = Vector2(1079, 506.99997)
+position = Vector2(-2264.9998, 538)
 scale = Vector2(1.865, 1.61)
 sprite_frames = SubResource("SpriteFrames_kgnju")
 frame = 5
@@ -851,7 +864,37 @@ shape = SubResource("RectangleShape2D_bw0tn")
 position = Vector2(1936, 577)
 shape = SubResource("RectangleShape2D_tpcej")
 
+[node name="ClockFragment" parent="." instance=ExtResource("12_tpcej")]
+position = Vector2(450, 555)
+scale = Vector2(0.36, 0.36)
+
+[node name="marker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
+position = Vector2(-3061, 371)
+shape = SubResource("RectangleShape2D_au0bf")
+
+[node name="marker2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
+position = Vector2(1840, 655)
+shape = SubResource("RectangleShape2D_ovgfw")
+
+[node name="marker3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker3"]
+position = Vector2(1767, 619)
+shape = SubResource("RectangleShape2D_fghf5")
+
+[node name="marker4" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="marker4"]
+position = Vector2(-3012, 334.34375)
+shape = SubResource("RectangleShape2D_1yp7j")
+
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
 [connection signal="body_entered" from="towardtut" to="." method="_on_towardtut_body_entered"]
 [connection signal="body_entered" from="towardtut/towardto2" to="." method="_on_towardto_2_body_entered"]
+[connection signal="body_entered" from="marker3" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="marker4" to="." method="_on_marker_body_entered"]

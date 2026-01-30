@@ -8,6 +8,7 @@ radius = 11.0
 height = 60.0
 
 [node name="golem_projectile" type="Area2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_pxvpy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

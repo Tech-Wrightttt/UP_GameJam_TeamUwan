@@ -36,6 +36,7 @@ right={
 [autoload]
 
 GameManager="*res://scripts/GameManager.gd"
+UI="*res://scenes/ui.tscn"
 
 [display]
 

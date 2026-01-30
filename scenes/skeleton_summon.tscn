@@ -407,6 +407,11 @@ collision_layer = 2
 script = ExtResource("1_0dwpm")
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_bf6gi")]
+offset_left = -12.5
+offset_top = -30.5
+offset_right = 100.5
+offset_bottom = -3.5
+scale = Vector2(0.24, 0.24)
 health_component = NodePath("../HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -451,6 +456,7 @@ attack_animations = Array[String](["attack"])
 script = ExtResource("8_bf6gi")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -29.0
 offset_top = -58.5
 offset_right = 38.0

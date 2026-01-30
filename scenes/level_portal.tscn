@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dx4mb7mhq6m40"]
+
+[ext_resource type="Script" uid="uid://cfp60qx2kshwn" path="res://level_portal.gd" id="1_njh1l"]
+[ext_resource type="Texture2D" uid="uid://cdlqhrk4togmt" path="res://thatgamejam/assets/portal.png" id="2_4bddq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88cgg"]
+atlas = ExtResource("2_4bddq")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whll1"]
+atlas = ExtResource("2_4bddq")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unt1j"]
+atlas = ExtResource("2_4bddq")
+region = Rect2(0, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duqv7"]
+atlas = ExtResource("2_4bddq")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ngis"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88cgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whll1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unt1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duqv7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njh1l"]
+radius = 139.0
+height = 954.0
+
+[node name="LevelPortal" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_njh1l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2ngis")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.46422225
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_njh1l")
