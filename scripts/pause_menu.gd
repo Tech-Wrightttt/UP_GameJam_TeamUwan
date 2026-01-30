@@ -23,6 +23,7 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	pause_and_unpause()
+	GameManager.reset_spawn_points()
 	get_tree().reload_current_scene()
 
 
