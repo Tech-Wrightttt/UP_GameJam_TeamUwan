@@ -2465,10 +2465,10 @@ position = Vector2(1452, 599)
 shape = SubResource("RectangleShape2D_468ku")
 
 [node name="golem" parent="." instance=ExtResource("15_xt1gw")]
-position = Vector2(546, 260)
+position = Vector2(-1313, 386.00003)
 
 [node name="true_narrator" parent="." instance=ExtResource("16_38agi")]
-position = Vector2(-1435, 411)
+position = Vector2(-1020, 404)
 scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="towardso1" to="." method="_on_towardso_1_body_entered"]

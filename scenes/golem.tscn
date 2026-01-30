@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://coixxx3q8g6ad" path="res://scripts/finite_state_machine.gd" id="4_7qrc8"]
 [ext_resource type="Script" uid="uid://dayy24vnl0gug" path="res://scripts/idle.gd" id="5_7rhl2"]
 [ext_resource type="Script" uid="uid://ekij007wse3l" path="res://scripts/follow.gd" id="6_hf0py"]
-[ext_resource type="Script" uid="uid://cxo31vmosf0kx" path="res://scripts/attack_truenarrator.gd" id="7_lfkcr"]
 [ext_resource type="Script" uid="uid://bq6my177xprct" path="res://scripts/death.gd" id="8_mhixx"]
+[ext_resource type="Script" uid="uid://bcdlykuwiejwc" path="res://scripts/attack_golem.gd" id="8_vl4ji"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="9_0vgwy"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="10_552d6"]
 [ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="11_ovbf4"]
@@ -446,7 +446,6 @@ frame = 8
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-2, -1)
 shape = SubResource("CircleShape2D_lfkcr")
 
@@ -464,7 +463,6 @@ libraries = {
 script = ExtResource("3_hayyu")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
@@ -483,10 +481,10 @@ script = ExtResource("6_hf0py")
 dist = 200
 
 [node name="attack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("7_lfkcr")
+script = ExtResource("8_vl4ji")
 attack_animations = Array[String](["attack1", "attack2", "skill"])
-attack_duration = 0.9
-dist = 200
+attack_duration = 1.0
+attack_cooldown = 1.5
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("8_mhixx")

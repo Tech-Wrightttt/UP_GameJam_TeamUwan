@@ -80,23 +80,10 @@ func on_hurt(kb_direction: Vector2, force: float):
 	is_hurt = true
 
 func play_anim(name: String):
-	print("🎬 [", Time.get_ticks_msec(), "] Playing animation: ", name, " on ", self.name)
 	if uses_sprite and sprite:
-		if sprite.sprite_frames:
-			if sprite.sprite_frames.has_animation(name):
-				print("  ✅ Animation '", name, "' EXISTS")
-				print("  📺 Current animation before change: ", sprite.animation)
-			else:
-				print("  ❌ NOT FOUND! Available: ", sprite.sprite_frames.get_animation_names())
 		sprite.call_deferred("play", name)
-		# Check what actually plays after deferred
 		await get_tree().process_frame
-		print("  📺 Animation NOW playing: ", sprite.animation)
 	elif animation_player:
-		if animation_player.has_animation(name):
-			print("  ✅ Animation '", name, "' EXISTS in AnimationPlayer")
-		else:
-			print("  ❌ NOT FOUND!")
 		animation_player.play(name)
 
 func set_can_move(value: bool):
