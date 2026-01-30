@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://i4oytjfafos8"]
+[gd_scene load_steps=33 format=3 uid="uid://i4oytjfafos8"]
 
 [ext_resource type="Script" uid="uid://yuxm8c8g017u" path="res://scripts/overworld_three.gd" id="1_pw1ba"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_2n6u6"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="13_u0jwh"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="14_3coct"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="15_dfgtn"]
+[ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="16_3coct"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw1ba"]
 texture = ExtResource("6_owyvo")
@@ -1869,6 +1870,27 @@ position = Vector2(-356.47058, -51.162792)
 [node name="Spikes4" parent="platform4" instance=ExtResource("15_dfgtn")]
 visible = false
 position = Vector2(-343.52942, -51.67959)
+
+[node name="Slime" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(-2115, 528)
+
+[node name="Slime2" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(-1959, -144.99994)
+
+[node name="Slime3" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(-1007.0002, -143.00002)
+
+[node name="Slime4" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(-1052, 591.99994)
+
+[node name="Slime5" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(1466, -243.99998)
+
+[node name="Slime6" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(2648, 500.00003)
+
+[node name="Slime7" parent="." instance=ExtResource("16_3coct")]
+position = Vector2(2459.0002, -427.9999)
 
 [connection signal="body_entered" from="towardso2" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towardso4" to="." method="_on_towardsc_1_body_entered"]
