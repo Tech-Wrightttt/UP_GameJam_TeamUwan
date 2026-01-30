@@ -35,8 +35,25 @@ func _ready() -> void:
 		SCREEN["height"] / 2
 	)
 
-func setTutorialLocation(location: Vector2) -> void:
-	tutorialLocation = location
+
+
+
+func reset_spawn_points() -> void:
+	spawn_points.resize(13)
+	spawn_points[0] = Vector2(-1973.0, 455.0)
+	spawn_points[1] = Vector2(-555.0, 795.0)
+	spawn_points[2] = Vector2(-1343.0, 888.0001)
+	spawn_points[3] = Vector2(-1284.0, 882.9999)
+	spawn_points[4] = Vector2(130.0, 1004.0)
+	spawn_points[5] = Vector2(-3025.0, 342.0)
+	spawn_points[6] = Vector2(-3040.0, 66.0)
+	spawn_points[7] = Vector2(-2932.0, 410.0)
+	spawn_points[8] = Vector2(-1050.0, 336.0)
+	spawn_points[9] = Vector2(19, 20)
+	spawn_points[10] = Vector2(21, 22)
+	spawn_points[11] = Vector2(23, 24)
+	spawn_points[12] = Vector2(25, 26)
+
 	
 var defeated_bosses: Dictionary = {}
 var player_dead := false
