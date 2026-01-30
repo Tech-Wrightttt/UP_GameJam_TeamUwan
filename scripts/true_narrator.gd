@@ -31,6 +31,7 @@ func spawn_minion():
 		return
 
 	var minion = minion_scene.instantiate()
+	print("Name" + minion.name)
 	minion.global_position = global_position + summon_offset
 	get_parent().add_child(minion)
 	
@@ -57,6 +58,7 @@ func shoot():
 		spawn_pos = global_position + spawn_offset
 	
 	projectile.global_position = spawn_pos
+	projectile.source = self
 	
 	var dir = (player.global_position - spawn_pos).normalized() 
 	projectile.set_direction(dir)
@@ -64,6 +66,7 @@ func shoot():
 	get_parent().add_child(projectile)
 	
 func _ready():
+	print (name)
 	if GameManager.is_boss_defeated(boss_id):
 		queue_free()
 		return

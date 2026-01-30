@@ -401,7 +401,7 @@ height = 42.0
 radius = 13.0
 height = 26.0
 
-[node name="skeleton_summon" type="CharacterBody2D" groups=["enemy"]]
+[node name="skeleton_summon" type="CharacterBody2D" groups=["enemy", "summon"]]
 scale = Vector2(2, 2)
 collision_layer = 2
 script = ExtResource("1_0dwpm")

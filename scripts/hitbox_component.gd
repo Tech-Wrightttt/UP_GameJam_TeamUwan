@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var damage: int = 10
+@export var damage: int = 100
 
 func _ready():
 	monitoring = false
@@ -32,4 +32,4 @@ func _on_area_entered(area):
 		return
 
 	if area.has_method("take_hit"):
-		area.take_hit(damage, my_owner.global_position)
+		area.take_hit(damage, my_owner.global_position, my_owner)

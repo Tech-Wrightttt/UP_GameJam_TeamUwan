@@ -3,6 +3,7 @@ extends Area2D
 @export var damage: int = 5
 @export var lifetime: float = 5.0
 var direction: Vector2 = Vector2.ZERO
+var source: Node = null
 
 func _ready():
 	body_entered.connect(_on_body_entered) 
@@ -30,7 +31,7 @@ func set_direction(dir: Vector2):
 func _on_body_entered(body):
 	var hurtbox = body.find_child("Hurtbox", true, false)
 	if hurtbox and hurtbox.has_method("take_hit"):
-		hurtbox.take_hit(damage, global_position)
+		hurtbox.take_hit(damage, global_position, source)
 	elif body.has_node("HealthComponent"):
 		body.get_node("HealthComponent").take_damage(damage)
 	

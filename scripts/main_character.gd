@@ -125,7 +125,7 @@ func start_attack(anim: String):
 	animation_player.play(anim) 
 
 func _on_player_died():
-	print("Player died!")
+	var killer = health_component.last_damage_source
 	GameManager.set_is_player_dead(true)
 	
 	# Stop all animations
@@ -144,6 +144,21 @@ func _on_player_died():
 	# Disable hurtbox
 	$Hurtbox.monitoring = false
 	$Hurtbox.monitorable = false
+	print(killer.name)
+	if killer.name == "golem":
+		get_tree().change_scene_to_file("res://storylines/died_demonking.tscn")
+	elif killer.name == "true_narrator" :
+		get_tree().change_scene_to_file("res://storylines/died_truenarrator.tscn")
+	elif killer.is_in_group("summon"):
+		get_tree().change_scene_to_file("res://storylines/died_truenarrator.tscn")
+	elif killer.name == "fake narrator":
+		get_tree().change_scene_to_file("res://storylines/died_fakenarrator.tscn")
+	elif killer.is_in_group("enemy"):
+		get_tree().change_scene_to_file("res://storylines/died_monster.tscn")
+	elif killer.is_in_group("trap"):
+		get_tree().change_scene_to_file("res://storylines/died_trap.tscn")
+	else :
+		get_tree().change_scene_to_file("res://storylines/died_normally.tscn")
 	
 	set_physics_process(false)
 	sprite.play("death")  # If you have a death animation

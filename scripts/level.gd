@@ -34,3 +34,13 @@ func _on_marker_body_entered(body: Node2D) -> void:
 			GameManager.spawn_points[0] = player.global_position
 			print("OTEN")
 			print(GameManager.tutorialLocation)
+
+
+func _on_neutral_ending_body_entered(body):
+	if body.name == "main_character":
+		GameManager.fade_out(
+			self,
+			"res://storylines/neutral_ending.tscn",
+			1.5,
+			Color.BLACK
+		)
