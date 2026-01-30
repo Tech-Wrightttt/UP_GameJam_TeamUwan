@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgijy6ivdxkpr"]
+
+[ext_resource type="AudioStream" uid="uid://fp2ag86710w5" path="res://assets/voicelines/CASTLE1.wav" id="1_7vn7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhkqd"]
+size = Vector2(92.5, 264.5)
+
+[node name="voice area" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-282, 752)
+shape = SubResource("RectangleShape2D_qhkqd")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-230, 781)
+stream = ExtResource("1_7vn7w")
+volume_db = 24.0
