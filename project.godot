@@ -39,6 +39,7 @@ config/size/mode=2
 
 GameManager="*res://scripts/GameManager.gd"
 UI="*res://scenes/ui.tscn"
+AudioManager="*res://scenes/audio_manager.tscn"
 
 [display]
 
