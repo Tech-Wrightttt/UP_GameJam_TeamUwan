@@ -127,6 +127,7 @@ func start_attack(anim: String):
 func _on_player_died():
 	var killer = health_component.last_damage_source
 	GameManager.set_is_player_dead(true)
+	AudioManager.stop_music()
 	
 	# Stop all animations
 	animation_player.stop(false)
