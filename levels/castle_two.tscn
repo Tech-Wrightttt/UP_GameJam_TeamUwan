@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dr7aw4f5ckp1r"]
+[gd_scene load_steps=22 format=3 uid="uid://dr7aw4f5ckp1r"]
 
 [ext_resource type="Script" uid="uid://cqe0nx0dhykam" path="res://scripts/castle_two.gd" id="1_4xskk"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_e7sb2"]
 [ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="3_m23qa"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_22w3c"]
-[ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="4_mnvaw"]
-[ext_resource type="PackedScene" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
-[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="9_irwje"]
+[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
+[ext_resource type="PackedScene" path="res://scenes/outofbounds.tscn" id="9_irwje"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2184,16 +2183,13 @@ height = 506.0
 position = Vector2(215, 315.99997)
 
 [node name="Gargoyle2" parent="." instance=ExtResource("3_m23qa")]
-position = Vector2(12.000061, 876)
+position = Vector2(-415.99997, 876.00006)
 
 [node name="Gargoyle3" parent="." instance=ExtResource("3_m23qa")]
 position = Vector2(-448.99997, 535.0001)
 
 [node name="Gargoyle4" parent="." instance=ExtResource("3_m23qa")]
 position = Vector2(260.99997, 878)
-
-[node name="Slime" parent="." instance=ExtResource("4_mnvaw")]
-position = Vector2(-334, 871)
 
 [node name="main_character" parent="." instance=ExtResource("2_e7sb2")]
 position = Vector2(-1343, 888.00006)
