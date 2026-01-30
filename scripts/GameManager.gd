@@ -64,7 +64,10 @@ func mark_boss_defeated(boss_id: String):
 func restart():
 	defeated_bosses.clear()
 	level_clocks.clear()
+	current_clocks = 0
 	player_dead = false
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.reset()
 	
 func set_is_player_dead(is_dead: bool):
 	player_dead = is_dead

@@ -1,6 +1,6 @@
 [gd_scene load_steps=64 format=3 uid="uid://dxlxvyaooe6lf"]
 
-[ext_resource type="Script" uid="uid://cfodbh52etqh" path="res://scripts/skeleton.gd" id="1_7e1v2"]
+[ext_resource type="Script" uid="uid://xcfgcy1ila1h" path="res://scripts/skeleton_normal.gd" id="1_7e1v2"]
 [ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="2_rjsi3"]
 [ext_resource type="Texture2D" uid="uid://cg7rx74umip6j" path="res://assets/Skeleton enemy.png" id="3_3nhjk"]
 [ext_resource type="Script" uid="uid://dws5tm7gw0mof" path="res://scripts/health_component.gd" id="4_ghshk"]
@@ -401,7 +401,7 @@ height = 42.0
 radius = 13.0
 height = 26.0
 
-[node name="skeleton_summon" type="CharacterBody2D" groups=["enemy"]]
+[node name="skeleton" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(2, 2)
 collision_layer = 2
 script = ExtResource("1_7e1v2")

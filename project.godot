@@ -53,6 +53,7 @@ window/stretch/mode="canvas_items"
 player=""
 enemy=""
 summon=""
+fall=""
 
 [input]
 

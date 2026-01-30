@@ -38,9 +38,11 @@ var target: CharacterBody2D = null # The Player
 var attack_cooldown_timer := 0.0
 var is_attacking: bool = false
 var is_dead: bool = false
+var spawn_position: Vector2
 
 func _ready() -> void:
 	# Connect Health Signals
+	spawn_position = global_position
 	if health_component.has_signal("died"):
 		health_component.died.connect(_on_died)
 	
@@ -205,3 +207,8 @@ func _on_died() -> void:
 	is_dead = true
 	is_attacking = false
 	transition_to(EnemyState.DEATH)
+
+func reset():
+	global_position = spawn_position
+	visible = true
+	set_physics_process(true)

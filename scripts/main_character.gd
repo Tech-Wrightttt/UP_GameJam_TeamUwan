@@ -155,10 +155,10 @@ func _on_player_died():
 		get_tree().change_scene_to_file("res://storylines/died_fakenarrator.tscn")
 	elif killer.is_in_group("enemy"):
 		get_tree().change_scene_to_file("res://storylines/died_monster.tscn")
-	elif killer.is_in_group("trap"):
-		get_tree().change_scene_to_file("res://storylines/died_trap.tscn")
-	else :
+	elif killer.is_in_group("fall"):
 		get_tree().change_scene_to_file("res://storylines/died_normally.tscn")
+	else:
+		get_tree().change_scene_to_file("res://storylines/died_trap.tscn")
 	
 	set_physics_process(false)
 	sprite.play("death")  # If you have a death animation

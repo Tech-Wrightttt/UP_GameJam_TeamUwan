@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpwbynvk3vret"]
+[gd_scene load_steps=20 format=3 uid="uid://bpwbynvk3vret"]
 
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_6coua"]
 [ext_resource type="Script" uid="uid://cbal02ml3e170" path="res://scripts/castle_bossroom.gd" id="1_podjh"]
@@ -1056,9 +1056,6 @@ fill = 1
 fill_from = Vector2(0.53939396, 0.51379097)
 fill_to = Vector2(0.8727273, 0.86654294)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_podjh"]
-size = Vector2(47.696163, 50.826843)
-
 [node name="CastleBossroom" type="Node2D"]
 script = ExtResource("1_podjh")
 
@@ -1183,32 +1180,6 @@ tile_set = SubResource("TileSet_cbcmy")
 format = 2
 layer_0/tile_data = PackedInt32Array(2097195, 458753, 8, 2097196, 524289, 8, 2097197, 589825, 8, 1966119, 524289, 8, 1966120, 589825, 8, 1966118, 458753, 8, 1835041, 524289, 8, 1835042, 589825, 8, 1835040, 458753, 8, 1703952, 458753, 8, 1703953, 524289, 8, 1703954, 589825, 8, 1703955, 458753, 8, 1703956, 524289, 8, 1703957, 589825, 8, 1703958, 458753, 8, 1703959, 524289, 8, 1703960, 589825, 8, 1703961, 458753, 8, 1703962, 524289, 8, 1703963, 589825, 8, 1703964, 458753, 8, 1703965, 524289, 8, 1703966, 589825, 8, 1310724, 589825, 8, 1441800, 589825, 8, 1572877, 589825, 8, 1310722, 458753, 8, 1310723, 524289, 8, 1441798, 458753, 8, 1441799, 524289, 8, 1572875, 458753, 8, 1572876, 524289, 8, 1048608, 458753, 8, 1048609, 524289, 8, 1048610, 589825, 8, 1245224, 458753, 8, 1245225, 524289, 8, 1245226, 589825, 8, 1179655, 458753, 8, 1179656, 524289, 8, 1179657, 589825, 8, 1048588, 458753, 8, 1048589, 524289, 8, 1048590, 589825, 8, 1114133, 458753, 8, 1114134, 524289, 8, 1114135, 589825, 8, 917530, 458753, 8, 917531, 524289, 8, 917532, 589825, 8, 917521, 458753, 8, 917522, 524289, 8, 917523, 589825, 8, 917541, 458753, 8, 917542, 524289, 8, 917543, 589825, 8, 720937, 458753, 8, 720938, 524289, 8, 720939, 589825, 8, 655382, 720897, 44, 655383, 786433, 44, 720919, 786433, 45, 589848, 851969, 43, 655384, 851969, 44, 720920, 851969, 45, 655385, 917505, 44)
 
-[node name="door" type="TileMap" parent="."]
-visible = false
-scale = Vector2(2.55, 1.935)
-tile_set = SubResource("TileSet_cbcmy")
-format = 2
-layer_0/tile_data = PackedInt32Array(2031638, 851969, 36, 2097174, 851969, 37, 2162710, 851969, 38, 2031639, 917505, 36, 2097175, 917505, 37, 2162711, 917505, 38, 2031640, 983041, 36, 2097176, 983041, 37, 2162712, 983041, 38)
-
-[node name="PointLight2D7" type="PointLight2D" parent="door"]
-texture_filter = 1
-position = Vector2(378.43134, 521.9638)
-scale = Vector2(1.1782767, 4.998679)
-energy = 0.8
-range_item_cull_mask = 15
-shadow_filter_smooth = 64.0
-texture = SubResource("GradientTexture2D_podjh")
-offset = Vector2(-3.31, -0.585)
-texture_scale = 0.55
-height = 506.0
-
-[node name="DoorArea" type="Area2D" parent="door"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="door/DoorArea"]
-position = Vector2(374.90195, 521.9638)
-scale = Vector2(0.9999995, 1)
-shape = SubResource("RectangleShape2D_podjh")
-
 [node name="main_character" parent="." instance=ExtResource("2_j5t3b")]
 position = Vector2(130, 1004)
 scale = Vector2(1.655, 1.655)
@@ -1253,6 +1224,3 @@ scale = Vector2(2, 2)
 [node name="golem" parent="." instance=ExtResource("7_tk78h")]
 position = Vector2(1085, 955)
 scale = Vector2(2.2, 2.2)
-
-[connection signal="body_entered" from="door/DoorArea" to="." method="_on_door_area_body_entered"]
-[connection signal="body_exited" from="door/DoorArea" to="." method="_on_door_area_body_exited"]

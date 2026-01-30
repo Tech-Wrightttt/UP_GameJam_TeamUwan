@@ -30,11 +30,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if boss_defeated:
-		door1.visible = true
-
-		# show label if player is near
-		interact_label.visible = player_near_door
-
 		if player_near_door and Input.is_action_just_pressed("interact"):
 			# go to ending (commented out)
 			#get_tree().change_scene("res://storylines/died_demonking.tscn")
