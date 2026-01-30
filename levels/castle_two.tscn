@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dr7aw4f5ckp1r"]
+[gd_scene load_steps=27 format=3 uid="uid://dr7aw4f5ckp1r"]
 
 [ext_resource type="Script" uid="uid://cqe0nx0dhykam" path="res://scripts/castle_two.gd" id="1_4xskk"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="9_irwje"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="9_lxivw"]
+[ext_resource type="PackedScene" uid="uid://cgijy6ivdxkpr" path="res://levels/voice_area.tscn" id="10_i62bi"]
+[ext_resource type="AudioStream" uid="uid://d4kjj13kj2adu" path="res://assets/voicelines/CASTLE2.wav" id="11_1aq0v"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2287,7 +2289,18 @@ visible = false
 position = Vector2(-232.54901, 231.00777)
 scale = Vector2(0.5, 0.5)
 
+[node name="voice area" parent="." instance=ExtResource("10_i62bi")]
+
+[node name="CollisionShape2D" parent="voice area" index="0"]
+position = Vector2(-1114, 809)
+
+[node name="AudioStreamPlayer2D" parent="voice area" index="1"]
+stream = ExtResource("11_1aq0v")
+
 [connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towards2" to="." method="_on_towardsc_1_body_entered"]
 [connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="marker2" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]
+
+[editable path="voice area"]

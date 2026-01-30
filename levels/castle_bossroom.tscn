@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpwbynvk3vret"]
+[gd_scene load_steps=22 format=3 uid="uid://bpwbynvk3vret"]
 
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_6coua"]
 [ext_resource type="Script" uid="uid://cbal02ml3e170" path="res://scripts/castle_bossroom.gd" id="1_podjh"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="5_podjh"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="6_cbcmy"]
 [ext_resource type="PackedScene" uid="uid://cgwwfpi15kv6j" path="res://scenes/golem.tscn" id="7_tk78h"]
+[ext_resource type="PackedScene" uid="uid://cgijy6ivdxkpr" path="res://levels/voice_area.tscn" id="8_mj31d"]
+[ext_resource type="AudioStream" uid="uid://4k14a06usqxv" path="res://assets/voicelines/CASTLEBOSSROOM.wav" id="9_n5dqt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -1224,3 +1226,15 @@ scale = Vector2(2, 2)
 [node name="golem" parent="." instance=ExtResource("7_tk78h")]
 position = Vector2(1085, 955)
 scale = Vector2(2.2, 2.2)
+
+[node name="voice area" parent="." instance=ExtResource("8_mj31d")]
+
+[node name="CollisionShape2D" parent="voice area" index="0"]
+position = Vector2(235, 933)
+
+[node name="AudioStreamPlayer2D" parent="voice area" index="1"]
+stream = ExtResource("9_n5dqt")
+
+[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]
+
+[editable path="voice area"]

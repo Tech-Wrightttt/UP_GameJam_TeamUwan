@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=28 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="7_om42o"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="8_fm0u3"]
 [ext_resource type="PackedScene" uid="uid://7lgf2nha34ew" path="res://mobs/hazards/spikes/spikes.tscn" id="9_qwc3w"]
-[ext_resource type="AudioStream" uid="uid://fp2ag86710w5" path="res://assets/voicelines/CASTLE1.wav" id="10_bujft"]
+[ext_resource type="PackedScene" uid="uid://cgijy6ivdxkpr" path="res://levels/voice_area.tscn" id="10_bujft"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qwc3w"]
 texture = ExtResource("6_ylynx")
@@ -1115,9 +1115,6 @@ size = Vector2(74, 70.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bujft"]
 size = Vector2(71, 64.28125)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhkqd"]
-size = Vector2(30, 223)
-
 [node name="CastleOne" type="Node2D"]
 script = ExtResource("1_fpfjo")
 
@@ -1345,19 +1342,9 @@ position = Vector2(796.47064, 290.9561)
 visible = false
 position = Vector2(860, 289.9225)
 
-[node name="voice area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="voice area"]
-position = Vector2(-282, 752)
-shape = SubResource("RectangleShape2D_qhkqd")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="voice area"]
-position = Vector2(-230, 781)
-stream = ExtResource("10_bujft")
-volume_db = 24.0
+[node name="voice area" parent="." instance=ExtResource("10_bujft")]
 
 [connection signal="body_entered" from="TowarsTutorial" to="." method="_on_towardsTUTORIAL_body_entered"]
 [connection signal="body_entered" from="TowarsTutorial3" to="." method="_on_towardsc_1_body_entered"]
 [connection signal="body_entered" from="marker" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="marker2" to="." method="_on_marker_body_entered"]
-[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]

@@ -38,6 +38,11 @@ func _on_marker_body_entered(body: Node2D) -> void:
 			GameManager.spawn_points[2] = player.global_position
 
 
+@onready var sound_player: AudioStreamPlayer2D = $"voice area/AudioStreamPlayer2D"
 
-func _on_towards_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+func _on_voice_area_body_entered(body: Node2D) -> void:
+	if body.name != "main_character" or GameManager.castle2_voiceline_played:
+		return
+	
+	GameManager.castle2_voiceline_played = true
+	sound_player.play()

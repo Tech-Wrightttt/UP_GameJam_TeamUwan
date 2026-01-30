@@ -61,3 +61,13 @@ func _on_door_area_body_exited(body: Node2D) -> void:
 	if body == player:
 		player_near_door = false
 		interact_label.visible = false  # hide [E] to interact
+		
+		
+@onready var sound_player: AudioStreamPlayer2D = $"voice area/AudioStreamPlayer2D"
+
+func _on_voice_area_body_entered(body: Node2D) -> void:
+	if body.name != "main_character" or GameManager.castle4_voiceline_played:
+		return
+	
+	GameManager.castle4_voiceline_played = true
+	sound_player.play()
