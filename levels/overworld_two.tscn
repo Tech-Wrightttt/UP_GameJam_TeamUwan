@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4n8y8i55l6m3"]
+[gd_scene load_steps=20 format=3 uid="uid://c4n8y8i55l6m3"]
 
 [ext_resource type="Script" uid="uid://b41kd7yp8inqt" path="res://scripts/overworld_two.gd" id="1_pgyso"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_m4iym"]
@@ -551,6 +551,12 @@ sources/1 = SubResource("TileSetAtlasSource_d1nep")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_if6q4"]
 size = Vector2(123, 160.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgyso"]
+size = Vector2(79.5, 58.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqlue"]
+size = Vector2(71.75, 67)
+
 [node name="OverworldTwo" type="Node2D"]
 script = ExtResource("1_pgyso")
 
@@ -651,10 +657,31 @@ limit_bottom = 800
 editor_draw_limits = true
 script = ExtResource("9_ou6lx")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="towardso2" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3143, 60)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardso2"]
+position = Vector2(-3182, 65)
 shape = SubResource("RectangleShape2D_if6q4")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_towardso_1_body_entered"]
+[node name="mark1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark1"]
+position = Vector2(-2945, 94)
+shape = SubResource("RectangleShape2D_pgyso")
+
+[node name="mark2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark2"]
+position = Vector2(3394, 461)
+shape = SubResource("RectangleShape2D_lqlue")
+
+[node name="towardso3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardso3"]
+position = Vector2(3538, 416)
+shape = SubResource("RectangleShape2D_if6q4")
+
+[connection signal="body_entered" from="towardso2" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="mark1" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="mark2" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="towardso3" to="." method="_on_towardso_3_body_entered"]

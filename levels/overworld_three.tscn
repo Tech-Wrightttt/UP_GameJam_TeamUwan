@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://i4oytjfafos8"]
+[gd_scene load_steps=24 format=3 uid="uid://c0sodxrxiijbr"]
 
-[ext_resource type="Script" uid="uid://ttn11ik7jjfw" path="res://scripts/level.gd" id="1_cwnw4"]
+[ext_resource type="Script" uid="uid://yuxm8c8g017u" path="res://scripts/overworld_three.gd" id="1_pw1ba"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_2n6u6"]
 [ext_resource type="Texture2D" uid="uid://cjlct2f0xqad6" path="res://assets/Background/CloudsFront.png" id="3_pw1ba"]
 [ext_resource type="Texture2D" uid="uid://vbnc5dhgt33j" path="res://assets/Background/BGBack.png" id="4_uc1gp"]
@@ -668,8 +668,20 @@ texture = ExtResource("7_u0jwh")
 [sub_resource type="TileSet" id="TileSet_gedp1"]
 sources/1 = SubResource("TileSetAtlasSource_d1nep")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc1gp"]
+size = Vector2(161.375, 154)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcis3"]
+size = Vector2(277, 307)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owyvo"]
+size = Vector2(75.6875, 57.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0jwh"]
+size = Vector2(75.6875, 54.75)
+
 [node name="OverworldTwo" type="Node2D"]
-script = ExtResource("1_cwnw4")
+script = ExtResource("1_pw1ba")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -767,3 +779,32 @@ script = ExtResource("9_dfgtn")
 [node name="ClockFragment" parent="." instance=ExtResource("13_kcis3")]
 position = Vector2(2449, 555)
 scale = Vector2(0.36, 0.36)
+
+[node name="towardso2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardso2"]
+position = Vector2(-3078.6875, 389)
+shape = SubResource("RectangleShape2D_uc1gp")
+
+[node name="towardso4" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="towardso4"]
+position = Vector2(3018.5, 542.5)
+shape = SubResource("RectangleShape2D_kcis3")
+
+[node name="mark" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark"]
+position = Vector2(-2932, 437)
+shape = SubResource("RectangleShape2D_owyvo")
+
+[node name="mark2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mark2"]
+position = Vector2(2776, 531.375)
+shape = SubResource("RectangleShape2D_u0jwh")
+
+[connection signal="body_entered" from="towardso2" to="." method="_on_towardso_1_body_entered"]
+[connection signal="body_entered" from="towardso4" to="." method="_on_towardsc_1_body_entered"]
+[connection signal="body_entered" from="mark" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="mark2" to="." method="_on_marker_body_entered"]

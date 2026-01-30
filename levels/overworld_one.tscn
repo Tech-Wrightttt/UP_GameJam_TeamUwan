@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=37 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -667,9 +667,6 @@ size = Vector2(146, 241.03125)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au0bf"]
 size = Vector2(23.5, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovgfw"]
-size = Vector2(33.03125, 58.75)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fghf5"]
 size = Vector2(33.03125, 58.75)
 
@@ -873,12 +870,6 @@ scale = Vector2(0.36, 0.36)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="marker"]
 position = Vector2(-3061, 371)
 shape = SubResource("RectangleShape2D_au0bf")
-
-[node name="marker2" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
-position = Vector2(1840, 655)
-shape = SubResource("RectangleShape2D_ovgfw")
 
 [node name="marker3" type="Area2D" parent="."]
 
