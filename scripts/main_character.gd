@@ -83,6 +83,10 @@ var knockback_velocity := Vector2.ZERO
 var is_hurt := false
 
 func _ready() -> void:
+	if UI:
+		UI.connect_player_health(health_component)
+	else:
+		push_error("UI autoload not found")
 	transition_to(PlayerState.IDLE)
 	health_component.died.connect(_on_player_died)
 	health_component.damaged.connect(_on_player_damaged)

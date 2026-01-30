@@ -32,8 +32,9 @@ func _ready() -> void:
 func setTutorialLocation(location: Vector2) -> void:
 	tutorialLocation = location
 	
-
-
+func register_player(player):
+	var health = player.health_component
+	$UI/Display/Healthbar.set_health_source(health)
 
 var defeated_bosses: Dictionary = {}
 var player_dead := false

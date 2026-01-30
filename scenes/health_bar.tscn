@@ -14,7 +14,6 @@ offset_left = -28.0
 offset_top = -36.0
 offset_right = 85.0
 offset_bottom = -9.0
-scale = Vector2(0.5, 0.5)
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
 max_value = 150.0
 script = ExtResource("1_1bvlm")

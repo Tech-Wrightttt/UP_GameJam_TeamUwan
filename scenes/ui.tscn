@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfidvhfmxeqtq"]
+
+[ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="1_x4jx1"]
+[ext_resource type="Script" uid="uid://wqlf63xw8sjq" path="res://scripts/ui_manager.gd" id="1_yev5y"]
+[ext_resource type="Script" uid="uid://dew81t00yo3fu" path="res://scripts/health_bar.gd" id="2_x4jx1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yev5y"]
+bg_color = Color(0.6397846, 0.11505448, 0.1581636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_yev5y")
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_x4jx1")]
+z_index = 2
+
+[node name="Display" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="Display"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 62.0
+offset_right = 2087.7827
+offset_bottom = 248.95651
+scale = Vector2(0.23, 0.23)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/fill = SubResource("StyleBoxFlat_yev5y")
+max_value = 150.0
+value = 100.0
+script = ExtResource("2_x4jx1")
+
+[node name="Label" type="Label" parent="Display"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 57.0
+offset_right = 143.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 35
+text = "HP:"

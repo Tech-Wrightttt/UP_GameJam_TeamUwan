@@ -3,6 +3,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if UI:
+		UI.show_hud()
 	print($main_character.global_position)
 	$main_character.global_position = GameManager.spawn_points[0]
 	

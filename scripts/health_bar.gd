@@ -1,26 +1,30 @@
 extends ProgressBar
 
-@export var health_component: HealthComponent
 @export var hide_when_full := false
+var health_component: HealthComponent
 
-func _ready():
-	if not health_component:
-		push_error("HealthComponent not assigned to ProgressBar")
+func bind(health: HealthComponent):
+	if not health:
+		push_error("HealthBar: Tried to bind null HealthComponent")
 		return
-	
-	max_value = health_component.max_health
-	value = health_component.current_health
 
-	if hide_when_full and value >= max_value:
-		visible = false
-	
-	health_component.health_changed.connect(_on_health_changed)
-	health_component.died.connect(_on_died)
+	health_component = health
+
+	max_value = health.max_health
+	value = health.current_health
+
+	if hide_when_full:
+		visible = value < max_value
+
+	health.health_changed.connect(_on_health_changed)
+	health.died.connect(_on_died)
+
+	print("✅ HealthBar bound to HealthComponent")
 
 func _on_health_changed(current: int, maximum: int):
 	max_value = maximum
 	value = current
-	
+
 	if hide_when_full:
 		visible = current < maximum
 
