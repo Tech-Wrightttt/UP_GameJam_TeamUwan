@@ -6,7 +6,7 @@ extends Control
 
 @onready var audio_player = $audio
 func _ready() -> void:
-	# Hide all layers at the start just in case
+	UI.hide_hud()
 	layer1.hide()
 	if audio_player:
 		audio_player.play()

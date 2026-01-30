@@ -48,8 +48,7 @@ func on_hurt(kb_direction: Vector2, force: float):
 	
 	is_hurt = true
 
-func play_anim(name: String):
-	print("🎬 Playing animation: ", name)  # ← Add this
+func play_anim(name: String): 
 	if uses_sprite and sprite:
 		sprite.call_deferred("play", name)
 	elif animation_player:
