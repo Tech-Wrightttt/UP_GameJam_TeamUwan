@@ -1,7 +1,7 @@
 extends Node
 
 var level_clocks: Array[int] = []  # [level1_clocks, level2_clocks, ...]
-var current_clocks: int = 0 
+var current_clocks: int = 3 
 
 signal clocks_changed(current: int, total: int)
 

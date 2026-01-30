@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmamlypar2qce"]
+[gd_scene load_steps=42 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
 [ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_au0bf"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="14_ovgfw"]
+[ext_resource type="Script" uid="uid://qvonyh2jik6e" path="res://scripts/darkdimension_portal.gd" id="15_1yp7j"]
+[ext_resource type="Texture2D" uid="uid://ca4ht8s4rq2gd" path="res://assets/portal.png" id="15_fghf5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -675,7 +677,9 @@ size = Vector2(33.03125, 58.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yp7j"]
 size = Vector2(52.121094, 134.6875)
 
-[node name="OverworldTwo" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgnju"]
+
+[node name="OverworldOne" type="Node2D"]
 script = ExtResource("1_u747v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -851,6 +855,40 @@ libraries = {
 &"": SubResource("AnimationLibrary_pmj2g")
 }
 
+[node name="CanvasLayer4" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer4"]
+anchors_preset = -1
+anchor_left = 0.416
+anchor_top = 0.43800002
+anchor_right = 0.739
+anchor_bottom = 0.5
+offset_left = -343.72003
+offset_top = 99.95996
+offset_right = 81.119995
+offset_bottom = 173.0
+theme_override_colors/default_color = Color(0.8920336, 0.89203364, 0.8920335, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("11_bw0tn")
+theme_override_font_sizes/normal_font_size = 35
+text = "You have gathered every fragment at last…
+Perhaps now, this tale may finally reach its end.
+Before you stands a portal to a land known by few and feared by many.
+Step through—if you dare.
+May the heavens watch over you.
+Good luck."
+fit_content = true
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer4"]
+root_node = NodePath("../RichTextLabel")
+libraries = {
+&"": SubResource("AnimationLibrary_pmj2g")
+}
+
 [node name="towardtut" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="towardtut"]
@@ -898,9 +936,26 @@ position = Vector2(1230, 533.00006)
 [node name="Slime3" parent="." instance=ExtResource("14_ovgfw")]
 position = Vector2(-118.99988, 535)
 
+[node name="Portal" type="Area2D" parent="."]
+visible = false
+monitoring = false
+script = ExtResource("15_1yp7j")
+
+[node name="Sprite2D" type="Sprite2D" parent="Portal"]
+position = Vector2(-2430, 534)
+scale = Vector2(0.15, 0.11)
+texture = ExtResource("15_fghf5")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource("RectangleShape2D_kgnju")
+
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
 [connection signal="body_entered" from="towardtut" to="." method="_on_towardtut_body_entered"]
 [connection signal="body_entered" from="towardtut/towardto2" to="." method="_on_towardto_2_body_entered"]
 [connection signal="body_entered" from="marker3" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="marker4" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="Portal" to="." method="_on_portal_body_entered"]
+[connection signal="body_exited" from="Portal" to="." method="_on_portal_body_exited"]
