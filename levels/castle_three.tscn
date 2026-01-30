@@ -1130,7 +1130,7 @@ texture = ExtResource("6_dom3m")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xhgwq"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_keff6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhgwq"]
 texture = ExtResource("1_shegg")
 1:0/0 = 0
 1:0/0/material = SubResource("CanvasItemMaterial_xhgwq")
@@ -2114,7 +2114,7 @@ texture = ExtResource("1_shegg")
 
 [sub_resource type="TileSet" id="TileSet_p16ql"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_keff6")
+sources/1 = SubResource("TileSetAtlasSource_xhgwq")
 sources/0 = SubResource("TileSetAtlasSource_pc8cq")
 
 [node name="CastleThree" type="Node2D"]
