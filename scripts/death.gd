@@ -10,9 +10,9 @@ func enter():
 	boss.hurtbox.monitoring = false
 	boss.hurtbox.monitorable = false
 	
-	boss.play_anim(death_animation)  # AnimatedSprite2D animation ni
+	boss.play_anim(death_animation)  
 	if boss.animation_player.has_animation(death_animation):
-		boss.animation_player.play(death_animation)  # AnimationPlayer ni
+		boss.animation_player.play(death_animation) 
 	else:
 		print("Warning: no animationplayer animation for death")
 	

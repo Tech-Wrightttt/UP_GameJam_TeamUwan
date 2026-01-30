@@ -3,6 +3,8 @@ class_name HealthComponent
 
 signal health_changed(current: int, maximum: int)
 signal died
+signal damaged(amount: int)
+
 
 @export var max_health: int = 100
 var current_health: int
@@ -20,7 +22,7 @@ func take_damage(amount: int):
 	print(get_parent().name, "HP:", current_health, "/", max_health)
 	
 	health_changed.emit(current_health, max_health)  
-	
+	damaged.emit(amount)
 	if current_health == 0:
 		is_dead = true
 		died.emit()

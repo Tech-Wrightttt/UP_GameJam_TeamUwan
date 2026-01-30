@@ -73,17 +73,44 @@ var dash_cooldown_timer := 0.0
 
 @export var effects_animation_player: AnimationPlayer  
 @export var knockback_decay := 6.0
+@export var passive_heal_rate := 2 
+@export var passive_heal_delay := 3.0  
+@export var can_passive_heal := true
+var time_since_last_damage := 0.0
+var is_in_combat := false
+var heal_buffer := 0.0
 var knockback_velocity := Vector2.ZERO
 var is_hurt := false
 
 func _ready() -> void:
 	transition_to(PlayerState.IDLE)
-	
 	health_component.died.connect(_on_player_died)
-	
+	health_component.damaged.connect(_on_player_damaged)
 	hitbox_attack1.deactivate()
 	hitbox_attack2.deactivate()
 	hitbox_attack3.deactivate()
+	
+func handle_passive_healing(delta: float) -> void:
+	if not can_passive_heal:
+		return
+		
+	time_since_last_damage += delta
+	if is_in_combat and time_since_last_damage >= passive_heal_delay:
+		is_in_combat = false
+
+	if not is_in_combat and health_component.current_health < health_component.max_health:
+		heal_buffer += passive_heal_rate * delta
+
+		if heal_buffer >= 1.0:
+			var heal_amount := int(heal_buffer)
+			heal_buffer -= heal_amount
+			health_component.heal(heal_amount)
+			print("Healing:", heal_amount)
+
+
+func _on_player_damaged(damage: int):
+	time_since_last_damage = 0.0
+	is_in_combat = true
 
 func start_attack(anim: String):
 	is_attacking = true
@@ -145,6 +172,7 @@ func _physics_process(delta: float) -> void:
 	handle_input()
 	update_state(delta)
 	apply_knockback(delta)
+	handle_passive_healing(delta)
 	move_and_slide()
 
 func _process(_delta: float) -> void:

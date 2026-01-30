@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=100 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
@@ -84,6 +84,7 @@
 [ext_resource type="Texture2D" uid="uid://dukibduhwkfir" path="res://assets/mc/Roll/HeroKnight_Roll_8.png" id="71_s48db"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="83_ikepn"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="84_7ghjf"]
+[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="85_ikepn"]
 
 [sub_resource type="Curve" id="Curve_m40x0"]
 _data = [Vector2(0.060109288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.153682), 0.0, 0.0, 0, 0]
@@ -536,6 +537,8 @@ _data = {
 collision_mask = 131
 script = ExtResource("1_tqm6u")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
+passive_heal_rate = 1
+passive_heal_delay = 7.0
 
 [node name="explosion" type="CPUParticles2D" parent="."]
 emitting = false
@@ -613,5 +616,8 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_22120")
 }
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("85_ikepn")]
+health_component = NodePath("../HealthComponent")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

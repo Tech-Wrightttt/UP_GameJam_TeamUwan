@@ -485,6 +485,7 @@ script = ExtResource("8_vl4ji")
 attack_animations = Array[String](["attack1", "attack2", "skill"])
 attack_duration = 1.0
 attack_cooldown = 1.5
+dist = 200
 
 [node name="death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("8_mhixx")
