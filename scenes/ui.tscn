@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfidvhfmxeqtq"]
+[gd_scene load_steps=9 format=3 uid="uid://dfidvhfmxeqtq"]
 
 [ext_resource type="PackedScene" uid="uid://r52b6jrxbn7r" path="res://scenes/pause_menu.tscn" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://wqlf63xw8sjq" path="res://scripts/ui_manager.gd" id="1_yev5y"]
 [ext_resource type="Script" uid="uid://dup7uad0vo3su" path="res://scripts/playerhealth_bar.gd" id="3_yev5y"]
 [ext_resource type="Texture2D" uid="uid://cq5kpcagsjqkd" path="res://assets/ui/hp.png" id="4_gdt2y"]
+[ext_resource type="Script" uid="uid://cltt7wk2ne7qn" path="res://scripts/counter.gd" id="5_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://dheyvd6nwgb70" path="res://assets/ui/clock_fragment.png" id="6_8dubc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdt2y"]
 bg_color = Color(0.16206557, 0.1620656, 0.16206554, 1)
@@ -43,10 +45,10 @@ offset_bottom = 40.0
 
 [node name="HealthBar" type="ProgressBar" parent="Display"]
 layout_mode = 0
-offset_left = 151.0
-offset_top = 63.0
-offset_right = 2085.7827
-offset_bottom = 236.91302
+offset_left = 161.0
+offset_top = 71.0
+offset_right = 2095.7827
+offset_bottom = 244.91302
 scale = Vector2(0.23, 0.23)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -57,10 +59,29 @@ max_value = 150.0
 value = 100.0
 script = ExtResource("3_yev5y")
 
-[node name="Label" type="TextureRect" parent="Display"]
+[node name="heart" type="TextureRect" parent="Display"]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 53.0
-offset_right = 135.0
-offset_bottom = 111.0
+offset_left = 84.0
+offset_top = 62.0
+offset_right = 144.0
+offset_bottom = 120.0
 texture = ExtResource("4_gdt2y")
+
+[node name="counter" type="Label" parent="Display"]
+layout_mode = 0
+offset_left = 1741.0
+offset_top = 945.0
+offset_right = 1802.0
+offset_bottom = 1000.0
+theme_override_font_sizes/font_size = 35
+text = "0/3"
+script = ExtResource("5_wm3ai")
+
+[node name="clock" type="TextureRect" parent="Display"]
+layout_mode = 0
+offset_left = 1664.0
+offset_top = 928.0
+offset_right = 3664.0
+offset_bottom = 2928.0
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("6_8dubc")
