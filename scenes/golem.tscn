@@ -491,6 +491,7 @@ dist = 200
 script = ExtResource("8_mhixx")
 
 [node name="debug" type="Label" parent="."]
+visible = false
 offset_left = -28.0
 offset_top = -88.0
 offset_right = 39.0
@@ -524,8 +525,11 @@ target_position = Vector2(42, 0)
 [node name="FloorRay" type="RayCast2D" parent="."]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_ovbf4")]
-offset_top = -67.0
-offset_bottom = -40.0
+offset_left = -13.333333
+offset_top = -66.0
+offset_right = 99.666664
+offset_bottom = -39.0
+scale = Vector2(0.24, 0.24)
 health_component = NodePath("../HealthComponent")
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]

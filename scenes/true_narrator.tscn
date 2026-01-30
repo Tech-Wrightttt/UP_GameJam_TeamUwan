@@ -778,10 +778,11 @@ target_position = Vector2(42, 0)
 [node name="FloorRay" type="RayCast2D" parent="."]
 
 [node name="debug" type="Label" parent="."]
-offset_left = -28.0
-offset_top = -23.0
-offset_right = 27.0
-offset_bottom = 26.0
+visible = false
+offset_left = -27.0
+offset_top = -43.0
+offset_right = 28.0
+offset_bottom = 6.0
 text = "DEBUG
 "
 
@@ -791,6 +792,11 @@ libraries = {
 }
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_shqxs")]
+offset_left = -13.000001
+offset_top = -9.0
+offset_right = 100.0
+offset_bottom = 18.0
+scale = Vector2(0.24, 0.24)
 health_component = NodePath("../HealthComponent")
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]

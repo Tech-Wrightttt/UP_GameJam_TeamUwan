@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://b1fjswq034ikg"]
+[gd_scene load_steps=101 format=3 uid="uid://b1fjswq034ikg"]
 
 [ext_resource type="Script" path="res://scripts/main_character.gd" id="1_tqm6u"]
 [ext_resource type="Texture2D" uid="uid://botsj2uxpcsq8" path="res://assets/mc/Attack1/HeroKnight_Attack1_0.png" id="2_7ip3e"]
@@ -84,7 +84,7 @@
 [ext_resource type="Texture2D" uid="uid://dukibduhwkfir" path="res://assets/mc/Roll/HeroKnight_Roll_8.png" id="71_s48db"]
 [ext_resource type="Script" uid="uid://ccifkr113poi5" path="res://scripts/hurt_component.gd" id="83_ikepn"]
 [ext_resource type="Script" uid="uid://dcniktsrdfc32" path="res://scripts/hitbox_component.gd" id="84_7ghjf"]
-[ext_resource type="PackedScene" uid="uid://cgwgq60bg2o1i" path="res://scenes/health_bar.tscn" id="85_ikepn"]
+[ext_resource type="Script" uid="uid://dew81t00yo3fu" path="res://scripts/health_bar.gd" id="85_ikepn"]
 
 [sub_resource type="Curve" id="Curve_m40x0"]
 _data = [Vector2(0.060109288, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.153682), 0.0, 0.0, 0, 0]
@@ -533,6 +533,13 @@ _data = {
 &"hurt": SubResource("Animation_f1khg")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ghjf"]
+bg_color = Color(0.6397846, 0.11505448, 0.1581636, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="main_character" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["player"]]
 collision_mask = 131
 script = ExtResource("1_tqm6u")
@@ -617,7 +624,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_22120")
 }
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("85_ikepn")]
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_component")]
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 7.0
+scale = Vector2(0.23, 0.23)
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ghjf")
+max_value = 150.0
+value = 100.0
+script = ExtResource("85_ikepn")
 health_component = NodePath("../HealthComponent")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
