@@ -411,9 +411,8 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ip3e"]
-radius = 8.0
-height = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m40x0"]
+size = Vector2(20, 30)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yum8o"]
 radius = 16.0
@@ -575,8 +574,8 @@ script = ExtResource("83_ikepn")
 knockback_force = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 5)
-shape = SubResource("CapsuleShape2D_7ip3e")
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_m40x0")
 
 [node name="Hitbox_Attack1" type="Area2D" parent="."]
 collision_layer = 16
