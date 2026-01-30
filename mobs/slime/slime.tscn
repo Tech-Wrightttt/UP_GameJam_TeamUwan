@@ -452,12 +452,13 @@ target_position = Vector2(42, 0)
 
 [node name="FloorRay" type="RayCast2D" parent="."]
 
-[node name="HealthBar" parent="." instance=ExtResource("14_cwfm1")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_cwfm1")]
 offset_left = -13.2
 offset_top = -15.6
 offset_right = 99.8
 offset_bottom = 11.4
 scale = Vector2(0.24, 0.24)
+health_component = NodePath("../HealthComponent")
 
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/idle" method="_on_player_detection_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]

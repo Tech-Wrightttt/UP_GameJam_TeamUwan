@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4th0pe08cjp4"]
+[gd_scene load_steps=26 format=3 uid="uid://c4th0pe08cjp4"]
 
 [ext_resource type="Script" uid="uid://2c7yk1akjb4y" path="res://scripts/castle_three.gd" id="1_4cn4s"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_shegg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_dom3m"]
 [ext_resource type="Texture2D" uid="uid://dow3lyrormikg" path="res://assets/Foreground/spr_torch.png" id="4_f1m04"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="6_dom3m"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="7_308tn"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2275,6 +2276,10 @@ shape = SubResource("RectangleShape2D_qwjc7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mark2"]
 position = Vector2(-1105, 885)
 shape = SubResource("RectangleShape2D_pc8cq")
+
+[node name="outofbounds" parent="." instance=ExtResource("7_308tn")]
+position = Vector2(-2113, 1189)
+scale = Vector2(3, 3)
 
 [connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towards2" to="." method="_on_towardsc_1_body_entered"]

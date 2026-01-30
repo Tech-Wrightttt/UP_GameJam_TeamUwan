@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds6myjnbyxmxy"]
+
+[ext_resource type="Script" uid="uid://dal3js24tjswc" path="res://scripts/outofbounds.gd" id="1_2e1h0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe0ib"]
+size = Vector2(1931, 471)
+
+[node name="outofbounds" type="Area2D"]
+script = ExtResource("1_2e1h0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(955.5, 225.5)
+shape = SubResource("RectangleShape2D_qe0ib")

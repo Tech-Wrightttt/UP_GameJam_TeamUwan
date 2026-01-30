@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dr7aw4f5ckp1r"]
+[gd_scene load_steps=23 format=3 uid="uid://dr7aw4f5ckp1r"]
 
 [ext_resource type="Script" uid="uid://cqe0nx0dhykam" path="res://scripts/castle_two.gd" id="1_4xskk"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_jghl2"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="3_m23qa"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="4_22w3c"]
 [ext_resource type="PackedScene" uid="uid://dxibxggf0tlv3" path="res://mobs/slime/slime.tscn" id="4_mnvaw"]
-[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
+[ext_resource type="PackedScene" path="res://scenes/clock_fragment.tscn" id="7_mnvaw"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="9_irwje"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2257,6 +2258,10 @@ shape = SubResource("RectangleShape2D_lxivw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
 position = Vector2(-1211, 886)
 shape = SubResource("RectangleShape2D_i62bi")
+
+[node name="outofbounds" parent="." instance=ExtResource("9_irwje")]
+position = Vector2(-2037, 1189)
+scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="towards" to="." method="_on_towardso_1_body_entered"]
 [connection signal="body_entered" from="towards2" to="." method="_on_towardsc_1_body_entered"]

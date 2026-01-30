@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkqy4r30iw0wy"]
+[gd_scene load_steps=24 format=3 uid="uid://b10bpweis6eyj"]
 
-[ext_resource type="Script" uid="uid://cqbrai3nkdwak" path="res://levels/dimension_20_bossroom.gd" id="1_k3hg0"]
+[ext_resource type="Script" path="res://levels/dimension_20_bossroom.gd" id="1_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_vpqxi"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_4wkfd"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="10_4rbfo"]
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="10_k3hg0"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="11_fvxnr"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_vpqxi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhbva"]
 texture = ExtResource("7_uurvu")
@@ -2353,3 +2354,7 @@ limit_right = 1500
 limit_bottom = 950
 editor_draw_limits = true
 script = ExtResource("11_fvxnr")
+
+[node name="outofbounds" parent="." instance=ExtResource("13_vpqxi")]
+position = Vector2(-2830, 1038)
+scale = Vector2(3, 3)

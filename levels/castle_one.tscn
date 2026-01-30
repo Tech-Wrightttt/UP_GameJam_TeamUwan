@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dn6jopggneqco"]
+[gd_scene load_steps=27 format=3 uid="uid://dn6jopggneqco"]
 
 [ext_resource type="Script" uid="uid://dqj4awtgvtopj" path="res://scripts/castle_one.gd" id="1_fpfjo"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_ptp65"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="5_de36y"]
 [ext_resource type="Texture2D" uid="uid://ddg67o13gwvd" path="res://assets/Foreground/Spike_B.png" id="6_ylynx"]
 [ext_resource type="PackedScene" uid="uid://jqcn8wer5qdy" path="res://mobs/gargoyle/gargoyle.tscn" id="7_om42o"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="8_fm0u3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -2305,6 +2306,9 @@ position = Vector2(-604, 866)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="marker2"]
 position = Vector2(2925, -308)
 shape = SubResource("RectangleShape2D_bujft")
+
+[node name="outofbounds" parent="." instance=ExtResource("8_fm0u3")]
+position = Vector2(90, 1177)
 
 [connection signal="body_entered" from="TowarsTutorial" to="." method="_on_towardsTUTORIAL_body_entered"]
 [connection signal="body_entered" from="TowarsTutorial3" to="." method="_on_towardsc_1_body_entered"]

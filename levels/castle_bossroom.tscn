@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpwbynvk3vret"]
+[gd_scene load_steps=21 format=3 uid="uid://bpwbynvk3vret"]
 
 [ext_resource type="Texture2D" uid="uid://3ehpsxs68tla" path="res://assets/Foreground/Tilesetv3.png" id="1_6coua"]
 [ext_resource type="Script" uid="uid://cbal02ml3e170" path="res://scripts/castle_bossroom.gd" id="1_podjh"]
 [ext_resource type="PackedScene" uid="uid://b1fjswq034ikg" path="res://scenes/main_character.tscn" id="2_j5t3b"]
 [ext_resource type="Texture2D" uid="uid://dow3lyrormikg" path="res://assets/Foreground/spr_torch.png" id="4_j5t3b"]
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="5_podjh"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="6_cbcmy"]
+[ext_resource type="PackedScene" uid="uid://cgwwfpi15kv6j" path="res://scenes/golem.tscn" id="7_tk78h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -1243,6 +1245,14 @@ offset_top = 929.0
 offset_right = 1045.0
 offset_bottom = 970.0
 text = "[E] to interact"
+
+[node name="outofbounds" parent="." instance=ExtResource("6_cbcmy")]
+position = Vector2(-994, 1445)
+scale = Vector2(2, 2)
+
+[node name="golem" parent="." instance=ExtResource("7_tk78h")]
+position = Vector2(755, 685)
+scale = Vector2(2.5, 2.5)
 
 [connection signal="body_entered" from="door/DoorArea" to="." method="_on_door_area_body_entered"]
 [connection signal="body_exited" from="door/DoorArea" to="." method="_on_door_area_body_exited"]

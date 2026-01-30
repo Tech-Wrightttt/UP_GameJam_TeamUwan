@@ -664,7 +664,7 @@ radius = 15.0
 height = 46.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_apn8y"]
-size = Vector2(250, 42)
+size = Vector2(406, 44)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_67gox"]
 radius = 17.0
@@ -739,7 +739,7 @@ shape = SubResource("CapsuleShape2D_y6rnd")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-position = Vector2(97, 27)
+position = Vector2(0, 26)
 shape = SubResource("RectangleShape2D_apn8y")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]

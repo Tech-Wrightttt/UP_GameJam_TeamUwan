@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://7n6fktj3dlva"]
+[gd_scene load_steps=38 format=3 uid="uid://cmamlypar2qce"]
 
 [ext_resource type="Script" uid="uid://clye20fljm10y" path="res://scripts/overworld_one.gd" id="1_u747v"]
 [ext_resource type="Texture2D" uid="uid://cq7e06tiw8oer" path="res://assets/Background/CloudsBack.png" id="2_u747v"]
@@ -11,7 +11,8 @@
 [ext_resource type="Script" uid="uid://f8nqwrgcv6eq" path="res://scripts/camera_movement.gd" id="9_kgnju"]
 [ext_resource type="Texture2D" uid="uid://bj4y0bww0hf55" path="res://assets/narrator/Jotem spritesheet.png" id="10_u747v"]
 [ext_resource type="FontFile" uid="uid://cqpjew5k7jxne" path="res://assets/ui/fonts/Pixellari.ttf" id="11_bw0tn"]
-[ext_resource type="PackedScene" uid="uid://cq405afqamyqp" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
+[ext_resource type="PackedScene" path="res://scenes/clock_fragment.tscn" id="12_tpcej"]
+[ext_resource type="PackedScene" uid="uid://ds6myjnbyxmxy" path="res://scenes/outofbounds.tscn" id="13_au0bf"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjsbj"]
 
@@ -882,6 +883,10 @@ shape = SubResource("RectangleShape2D_fghf5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="marker4"]
 position = Vector2(-3012, 334.34375)
 shape = SubResource("RectangleShape2D_1yp7j")
+
+[node name="outofbounds" parent="." instance=ExtResource("13_au0bf")]
+position = Vector2(-2556, 1099)
+scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="npc/npcarea" to="." method="_on_npcarea_body_entered"]
 [connection signal="body_exited" from="npc/npcarea" to="." method="_on_npcarea_body_exited"]
