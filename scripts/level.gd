@@ -38,6 +38,7 @@ func _on_marker_body_entered(body: Node2D) -> void:
 
 func _on_neutral_ending_body_entered(body):
 	if body.name == "main_character":
+		GameManager.reset_spawn_points()
 		GameManager.fade_out(
 			self,
 			"res://storylines/neutral_ending.tscn",
