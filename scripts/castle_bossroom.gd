@@ -14,6 +14,7 @@ var boss_defeated: bool = false
 var player_near_door: bool = false
 
 func _ready() -> void:
+	AudioManager.transition_music("bossfight")
 	sprite.play("default")
 	sprite1.play("default")
 	sprite2.play("default")
@@ -50,6 +51,7 @@ func _on_Door_area_entered(area: Area2D) -> void:
 
 func _on_Door_area_exited(area: Area2D) -> void:
 	if area.name == "Player":
+		AudioManager.stop_music()
 		player_near_door = false
 
 

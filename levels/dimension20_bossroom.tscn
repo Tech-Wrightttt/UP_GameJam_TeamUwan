@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://b10bpweis6eyj"]
 
-[ext_resource type="Script" path="res://levels/dimension_20_bossroom.gd" id="1_k3hg0"]
+[ext_resource type="Script" uid="uid://cqbrai3nkdwak" path="res://levels/dimension_20_bossroom.gd" id="1_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://dviucw1qtoqlk" path="res://assets/Background/SacredLands_1.png" id="2_k3hg0"]
 [ext_resource type="Texture2D" uid="uid://kvvt3ob7p80k" path="res://assets/Background/SacredLands_2.png" id="3_vpqxi"]
 [ext_resource type="Texture2D" uid="uid://bp2woql5qes3w" path="res://assets/Background/SacredLands_3.png" id="4_4wkfd"]
