@@ -1906,5 +1906,6 @@ stream = ExtResource("18_2dqok")
 [connection signal="body_entered" from="towardso4" to="." method="_on_towardsc_1_body_entered"]
 [connection signal="body_entered" from="mark" to="." method="_on_marker_body_entered"]
 [connection signal="body_entered" from="mark2" to="." method="_on_marker_body_entered"]
+[connection signal="body_entered" from="voice area" to="." method="_on_voice_area_body_entered"]
 
 [editable path="voice area"]

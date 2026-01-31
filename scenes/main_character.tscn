@@ -532,6 +532,7 @@ _data = {
 }
 
 [node name="main_character" type="CharacterBody2D" node_paths=PackedStringArray("effects_animation_player") groups=["player"]]
+collision_layer = 257
 collision_mask = 131
 script = ExtResource("1_tqm6u")
 effects_animation_player = NodePath("EffectsAnimationPlayer")
